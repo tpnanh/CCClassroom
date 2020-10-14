@@ -18,6 +18,7 @@
 		padding-top: 20px;
 		padding-bottom: 80px;
 		height: 100%;
+		font-family:verdana;
 	}
 
 	.form-signin {
@@ -26,7 +27,7 @@
 		margin: 10px;
 	}
 	
-	.signin{
+	img{
 		margin-bottom: 10px;
 	}
 	
@@ -42,8 +43,13 @@
 		z-index: 2;
 	}
 	
+	label{
+		display: block;
+		text-align: left;
+		margin-top: 10px;
+	}
+	
 	input[type="email"] {
-		margin-bottom: 10px;
 		border-bottom-right-radius: 0;
 		border-bottom-left-radius: 0;
 	}
@@ -59,18 +65,23 @@
 	}
 	
 	.forgot-password-link{
-		float: left;
-		margin-bottom: 10px;		
+		display: block;
+		text-align: left;
+		margin-bottom: 30px;		
+	}
+	
+	.btn:hover{
+		background-color: #43437B;
+		color: white;
 	}
 	
 	.btn{
-		background-color: #43437B;
 		color: white;
-		font-size: 16px;
+		background-color: #7492c4;
 	}
 	
 	.dont-have-account{
-		float: left;
+		text-align: left;
 		margin-top: 10px;	
 		color: dimgrey;		
 	}
@@ -78,20 +89,22 @@
 
 </head>
 <body class="text-center">
+
 	<form action="" method="post" class="form-signin">
-      <img src="img/icon.png" alt="" width="auto" height="250">
+      <img src="img/icon.png" alt="icon" width="auto" height="200">
 	  
       <h3 class="signin"><b>Sign In</b></h3>
 	  
-      <label for="username" class="sr-only">Username</label>      
-	  <input type="text" name="username" id="username" class="form-control" placeholder="Username" required autofocus>      
-	  <label for="password" class="sr-only">Password</label>      
+      <label for="email" >Email</label>      
+	  <input type="email" name="email" id="email" class="form-control" placeholder="Email" required autofocus>      
+	  <label for="password" >Password</label>      
 	  <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
 	  
-	  <a class="forgot-password-link" href="">Forgot your password?</a>
+	  <a class="forgot-password-link" href="reset_password.php">Forgot your password?</a>
       
-      <button class="btn btn-lg btn-block" type="submit">Sign In</button>
+      <button class="btn btn-lg btn-block" type="submit" name="submit">Sign In</button>
 	  
-	   <p class="dont-have-account">Don't have an account yet? <a href="">Sign Up</a></p>
+	   <p class="dont-have-account">Don't have an account yet? <a href="sign_up.php">Sign Up</a></p>
+	</form>
 </body>
 </html>
