@@ -141,7 +141,7 @@
       
       	<button class="btn btn-md btn-block" type="submit" name="submit">Sign In</button>
 	  
-	   	<p class="dont-have-account">Don't have an account yet? <a href="sign_up.php">Sign Up</a></p>
+	   	<p class="dont-have-account">Don't have an account yet? <a href="./signUp/sign_up.html">Sign Up</a></p>
 	</form>
 </body>
 </html>
