@@ -1,4 +1,13 @@
 <!DOCTYPE html>
+<?php
+	session_start();
+	// if(isset($_SESSION['login'])){
+	// 	if($_SESSION['login']){
+ //    		header('Location: home.php');
+	// 		exit();
+	// 	}
+	// }
+?>
 <html lang="en">
 <head>
     <title>Signin - CC Classroom</title>
@@ -104,9 +113,10 @@
 			}else if ($pass != '123'){
 				$error = "Password wrong";
 			}else{
+				$_SESSION['login'] = true;
 				$error = "";
 				header('Location: home.php');
-				die();
+				exit();
 			}
 		}
 	?>
