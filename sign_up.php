@@ -5,15 +5,16 @@
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" type="image/x-icon" href="img/thumbnail.ico" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 	<style>	
 	body {
 		color: #43437B;
 		display: flex;
-		justify-content: flex-start;
+		justify-content: center;
 		padding-bottom: 80px;
 		height: 100%;
 		width: 100%;
@@ -21,15 +22,12 @@
 	}
 	
 	img{
-		margin-bottom: 10px;
-		display: flex;
-		justify-content: flex-start;
+		margin-bottom: 20px;
 	}
 
 	.form-signin {
-		width: 100%;
+		width: 50%;
 		margin: 20px;
-		max-width: 500px;
 	}	
 	
 	.form-control{
@@ -37,7 +35,7 @@
 		box-sizing: border-box;
 		height: auto;
 		margin-top: 5px;
-		font-size: 13px;
+		font-size: 14px;
 	}
 	
 	.form-control:focus {
@@ -48,8 +46,13 @@
 		display: block;
 		text-align: left;
 		margin-top: 20px;
-		color: dimgray;
+		color: #43437B;
 		font-size: 13px;
+		font-weight: bold;
+	}
+	
+	.custom-file-label{
+		margin: 0;
 	}
 	
 	input{		
@@ -72,15 +75,16 @@
 	
 	.alert{
 		margin-top: 15px;
-		
+		font-size: 15px;
 	}
 	</style>
 
 </head>
 <body class="text-center">
 	
+	
 	<form action="" method="post" class="form-signin">
-		<img src="img/icon.png" alt="icon" width="auto" height="50">
+		<img src="img/icon.png" alt="icon" width="auto" height="60">
 		<h3 class="signup"><b>Sign Up</b></h3>
 
 		<label for="email" >Email</label>     
@@ -99,15 +103,19 @@
 		<input type="text" name="fullname" id="fullname" class="form-control" placeholder="Họ và tên" required> 
 
 		<label for="date-of-birth" >Ngày sinh</label>     
-		<input type="text" name="fullname" id="date-of-birth" class="form-control" placeholder="Ngày sinh" required> 	
+		<input type="text" name="date-of-birth" id="date-of-birth" class="form-control" placeholder="Ngày sinh" required> 	
 
 		<label for="phone-number" >Số điện thoại</label>     
-		<input type="text" name="fullname" id="phone-number" class="form-control" placeholder="Số điện thoại" required> 
+		<input type="text" name="phone-number" id="phone-number" class="form-control" placeholder="Số điện thoại" required> 
 
-		<label for="avatar">Chọn ảnh đại diện</label> 		
-		<button class="btn" type="button">Sign Up</button>
+		<label for="custom-file" >Chọn ảnh đại diện</label> 
+		<div class="custom-file">
+			<label class="custom-file-label" for="custom-file">Choose file</label>
+			<input type="file" name="custom-file" class="custom-file-input" id="custom-file">
+			
+		</div>
 
-		<button class="btn btn-lg btn-block" type="submit" name="submit">Sign Up</button>
+		<button class="btn btn-md btn-block" type="submit" name="submit">Sign Up</button>
 
 		<button class="alert alert-success">Information has been saved</button>
 	</form>

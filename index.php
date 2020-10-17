@@ -139,7 +139,7 @@
   		</div>
 	  	<a class="forgot-password-link" href="reset_password.php">Forgot your password?</a>
       
-      	<button class="btn btn-lg btn-block" type="submit" name="submit">Sign In</button>
+      	<button class="btn btn-md btn-block" type="submit" name="submit">Sign In</button>
 	  
 	   	<p class="dont-have-account">Don't have an account yet? <a href="sign_up.php">Sign Up</a></p>
 	</form>
