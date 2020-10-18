@@ -144,17 +144,25 @@
 						if(response==="File so big"){
 							alertError.style.display = ""
 							alertError.innerHTML = "File avatar so big"
+							alertSuccess.style.display = "none"
 						}else if(response.includes("Duplicate entry")){
 							alertError.style.display = ""
 							alertError.innerHTML = "User has exist"
-						}else{
-	        				alertError.style.display = "none"
+							alertSuccess.style.display = "none"
+						}else if (response === "Insert success"){
+							alertError.style.display = "none"
 							alertSuccess.style.display = ""
+						}else{
+	        				alertError.style.display = ""
+							alertError.innerHTML = response
+							alertSuccess.style.display = "none"
 						}
 						
     				},
     				fail: function(xhr, textStatus, errorThrown){
-       					alert('request failed');
+    					alertError.style.display = ""
+						alertError.innerHTML = "Request failed"
+						alertSuccess.style.display = "none"
     				}
 				});
 				

@@ -98,45 +98,64 @@
 
 	</style>
 
+	<script>
+		let email;
+		let password;
+		let alertError;
+		window.onload = function(){
+			email = document.getElementById('email');
+			password = document.getElementById('password');
+			alertError = document.getElementById('error');
+		}
+
+		function login(){
+			let fd = new FormData();
+			fd.append('email', email.value)
+			fd.append('password', password.value)
+			$.ajax({
+					type:"POST",
+					url:"./login/login.php",
+					cache: false,
+                    contentType: false,
+                    processData: false,
+					data:fd,
+					success: function (response) {
+						console.log(response)
+						if (response==="User not found") {
+							alertError.style.display = ""
+							alertError.innerHTML = "User not found"
+						}else if(response==="Password wrong"){
+							alertError.style.display = ""
+							alertError.innerHTML = "Password wrong"
+						}else if (response === "Login success"){
+							alertError.style.display = "none"
+							window.location.href="home.php"
+						}
+
+    				},
+    				fail: function(xhr, textStatus, errorThrown){
+       					alertError.style.display = ""
+       					alertError.innerHTML = "Request failed"
+    				}
+				});
+		}
+
+	</script>
+
 </head>
 <body class="text-center">
 </body>
-	<?php
-		$mail = '';
-		$pass = '';
-		$error = '';
-		if (isset($_POST['email']) && isset($_POST['password'])) {
-			$mail = $_POST['email'];
-			$pass = $_POST['password'];
-			if ($mail!='1@gmail.com') {
-				$error = "User not found";
-			}else if ($pass != '123'){
-				$error = "Password wrong";
-			}else{
-				$_SESSION['login'] = true;
-				$error = "";
-				header('Location: home.php');
-				exit();
-			}
-		}
-	?>
-	<form method="post" class="form-signin">
+	<form method="post" class="form-signin" onsubmit='login();return false'>
       	<img src="img/icon.png" alt="icon" width="auto" height="200">
 	  
       	<h3 class="signin"><b>Sign In</b></h3>
 	  
       	<label for="email" >Email</label>      
-	  	<input type="email" name="email" id="email" class="form-control" placeholder="Email" value="<?= $mail ?>" required autofocus>      
+	  	<input type="email" name="email" id="email" class="form-control" placeholder="Email" required autofocus>      
 	  	<label for="password" >Password</label>      
-	  	<input type="password" name="password" id="password" class="form-control" placeholder="Password" value="<?= $pass ?>" required>
+	  	<input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
 	  
-	  	<div class="alert alert-danger" <?php if($error ===''){?> style="display: none" <?php } ?> id="error">
-    		<?php 
-    			if($error!=''){
-    				echo($error);
-    			}
-    		?>
-  		</div>
+	  	<div class="alert alert-danger" id="error" style="display: none;"></div>
 	  	<a class="forgot-password-link" href="reset_password.php">Forgot your password?</a>
       
       	<button class="btn btn-md btn-block" type="submit" name="submit">Sign In</button>
