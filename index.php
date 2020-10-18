@@ -156,7 +156,7 @@
 	  	<input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
 	  
 	  	<div class="alert alert-danger" id="error" style="display: none;"></div>
-	  	<a class="forgot-password-link" href="reset_password.php">Forgot your password?</a>
+	  	<a class="forgot-password-link" href="./resetPassword/reset_password.html">Forgot your password?</a>
       
       	<button class="btn btn-md btn-block" type="submit" name="submit">Sign In</button>
 	  
