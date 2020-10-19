@@ -146,7 +146,7 @@
 <body class="text-center">
 </body>
 	<form method="post" class="form-signin" onsubmit='login();return false'>
-      	<img src="img/icon.png" alt="icon" width="auto" height="200">
+      	<img src="img/icon.png" alt="icon" width="auto" height="100">
 	  
       	<h3 class="signin"><b>Sign In</b></h3>
 	  
