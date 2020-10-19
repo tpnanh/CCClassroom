@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <?php
 	session_start();
-	// if(isset($_SESSION['login'])){
-	// 	if($_SESSION['login']){
+	// if(isset($_SESSION['user'])){
+	// 	if($_SESSION['user']!==null){
  //    		header('Location: home.php');
 	// 		exit();
 	// 	}

@@ -19,8 +19,7 @@
     if($pass!==$data['password']){
     	die("Password wrong");
     }
-
-    $_SESSION['login'] = true;
+    $_SESSION['user'] = $data;
 	echo("Login success");
 
 ?>

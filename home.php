@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<?php
+	session_start();
+	$user = $_SESSION['user'];
+?>
 <html lang="en">
 <head>
     <title>Signin - CC Classroom</title>
