@@ -17,12 +17,9 @@
 
 	<style>
 		nav{
-			margin: 10px;
+			margin: 5px;
 		}
-		.navbar{
-			background-color: white;
-			margin: 0;
-		}
+
 		.nav-right li{
 			margin-left: 20px;
 		}
@@ -40,7 +37,8 @@
 		}
 		.container-fluid{
 			margin-left:10px;
-			width: 98%;
+			width: 99%;
+			margin-top: 70px;
 		}
 		a{
 			color:white;
@@ -68,10 +66,10 @@
 			height: 60px;
 		}
 		h5, h6{
-			white-space: nowrap; 
-			overflow: hidden;
 			width: 90%;
-			text-overflow: ellipsis; 
+			white-space: nowrap; 
+            overflow: hidden;
+            text-overflow: ellipsis; 
 		}
 	</style>
 
@@ -113,107 +111,107 @@
 
 	</div>
 	
-	<div style="margin-top: 70px">
 
+	<div>
 		<div class="container-fluid">
 			<div class="row">
 			  	<div class="card col-lg-3">
-				  	<div class="card-header">
-				  	 	<a href="#" style="float: right;">
-				  	 		<i class="fas fa-ellipsis-v" style="color: white"></i>
-				  	 	</a>
+				  	<div class="card-header">				  	 	
 				      	<a href="#"><h5 class="card-title">Lập trình web và ứng dụng</h5></a>
 				      	<h6 class="card-subtitle">Mai Văn Mạnh - web - N3</h6>
 				      	<p class="card-text" style="font-size: 15px;margin-top: 5px">Mai Văn Mạnh</p>
 				  	</div>
-				  	<div class="card-img-overlay">
-				  		<img src="../img/person_icon.png" class="rounded-circle" style="float: right;margin-top: 48px" alt="avatar" width="70" height="70"> 
-				  	</div>
+				  	<div class="card-img-overlay ml-auto" style="max-height: 30px;max-width: 30px;">
+				  		<img src="../img/person_icon.png" class="rounded-circle"  alt="avatar" width="70" height="70" style="float: right;margin-top: 48px"> 
+				  		<a href="#" style="float: right;">
+				  	 		<i class="fas fa-ellipsis-v" style="color: white"></i>
+				  	 	</a>
+				  	</div>				  	
 				    <div class="card-body">	   
 
 				    </div>
 				</div>	  
 
 				<div class="card col-lg-3">
-				  	<div class="card-header">
-				  	 	<a href="#" style="float: right;">
-				  	 		<i class="fas fa-ellipsis-v" style="color: white"></i>
-				  	 	</a>
+				  	<div class="card-header">				  	 	
 				      	<a href="#"><h5 class="card-title">Lập trình web và ứng dụng</h5></a>
 				      	<h6 class="card-subtitle">Mai Văn Mạnh - web - N3</h6>
 				      	<p class="card-text" style="font-size: 15px;margin-top: 5px">Mai Văn Mạnh</p>
 				  	</div>
-				  	<div class="card-img-overlay">
-				  		<img src="../img/person_icon.png" class="rounded-circle" style="float: right;margin-top: 48px" alt="avatar" width="70" height="70"> 
-				  	</div>
+				  	<div class="card-img-overlay ml-auto" style="max-height: 30px;max-width: 30px;">
+				  		<img src="../img/person_icon.png" class="rounded-circle"  alt="avatar" width="70" height="70" style="float: right;margin-top: 48px"> 
+				  		<a href="#" style="float: right;">
+				  	 		<i class="fas fa-ellipsis-v" style="color: white"></i>
+				  	 	</a>
+				  	</div>	
 				    <div class="card-body">	   
 
 				    </div>
 				</div>	  
 
 				<div class="card col-lg-3">
-				  	<div class="card-header">
-				  	 	<a href="#" style="float: right;">
-				  	 		<i class="fas fa-ellipsis-v" style="color: white"></i>
-				  	 	</a>
+				  	<div class="card-header">				  	 	
 				      	<a href="#"><h5 class="card-title">Lập trình web và ứng dụng</h5></a>
 				      	<h6 class="card-subtitle">Mai Văn Mạnh - web - N3</h6>
 				      	<p class="card-text" style="font-size: 15px;margin-top: 5px">Mai Văn Mạnh</p>
 				  	</div>
-				  	<div class="card-img-overlay">
-				  		<img src="../img/person_icon.png" class="rounded-circle" style="float: right;margin-top: 48px" alt="avatar" width="70" height="70"> 
-				  	</div>
+				  	<div class="card-img-overlay ml-auto" style="max-height: 30px;max-width: 30px;">
+				  		<img src="../img/person_icon.png" class="rounded-circle"  alt="avatar" width="70" height="70" style="float: right;margin-top: 48px"> 
+				  		<a href="#" style="float: right;">
+				  	 		<i class="fas fa-ellipsis-v" style="color: white"></i>
+				  	 	</a>
+				  	</div>	
 				    <div class="card-body">	   
 
 				    </div>
 				</div>	 
 
 				<div class="card col-lg-3">
-				  	<div class="card-header">
-				  	 	<a href="#" style="float: right;">
-				  	 		<i class="fas fa-ellipsis-v" style="color: white"></i>
-				  	 	</a>
+				  	<div class="card-header">				  	 	
 				      	<a href="#"><h5 class="card-title">Lập trình web và ứng dụng</h5></a>
 				      	<h6 class="card-subtitle">Mai Văn Mạnh - web - N3</h6>
 				      	<p class="card-text" style="font-size: 15px;margin-top: 5px">Mai Văn Mạnh</p>
 				  	</div>
-				  	<div class="card-img-overlay">
-				  		<img src="../img/person_icon.png" class="rounded-circle" style="float: right;margin-top: 48px" alt="avatar" width="70" height="70"> 
-				  	</div>
+				  	<div class="card-img-overlay ml-auto" style="max-height: 30px;max-width: 30px;">
+				  		<img src="../img/person_icon.png" class="rounded-circle"  alt="avatar" width="70" height="70" style="float: right;margin-top: 48px"> 
+				  		<a href="#" style="float: right;">
+				  	 		<i class="fas fa-ellipsis-v" style="color: white"></i>
+				  	 	</a>
+				  	</div>	
 				    <div class="card-body">	   
 
 				    </div>
 				</div>	  
 
 				<div class="card col-lg-3">
-				  	<div class="card-header">
-				  	 	<a href="#" style="float: right;">
-				  	 		<i class="fas fa-ellipsis-v" style="color: white"></i>
-				  	 	</a>
+				  	<div class="card-header">				  	 	
 				      	<a href="#"><h5 class="card-title">Lập trình web và ứng dụng</h5></a>
 				      	<h6 class="card-subtitle">Mai Văn Mạnh - web - N3</h6>
 				      	<p class="card-text" style="font-size: 15px;margin-top: 5px">Mai Văn Mạnh</p>
 				  	</div>
-				  	<div class="card-img-overlay">
-				  		<img src="../img/person_icon.png" class="rounded-circle" style="float: right;margin-top: 48px" alt="avatar" width="70" height="70"> 
-				  	</div>
+				  	<div class="card-img-overlay ml-auto" style="max-height: 30px;max-width: 30px;">
+				  		<img src="../img/person_icon.png" class="rounded-circle"  alt="avatar" width="70" height="70" style="float: right;margin-top: 48px"> 
+				  		<a href="#" style="float: right;">
+				  	 		<i class="fas fa-ellipsis-v" style="color: white"></i>
+				  	 	</a>
+				  	</div>	
 				    <div class="card-body">	   
 
 				    </div>
 				</div>	  
 
 				<div class="card col-lg-3">
-				  	<div class="card-header">
-				  	 	<a href="#" style="float: right;">
-				  	 		<i class="fas fa-ellipsis-v" style="color: white"></i>
-				  	 	</a>
+				  	<div class="card-header">				  	 	
 				      	<a href="#"><h5 class="card-title">Lập trình web và ứng dụng</h5></a>
 				      	<h6 class="card-subtitle">Mai Văn Mạnh - web - N3</h6>
 				      	<p class="card-text" style="font-size: 15px;margin-top: 5px">Mai Văn Mạnh</p>
 				  	</div>
-				  	<div class="card-img-overlay">
-				  		<img src="../img/person_icon.png" class="rounded-circle" style="float: right;margin-top: 48px" alt="avatar" width="70" height="70"> 
-				  	</div>
+				  	<div class="card-img-overlay ml-auto" style="max-height: 30px;max-width: 30px;">
+				  		<img src="../img/person_icon.png" class="rounded-circle"  alt="avatar" width="70" height="70" style="float: right;margin-top: 48px"> 
+				  		<a href="#" style="float: right;">
+				  	 		<i class="fas fa-ellipsis-v" style="color: white"></i>
+				  	 	</a>
+				  	</div>	
 				    <div class="card-body">	   
 
 				    </div>
@@ -221,6 +219,5 @@
 			</div>
 		</div>
 	</div>
-
 </body>
 </html>
