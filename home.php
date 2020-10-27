@@ -31,7 +31,7 @@
 			font-size: 12px;
 			font-weight: bold;
 		}
-		.dropdown-item:focus{
+		.dropdown-item:focus, .joinClass, .joinClass:hover{
 			background-color: #43437B;
 			color: white;
 		}
@@ -96,10 +96,10 @@
 				       	<button class="btn" data-toggle="dropdown" id="addClass" href="#">
 				       		<i class="fas fa-plus"></i>
 				       	</button>				       	
-				        <div class="dropdown-menu dropdown-menu-lg-right"  aria-labelledby="addClass">
-						    <a class="dropdown-item" href="#">Join</a>
+				        <div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="addClass">
+						    <a class="dropdown-item" data-toggle="modal" href="#modalJoin">Join</a>
 						    <div class="dropdown-divider"></div>
-						    <a class="dropdown-item" href="#">Create</a>
+						    <a class="dropdown-item" href="createClassroom/createClassroom.html">Create</a>
 						</div>
 					</div>
 			    </li>
@@ -109,6 +109,28 @@
 		  	</ul>
 		</nav>
 
+	</div>
+
+	<div class="modal" id="modalJoin" tabindex="-1" role="dialog">
+		<div class="modal-dialog " role="document">
+	    	<div class="modal-content w-75">
+	      		<div class="modal-header">
+	        		<h5 class="modal-title">Join class</h5>
+	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	         			<span aria-hidden="true">&times;</span>
+	        		</button>
+	      		</div>
+		      	<div class="modal-body">
+		        	<form>
+		        		<label for="inputClasscode">Classcode</label>
+						<input type="text" class="form-control" id="inputClasscode" placeholder="Enter classcode" >
+					</form>
+		      	</div>
+		      	<div class="modal-footer">
+			        <button type="button" class="btn joinClass">Join</button>			        
+		      	</div>
+	    	</div>
+	  	</div>
 	</div>
 	
 
