@@ -28,12 +28,15 @@
 			font-size: 19px;
 		}
 		.dropdown-item{
-			font-size: 12px;
+			font-size: 13px;
 			font-weight: bold;
 		}
 		.dropdown-item:focus, .joinClass, .joinClass:hover{
 			background-color: #43437B;
 			color: white;
+		}
+		.logout:hover{
+			color: red;
 		}
 		.container-fluid{
 			margin-left:10px;
@@ -93,10 +96,10 @@
 			    </li>
 				<li class="nav-item">
 					<div class="dropdown">
-				       	<button class="btn" data-toggle="dropdown" id="addClass" href="#">
+				       	<button class="btn" data-toggle="dropdown" id="joinClass" href="#">
 				       		<i class="fas fa-plus"></i>
 				       	</button>				       	
-				        <div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="addClass">
+				        <div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="joinClass">
 						    <a class="dropdown-item" data-toggle="modal" href="#modalJoin">Join</a>
 						    <div class="dropdown-divider"></div>
 						    <a class="dropdown-item" href="createClassroom/createClassroom.html">Create</a>
@@ -104,7 +107,17 @@
 					</div>
 			    </li>
 			   	<li class="nav-item">
-			       <a class="btn" href="#"><i class="fas fa-info-circle"></i></a>
+			       <!-- <a class="btn" href="profile/profile.html"><i class="fas fa-info-circle"></i></a> -->
+			       <div class="dropdown">
+				       	<button class="btn" data-toggle="dropdown" id="profile" href="#">
+				       		<i class="fas fa-info-circle"></i>
+				       	</button>				       	
+				        <div class="dropdown-menu dropdown-menu-lg-right  dropdown-profile" aria-labelledby="profile">
+						    <a class="dropdown-item" href="profile/profile.html">Edit profile</a>
+						    <div class="dropdown-divider"></div>
+						    <a class="dropdown-item logout" data-toggle="modal" href="#">Logout</a>
+						</div>
+					</div>
 			    </li>
 		  	</ul>
 		</nav>
