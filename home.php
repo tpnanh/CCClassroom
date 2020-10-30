@@ -24,6 +24,7 @@
 			margin-left: 20px;
 		}
 		i{
+			/*violet*/
 			color: #43437B;
 			font-size: 19px;
 		}
@@ -37,6 +38,9 @@
 		}
 		.logout:hover{
 			color: red;
+		}
+		.logout:focus{
+			background-color: lightgray;
 		}
 		.container-fluid{
 			margin-left:10px;
@@ -59,6 +63,7 @@
 		}
 		.card-header{
 			color: white;
+			/*green*/
 			background-color: #087043;
 		}
 		.card-title{
@@ -107,7 +112,6 @@
 					</div>
 			    </li>
 			   	<li class="nav-item">
-			       <!-- <a class="btn" href="profile/profile.html"><i class="fas fa-info-circle"></i></a> -->
 			       <div class="dropdown">
 				       	<button class="btn" data-toggle="dropdown" id="profile" href="#">
 				       		<i class="fas fa-info-circle"></i>
@@ -145,6 +149,25 @@
 	    	</div>
 	  	</div>
 	</div>
+
+	<div class="modal" id="modalUnenroll" tabindex="-1" role="dialog">
+		<div class="modal-dialog " role="document">
+	    	<div class="modal-content w-75">
+	      		<div class="modal-header">
+	        		<h5 class="modal-title">Unenroll</h5>
+	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	         			<span aria-hidden="true">&times;</span>
+	        		</button>
+	      		</div>
+		      	<div class="modal-body">
+		        	<p>Are you sure you want to unenroll this class?</p>
+		      	</div>
+		      	<div class="modal-footer">
+			        <button type="button" class="btn joinClass">Unenroll</button>			        
+		      	</div>
+	    	</div>
+	  	</div>
+	</div>
 	
 
 	<div>
@@ -152,15 +175,20 @@
 			<div class="row">
 			  	<div class="card col-lg-3">
 				  	<div class="card-header">				  	 	
-				      	<a href="#"><h5 class="card-title">Lập trình web và ứng dụng</h5></a>
+				      	<a href="classroom/classroom.html"><h5 class="card-title">Lập trình web và ứng dụng</h5></a>
 				      	<h6 class="card-subtitle">Mai Văn Mạnh - web - N3</h6>
 				      	<p class="card-text" style="font-size: 15px;margin-top: 5px">Mai Văn Mạnh</p>
 				  	</div>
 				  	<div class="card-img-overlay ml-auto" style="max-height: 30px;max-width: 30px;">
 				  		<img src="../img/person_icon.png" class="rounded-circle"  alt="avatar" width="70" height="70" style="float: right;margin-top: 48px"> 
-				  		<a href="#" style="float: right;">
+				  		<a href="#" data-toggle="dropdown" id="classOption" style="float: right;">
 				  	 		<i class="fas fa-ellipsis-v" style="color: white"></i>
 				  	 	</a>
+				  	 	<div class="dropdown-menu dropdown-menu-right" aria-labelledby="classOption">
+						    <a class="dropdown-item" href="editClassroom/editClassroom.html">Edit</a>
+						    <div class="dropdown-divider"></div>
+						    <a class="dropdown-item" data-toggle="modal" href="#modalUnenroll">Unenroll</a>
+						</div>
 				  	</div>				  	
 				    <div class="card-body">	   
 
