@@ -32,12 +32,20 @@
 			font-size: 13px;
 			font-weight: bold;
 		}
-		.dropdown-item:focus, .joinClass, .joinClass:hover{
+		.dropdown-item:focus, .joinClass, .joinClass:hover, .deleteClass{
 			background-color: #43437B;
 			color: white;
 		}
 		.logout:hover{
 			color: red;
+		}
+		.deleteClass:hover, .deleteClass:focus{
+			background-color: red;
+			color: white;
+		}
+		.deleteClass:not(:disabled):not(.disabled):focus {
+			border-color: red;
+		    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.075);
 		}
 		.logout:focus{
 			background-color: lightgray;
@@ -86,9 +94,9 @@
 	<div>
 		<nav class="navbar navbar-expand-sm fixed-top"> 
 	  		<ul class="navbar-nav">
-	    		<li class="nav-item">
+	    		<!-- <li class="nav-item">
 	       			<a class="navbar-brand" href="#"><i class="fas fa-bars"></i></a>
-	    		</li>
+	    		</li> -->
 				<li class="nav-item">
 		      		<img src="../img/brand.png" style="width: auto; height: 36px">
 			    </li>
@@ -144,26 +152,26 @@
 					</form>
 		      	</div>
 		      	<div class="modal-footer">
-			        <button type="button" class="btn joinClass">Join</button>			        
+			        <a type="button" href="classroom/Classroom.html" class="btn joinClass">Join</a>			        
 		      	</div>
 	    	</div>
 	  	</div>
 	</div>
 
-	<div class="modal" id="modalUnenroll" tabindex="-1" role="dialog">
+	<div class="modal" id="modalDelete" tabindex="-1" role="dialog">
 		<div class="modal-dialog " role="document">
 	    	<div class="modal-content w-75">
 	      		<div class="modal-header">
-	        		<h5 class="modal-title">Unenroll</h5>
+	        		<h5 class="modal-title">Delete</h5>
 	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	         			<span aria-hidden="true">&times;</span>
 	        		</button>
 	      		</div>
 		      	<div class="modal-body">
-		        	<p>Are you sure you want to unenroll this class?</p>
+		        	<p>Are you sure you want to delete this class?</p>
 		      	</div>
 		      	<div class="modal-footer">
-			        <button type="button" class="btn joinClass">Unenroll</button>			        
+			        <button type="button" class="btn deleteClass">Delete</button>			        
 		      	</div>
 	    	</div>
 	  	</div>
@@ -187,7 +195,7 @@
 				  	 	<div class="dropdown-menu dropdown-menu-right" aria-labelledby="classOption">
 						    <a class="dropdown-item" href="editClassroom/editClassroom.html">Edit</a>
 						    <div class="dropdown-divider"></div>
-						    <a class="dropdown-item" data-toggle="modal" href="#modalUnenroll">Unenroll</a>
+						    <a class="dropdown-item" data-toggle="modal" href="#modalDelete">Delete</a>
 						</div>
 				  	</div>				  	
 				    <div class="card-body">	   
