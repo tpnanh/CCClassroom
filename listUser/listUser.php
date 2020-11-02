@@ -6,7 +6,12 @@
 		header('Location: ../index.php');
 		exit();
 	}
+
 	$user = $_SESSION['user'];
+	if ($user["role"]!="Admin") {
+		header('Location: ../home.php');
+		exit();
+	}
 ?>
 <html lang="en">
 <head>
@@ -95,14 +100,149 @@
 			color: white;
 		}
 	</style>
+
+	<script>
+		let listUserView;
+		let inputTextFindView;
+		window.onload = function(){
+			listUserView = document.getElementById("listUserView");
+			inputTextFindView = document.getElementById("inputTextFindView");
+			getAllUser()	
+		}
+
+		function getAllUser(){
+			$.ajax({
+				type:"POST",
+				url:"getAllUser.php",
+				cache: false,
+                contentType: false,
+                processData: false,
+				success: function (response) {
+					let result = JSON.parse(response)
+					for (i = 0; i < result.length; i++) {
+						appendViewIntoTable(result[i])
+					}
+					
+				},
+				fail: function(xhr, textStatus, errorThrown){
+				}
+			});
+		}
+
+		function findUser(){
+			while (listUserView.hasChildNodes()) {
+  				listUserView.removeChild(listUserView.lastChild);
+			}	
+			
+			let fd = new FormData();
+			fd.append('KEY_WORD', inputTextFindView.value)
+			$.ajax({
+				type:"POST",
+				url:"findUser.php",
+				cache: false,
+                contentType: false,
+                processData: false,
+				data:fd,
+				success: function (response) {
+					let result = JSON.parse(response)
+					for (i = 0; i < result.length; i++) {
+						appendViewIntoTable(result[i])
+					}
+					
+				},
+				fail: function(xhr, textStatus, errorThrown){
+				}
+			});
+		}
+
+		function appendViewIntoTable(data){
+			let tr = document.createElement('tr')
+
+			let td1 = document.createElement('td')
+			td1.classList.add('firstCol')
+			td1.style.text_align = 'right'
+			let img = document.createElement('img')
+			img.classList.add('rounded-circle')
+			img.src = data.avatar
+			img.width = '20'
+			img.height = '20'
+			td1.appendChild(img)
+
+			let td2 = document.createElement('td')
+			td2.classList.add('secondCol')
+			td2.innerHTML = data.ho_ten
+
+			let td3 = document.createElement('td')
+			td3.innerHTML = data.user_name
+
+			let td4 = document.createElement('td')
+			td4.innerHTML = data.email
+
+			let td5 = document.createElement('td')
+			td5.innerHTML = data.role
+
+			let td6 = document.createElement('td')
+			td6.classList.add('lastCol')
+
+			let div1 = document.createElement('div')
+			div1.classList.add('dropdown')
+
+			let btn = document.createElement('button')
+			btn.classList.add('btn')
+			btn.setAttribute("data-toggle", "dropdown");
+			btn.id = "editUser"
+			btn.aria_expanded = 'true'
+
+			let i = document.createElement('i')
+			i.classList.add('fas','fa-ellipsis-v')
+			i.style.color = '#087043'
+
+			btn.appendChild(i)
+
+			let div2 =  document.createElement('div')
+			div2.classList.add('dropdown-menu','dropdown-menu-right')
+			div2.aria_labelledby = 'editUser'
+
+			let a = document.createElement('a')
+			a.classList.add('dropdown-item')
+			a.href = '#'
+			a.innerHTML = 'Delete'
+
+			let div3 = document.createElement('div')
+			div3.classList.add('dropdown-divider')
+
+			let a2 = document.createElement('a')
+			a2.classList.add('dropdown-item')
+			a2.setAttribute("data-toggle", "modal");
+			a2.href = "#modalPermission"
+			a2.innerHTML = 'Permission'
+
+			div2.appendChild(a)
+			div2.appendChild(div3)
+			div2.appendChild(a2)
+
+			div1.appendChild(btn)
+			div1.appendChild(div2)
+			td6.appendChild(div1)
+
+			tr.appendChild(td1)
+			tr.appendChild(td2)
+			tr.appendChild(td3)
+			tr.appendChild(td4)
+			tr.appendChild(td5)
+			tr.appendChild(td6)
+
+			listUserView.appendChild(tr)
+		}
+	</script>
 </head>
 <body>
 	<h3 style="text-align: center;">List of Users</h3>
 
 	<nav class="navbar">
 		
-		<form class="form-inline" style="margin-left: auto;">
-			<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+		<form class="form-inline" style="margin-left: auto;" onsubmit="findUser();return false;">
+			<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="inputTextFindView">
 			<button class="btn searchButton" type="submit">Search</button>
 		</form>
 	</nav>
@@ -118,86 +258,37 @@
 				<th scope="col"></th>
 			</tr>
 		</thead>
-		<tbody>
-			<!-- <tr>
-				<td class="firstCol" style="text-align: right;"><img src="../img/person_icon.png" class="rounded-circle" alt="avatar" width="20" height="20"></td>
-				<td class="secondCol">Ngọc Anh</td>
-				<td>ngocanhtran</td>
-				<td>tpna@gmail.com</td>
-				<td>Teacher</td>
-				<td class="lastCol">
-					<div class="dropdown">
-				       	<button class="btn" data-toggle="dropdown" id="editUser" href="#">
-				       		<i class="fas fa-ellipsis-v" style="color: #087043"></i>
-				       	</button>				       	
-				        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="editUser">
-						    <a class="dropdown-item" href="#">Delete</a>
-						    <div class="dropdown-divider"></div>
-						    <a class="dropdown-item" data-toggle="modal" href="#modalPermission">Permission</a>
-						</div>
-					</div>
-				</td>
-			</tr> -->
-			<?php
-				$conn = new mysqli('127.0.0.1','root','',"ccclassroom");
-				$emailUser = $user["email"];
-				$query = "select * from usercc where email!= '$emailUser' ORDER BY FIELD(role,'Admin', 'Teacher', 'Student'),ho_ten";
-            	$result = $conn->query($query);
-            	while ($row = mysqli_fetch_array($result)) {
-        	?>
-	               <tr>
-						<td class="firstCol" style="text-align: right;"><img src="<?= $row['avatar'] ?>" class="rounded-circle" alt="avatar" width="20" height="20"></td>
-						<td class="secondCol"><?= $row['ho_ten'] ?></td>
-						<td><?= $row['user_name'] ?></td>
-						<td><?= $row['email'] ?></td>
-						<td><?= $row['role'] ?></td>
-						<td class="lastCol">
-							<div class="dropdown">
-						       	<button class="btn" data-toggle="dropdown" id="editUser" href="#">
-						       		<i class="fas fa-ellipsis-v" style="color: #087043"></i>
-						       	</button>				       	
-						        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="editUser">
-								    <a class="dropdown-item" href="#">Delete</a>
-								    <div class="dropdown-divider"></div>
-								    <a class="dropdown-item" data-toggle="modal" href="#modalPermission">Permission</a>
+		<tbody id="listUserView">
+		
+			<div class="modal" id="modalPermission" tabindex="-1" role="dialog">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+  						<div class="modal-header">
+	        					<h5 class="modal-title">Permission</h5>
+	        					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	         						<span aria-hidden="true">&times;</span>
+	        					</button>
+  						</div>
+	      				<div class="modal-body">
+	        				<p>Choose user permission</p>
+	        				<div class="btn-group">
+								<button class="btn btn-sm dropdown-toggle btnPermission" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Permission</button>
+								<div class="dropdown-menu">
+									<a class="dropdown-item modalItem" href="#">Admin</a>
+									<a class="dropdown-item modalItem" href="#">Student</a>
+									<a class="dropdown-item modalItem" href="#">Teacher</a>
 								</div>
 							</div>
-						</td>
-					</tr>
-            <?php
-            	}
-            	$conn->close();
-			?>
-			 <div class="modal" id="modalPermission" tabindex="-1" role="dialog">
-						<div class="modal-dialog" role="document">
-	    					<div class="modal-content">
-	      						<div class="modal-header">
-		        					<h5 class="modal-title">Permission</h5>
-		        					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		         						<span aria-hidden="true">&times;</span>
-		        					</button>
-	      						</div>
-			      				<div class="modal-body">
-			        				<p>Choose user permission</p>
-			        				<div class="btn-group">
-										<button class="btn btn-sm dropdown-toggle btnPermission" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Permission</button>
-										<div class="dropdown-menu">
-											<a class="dropdown-item modalItem" href="#">Admin</a>
-	    									<a class="dropdown-item modalItem" href="#">Student</a>
-	    									<a class="dropdown-item modalItem" href="#">Teacher</a>
-										</div>
-									</div>
-			      				</div>
-			      				<div class="modal-footer">
-				        			<button type="button" class="btn btn-success savePermission">Save changes</button>			        
-			      				</div>
-	    					</div>
-	  					</div>
+	      				</div>
+	      				<div class="modal-footer">
+		        			<button type="button" class="btn btn-success savePermission">Save changes</button>			        
+	      				</div>
 					</div>
+				</div>
+			</div>
 		</tbody>
+		
 	</table>
-
-
 	
 </body>
 </html>

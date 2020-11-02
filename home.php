@@ -128,9 +128,16 @@
 		  	</ul>
 		  	<ul class="nav-right navbar-nav ml-auto">
 			    <li class="nav-item">
-			       <a class="btn" href="listUser/listUser.php">
-			       		<i class="fas fa-address-book"></i>
-			       </a>
+			    	<?php
+			    		if ($user["role"]==="Admin") {
+			    	?>
+							<a class="btn" href="listUser/listUser.php">
+			       				<i class="fas fa-address-book"></i>
+			      		 	</a>
+					<?php
+						}
+			    	?>
+			       
 			    </li>
 				<li class="nav-item">
 					<div class="dropdown">
