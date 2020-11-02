@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <?php
 	session_start();
+
+	if(!isset($_SESSION['user']) || $_SESSION['user']==null){
+		header('Location: index.php');
+		exit();
+	}
 	$user = $_SESSION['user'];
 ?>
 <html lang="en">
@@ -89,6 +94,26 @@
 		}
 	</style>
 
+	<script>
+		
+		function logOut(){
+			$.ajax({
+				type:"POST",
+				url:"./logOut/logOut.php",
+				cache: false,
+                contentType: false,
+                processData: false,
+				success: function (response) {
+					if (response=="LogOut Success") {
+						window.location.href = 'http://localhost:8080/index.php'
+					}
+				},
+				fail: function(xhr, textStatus, errorThrown){
+				}
+			});
+		}
+	</script>
+
 </head>
 <body>
 	<div>
@@ -127,7 +152,7 @@
 				        <div class="dropdown-menu dropdown-menu-lg-right  dropdown-profile" aria-labelledby="profile">
 						    <a class="dropdown-item" href="profile/profile.html">Edit profile</a>
 						    <div class="dropdown-divider"></div>
-						    <a class="dropdown-item logout" data-toggle="modal" href="#">Logout</a>
+						    <a class="dropdown-item logout" data-toggle="modal" href="#" onclick="logOut()">Logout</a>
 						</div>
 					</div>
 			    </li>
