@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Reset Password - CC Classroom</title>
+    <title>Sign Up - CC Classroom</title>
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" type="image/x-icon" href="img/thumbnail.ico" />
@@ -151,7 +151,7 @@
 							alertSuccess.style.display = "none"
 						}else if (response === "Insert success"){
 							alertError.style.display = "none"
-							alertSuccess.style.display = ""
+							window.location.href="../index.php"
 						}else{
 	        				alertError.style.display = ""
 							alertError.innerHTML = response
@@ -191,21 +191,20 @@
 		<label for="username" >Username</label>     
 		<input type="text" name="username" id="username" class="form-control" placeholder="Username" required> 
 
-		<label for="fullname" >Họ và tên</label>     
-		<input type="text" name="fullname" id="fullname" class="form-control" placeholder="Họ và tên" required> 
+		<label for="fullname" >Fullname</label>     
+		<input type="text" name="fullname" id="fullname" class="form-control" placeholder="Fullname" required> 
 
-		<label for="date-of-birth" >Ngày sinh</label>     
-		<input type="date" name="date-of-birth" id="date-of-birth" class="form-control" placeholder="Ngày sinh" required> 	
+		<label for="date-of-birth" >Date of birth</label>     
+		<input type="date" name="date-of-birth" id="date-of-birth" class="form-control" placeholder="Date of birth" required> 	
 
-		<label for="phone-number" >Số điện thoại</label>     
-		<input type="tel" name="phone-number" id="phone-number" class="form-control" placeholder="Số điện thoại" 
+		<label for="phone-number" >Phone number</label>     
+		<input type="tel" name="phone-number" id="phone-number" class="form-control" placeholder="Phone number" 
 		pattern="[0-9]{10}" required> 
 
-		<label for="custom-file" >Chọn ảnh đại diện</label> 
+		<label for="custom-file" >Choose your profile picture</label> 
 		<div class="custom-file">
 			<label class="custom-file-label" for="custom-file">Choose file</label>
-			<input type='file' name="custom-file" class="custom-file-input" id="custom-file" accept="image/*" required>
-			
+			<input type='file' name="custom-file" class="custom-file-input" id="custom-file" accept="image/*" required>			
 		</div>
 
 		<button class="btn btn-md btn-block" type="submit" name="submit">Sign Up</button>

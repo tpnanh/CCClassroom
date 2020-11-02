@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <?php
 	session_start();
-	// if(isset($_SESSION['user'])){
-	// 	if($_SESSION['user']!==null){
- //    		header('Location: home.php');
-	// 		exit();
-	// 	}
-	// }
+	if(isset($_SESSION['user'])){
+		if($_SESSION['user']!==null){
+    		header('Location: home.php');
+			exit();
+		}
+	}
 ?>
 <html lang="en">
 <head>
-    <title>Signin - CC Classroom</title>
+    <title>Sign In - CC Classroom</title>
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" type="image/x-icon" href="img/thumbnail.ico" />
@@ -146,7 +146,7 @@
 <body class="text-center">
 </body>
 	<form method="post" class="form-signin" onsubmit='login();return false'>
-      	<img src="img/icon.png" alt="icon" width="auto" height="200">
+      	<img src="img/icon.png" alt="icon" width="auto" height="100">
 	  
       	<h3 class="signin"><b>Sign In</b></h3>
 	  
