@@ -26,8 +26,9 @@
 	$query = "insert into usercc values('$mail','$username','$pass','$hoTen','$birth','$sdt','Học viên','$image')";
 
     if($conn->query($query)===false){
-    	$conn->close();
     	die($conn->error);
+    	
+    	$conn->close();
     }
 	$conn->close();
 
