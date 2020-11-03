@@ -99,13 +99,13 @@
 		function logOut(){
 			$.ajax({
 				type:"POST",
-				url:"./logOut/logOut.php",
+				url:"../logOut/logOut.php",
 				cache: false,
                 contentType: false,
                 processData: false,
 				success: function (response) {
 					if (response=="LogOut Success") {
-						window.location.href = 'http://localhost:8080/index.php'
+						window.location.href = '../index.php'
 					}
 				},
 				fail: function(xhr, textStatus, errorThrown){
@@ -146,8 +146,15 @@
 				       	</button>				       	
 				        <div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="joinClass">
 						    <a class="dropdown-item" data-toggle="modal" href="#modalJoin">Join</a>
-						    <div class="dropdown-divider"></div>
-						    <a class="dropdown-item" href="createClassroom/createClassroom.html">Create</a>
+						    <?php
+						    	if ($user["role"] === 'Admin' || $user["role"] === 'Teacher') {
+						    ?>
+						    	<div class="dropdown-divider"></div>
+						    	<a class="dropdown-item" href="../createClassroom/createClassroom.php">Create</a>
+						    <?php
+						    	}
+						    ?>
+						    
 						</div>
 					</div>
 			    </li>
@@ -157,7 +164,7 @@
 				       		<i class="fas fa-info-circle"></i>
 				       	</button>				       	
 				        <div class="dropdown-menu dropdown-menu-lg-right  dropdown-profile" aria-labelledby="profile">
-						    <a class="dropdown-item" href="profile/profile.html">Edit profile</a>
+						    <a class="dropdown-item" href="../profile/profile.html">Edit profile</a>
 						    <div class="dropdown-divider"></div>
 						    <a class="dropdown-item logout" data-toggle="modal" href="#" onclick="logOut()">Logout</a>
 						</div>
@@ -184,7 +191,7 @@
 					</form>
 		      	</div>
 		      	<div class="modal-footer">
-			        <a type="button" href="classroom/Classroom.html" class="btn joinClass">Join</a>			        
+			        <a type="button" href="../classroom/Classroom.html" class="btn joinClass">Join</a>			        
 		      	</div>
 	    	</div>
 	  	</div>
@@ -215,7 +222,7 @@
 			<div class="row">
 			  	<div class="card col-lg-3">
 				  	<div class="card-header">				  	 	
-				      	<a href="classroom/classroom.html"><h5 class="card-title">Lập trình web và ứng dụng</h5></a>
+				      	<a href="../classroom/classroom.html"><h5 class="card-title">Lập trình web và ứng dụng</h5></a>
 				      	<h6 class="card-subtitle">Mai Văn Mạnh - web - N3</h6>
 				      	<p class="card-text" style="font-size: 15px;margin-top: 5px">Mai Văn Mạnh</p>
 				  	</div>
@@ -225,7 +232,7 @@
 				  	 		<i class="fas fa-ellipsis-v" style="color: white"></i>
 				  	 	</a>
 				  	 	<div class="dropdown-menu dropdown-menu-right" aria-labelledby="classOption">
-						    <a class="dropdown-item" href="editClassroom/editClassroom.html">Edit</a>
+						    <a class="dropdown-item" href="../editClassroom/editClassroom.html">Edit</a>
 						    <div class="dropdown-divider"></div>
 						    <a class="dropdown-item" data-toggle="modal" href="#modalDelete">Delete</a>
 						</div>
