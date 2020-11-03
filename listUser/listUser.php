@@ -104,13 +104,30 @@
 	<script>
 		let listUserView;
 		let inputTextFindView;
+		let modalDialogPermission;
+		let emailTemp = ''
+		let btnPermission;
 		window.onload = function(){
 			listUserView = document.getElementById("listUserView");
 			inputTextFindView = document.getElementById("inputTextFindView");
+			modalDialogPermission = document.getElementById("modalPermission");
+			btnPermission = document.getElementById("btnPermission");
+
+			$('#modalPermission').on('hidden.bs.modal', function () {
+ 				unsaveEmailTemp()
+			})
+
+			$('#modalPermission').on('shown.bs.modal', function () {
+ 				btnPermission.innerHTML = 'Permission'
+			})
+
 			getAllUser()	
 		}
 
 		function getAllUser(){
+			while (listUserView.hasChildNodes()) {
+  				listUserView.removeChild(listUserView.lastChild);
+			}
 			$.ajax({
 				type:"POST",
 				url:"getAllUser.php",
@@ -146,6 +163,9 @@
 				success: function (response) {
 					let result = JSON.parse(response)
 					for (i = 0; i < result.length; i++) {
+						while (listUserView.hasChildNodes()) {
+  							listUserView.removeChild(listUserView.lastChild);
+						}
 						appendViewIntoTable(result[i])
 					}
 					
@@ -205,7 +225,7 @@
 
 			let a = document.createElement('a')
 			a.classList.add('dropdown-item')
-			a.href = '#'
+			a.onclick = function(){ deleteUser(data.email,tr) }
 			a.innerHTML = 'Delete'
 
 			let div3 = document.createElement('div')
@@ -213,8 +233,9 @@
 
 			let a2 = document.createElement('a')
 			a2.classList.add('dropdown-item')
-			a2.setAttribute("data-toggle", "modal");
+			a2.setAttribute("data-toggle", "modal")
 			a2.href = "#modalPermission"
+			a2.onclick = function(){ saveEmailTemp(data.email,td5) }
 			a2.innerHTML = 'Permission'
 
 			div2.appendChild(a)
@@ -234,6 +255,66 @@
 
 			listUserView.appendChild(tr)
 		}
+
+		function saveEmailTemp(email, viewRole){
+			emailTemp = email
+		}
+
+		function unsaveEmailTemp(){
+			emailTemp = ''
+		}
+
+		function savePermissionPerson(){
+			let fd = new FormData();
+			fd.append('Email', emailTemp)
+			fd.append('Role', btnPermission.innerHTML)
+			$.ajax({
+				type:"POST",
+				url:"updateRoleUser.php",
+				cache: false,
+                contentType: false,
+                processData: false,
+				data:fd,
+				success: function (response) {
+					while (listUserView.hasChildNodes()) {
+  						listUserView.removeChild(listUserView.lastChild);
+					}
+					let result = JSON.parse(response)
+					for (i = 0; i < result.length; i++) {
+						appendViewIntoTable(result[i])
+					}
+				},
+				fail: function(xhr, textStatus, errorThrown){
+				}
+			});
+			$("#modalPermission").modal('hide');
+
+		}
+
+		function changeViewPermission(permission){
+			btnPermission.innerHTML = permission
+		}
+
+		function deleteUser(email,view){
+			let fd = new FormData();
+			fd.append('Email', email)
+			$.ajax({
+				type:"POST",
+				url:"deleteUser.php",
+				cache: false,
+                contentType: false,
+                processData: false,
+				data:fd,
+				success: function (response) {
+					if (response==="Delete user success") {
+						view.remove()
+					}
+				},
+				fail: function(xhr, textStatus, errorThrown){
+				}
+			});
+		}
+
 	</script>
 </head>
 <body>
@@ -272,16 +353,16 @@
 	      				<div class="modal-body">
 	        				<p>Choose user permission</p>
 	        				<div class="btn-group">
-								<button class="btn btn-sm dropdown-toggle btnPermission" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Permission</button>
+								<button class="btn btn-sm dropdown-toggle btnPermission" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="btnPermission">Permission</button>
 								<div class="dropdown-menu">
-									<a class="dropdown-item modalItem" href="#">Admin</a>
-									<a class="dropdown-item modalItem" href="#">Student</a>
-									<a class="dropdown-item modalItem" href="#">Teacher</a>
+									<a class="dropdown-item modalItem" onclick="changeViewPermission('Admin')">Admin</a>
+									<a class="dropdown-item modalItem" onclick="changeViewPermission('Student')">Student</a>
+									<a class="dropdown-item modalItem" onclick="changeViewPermission('Teacher')">Teacher</a>
 								</div>
 							</div>
 	      				</div>
 	      				<div class="modal-footer">
-		        			<button type="button" class="btn btn-success savePermission">Save changes</button>			        
+		        			<button type="button" class="btn btn-success savePermission" onclick="savePermissionPerson()">Save changes</button>			        
 	      				</div>
 					</div>
 				</div>
