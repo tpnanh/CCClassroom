@@ -119,9 +119,9 @@
 	<div>
 		<nav class="navbar navbar-expand-sm fixed-top"> 
 	  		<ul class="navbar-nav">
-	    		<!-- <li class="nav-item">
-	       			<a class="navbar-brand" href="#"><i class="fas fa-bars"></i></a>
-	    		</li> -->
+	    		<li class="nav-item" >
+	       			<i class="fa fa-home navbar-brand" style="font-size: 27px; color: #D24848"></i>
+	    		</li>
 				<li class="nav-item">
 		      		<img src="../img/brand.png" style="width: auto; height: 36px">
 			    </li>
