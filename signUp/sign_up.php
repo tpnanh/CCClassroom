@@ -23,9 +23,10 @@
 
 	$conn = new mysqli('127.0.0.1','root','',"ccclassroom");
 
-	$query = "insert into usercc values('$mail','$username','$pass','$hoTen','$birth','$sdt','Học viên','$image')";
+	$query = "insert into usercc values('$mail','$username','$pass','$hoTen','$birth','$sdt','Student','$image')";
 
     if($conn->query($query)===false){
+
     	$error = $conn->error;
     	$conn->close();
     	die($error);

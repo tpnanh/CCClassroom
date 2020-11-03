@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <?php
 	session_start();
+
+	if(!isset($_SESSION['user']) || $_SESSION['user']==null){
+		header('Location: index.php');
+		exit();
+	}
 	$user = $_SESSION['user'];
 ?>
 <html lang="en">
@@ -89,6 +94,26 @@
 		}
 	</style>
 
+	<script>
+		
+		function logOut(){
+			$.ajax({
+				type:"POST",
+				url:"./logOut/logOut.php",
+				cache: false,
+                contentType: false,
+                processData: false,
+				success: function (response) {
+					if (response=="LogOut Success") {
+						window.location.href = 'http://localhost:8080/index.php'
+					}
+				},
+				fail: function(xhr, textStatus, errorThrown){
+				}
+			});
+		}
+	</script>
+
 </head>
 <body>
 	<div>
@@ -103,9 +128,16 @@
 		  	</ul>
 		  	<ul class="nav-right navbar-nav ml-auto">
 			    <li class="nav-item">
-			       <a class="btn" href="listUser/listUser.html">
-			       		<i class="fas fa-address-book"></i>
-			       </a>
+			    	<?php
+			    		if ($user["role"]==="Admin") {
+			    	?>
+							<a class="btn" href="listUser/listUser.php">
+			       				<i class="fas fa-address-book"></i>
+			      		 	</a>
+					<?php
+						}
+			    	?>
+			       
 			    </li>
 				<li class="nav-item">
 					<div class="dropdown">
@@ -127,7 +159,7 @@
 				        <div class="dropdown-menu dropdown-menu-lg-right  dropdown-profile" aria-labelledby="profile">
 						    <a class="dropdown-item" href="profile/profile.html">Edit profile</a>
 						    <div class="dropdown-divider"></div>
-						    <a class="dropdown-item logout" data-toggle="modal" href="#">Logout</a>
+						    <a class="dropdown-item logout" data-toggle="modal" href="#" onclick="logOut()">Logout</a>
 						</div>
 					</div>
 			    </li>
@@ -203,90 +235,6 @@
 				    </div>
 				</div>	  
 
-				<div class="card col-lg-3">
-				  	<div class="card-header">				  	 	
-				      	<a href="#"><h5 class="card-title">Lập trình web và ứng dụng</h5></a>
-				      	<h6 class="card-subtitle">Mai Văn Mạnh - web - N3</h6>
-				      	<p class="card-text" style="font-size: 15px;margin-top: 5px">Mai Văn Mạnh</p>
-				  	</div>
-				  	<div class="card-img-overlay ml-auto" style="max-height: 30px;max-width: 30px;">
-				  		<img src="../img/person_icon.png" class="rounded-circle"  alt="avatar" width="70" height="70" style="float: right;margin-top: 48px"> 
-				  		<a href="#" style="float: right;">
-				  	 		<i class="fas fa-ellipsis-v" style="color: white"></i>
-				  	 	</a>
-				  	</div>	
-				    <div class="card-body">	   
-
-				    </div>
-				</div>	  
-
-				<div class="card col-lg-3">
-				  	<div class="card-header">				  	 	
-				      	<a href="#"><h5 class="card-title">Lập trình web và ứng dụng</h5></a>
-				      	<h6 class="card-subtitle">Mai Văn Mạnh - web - N3</h6>
-				      	<p class="card-text" style="font-size: 15px;margin-top: 5px">Mai Văn Mạnh</p>
-				  	</div>
-				  	<div class="card-img-overlay ml-auto" style="max-height: 30px;max-width: 30px;">
-				  		<img src="../img/person_icon.png" class="rounded-circle"  alt="avatar" width="70" height="70" style="float: right;margin-top: 48px"> 
-				  		<a href="#" style="float: right;">
-				  	 		<i class="fas fa-ellipsis-v" style="color: white"></i>
-				  	 	</a>
-				  	</div>	
-				    <div class="card-body">	   
-
-				    </div>
-				</div>	 
-
-				<div class="card col-lg-3">
-				  	<div class="card-header">				  	 	
-				      	<a href="#"><h5 class="card-title">Lập trình web và ứng dụng</h5></a>
-				      	<h6 class="card-subtitle">Mai Văn Mạnh - web - N3</h6>
-				      	<p class="card-text" style="font-size: 15px;margin-top: 5px">Mai Văn Mạnh</p>
-				  	</div>
-				  	<div class="card-img-overlay ml-auto" style="max-height: 30px;max-width: 30px;">
-				  		<img src="../img/person_icon.png" class="rounded-circle"  alt="avatar" width="70" height="70" style="float: right;margin-top: 48px"> 
-				  		<a href="#" style="float: right;">
-				  	 		<i class="fas fa-ellipsis-v" style="color: white"></i>
-				  	 	</a>
-				  	</div>	
-				    <div class="card-body">	   
-
-				    </div>
-				</div>	  
-
-				<div class="card col-lg-3">
-				  	<div class="card-header">				  	 	
-				      	<a href="#"><h5 class="card-title">Lập trình web và ứng dụng</h5></a>
-				      	<h6 class="card-subtitle">Mai Văn Mạnh - web - N3</h6>
-				      	<p class="card-text" style="font-size: 15px;margin-top: 5px">Mai Văn Mạnh</p>
-				  	</div>
-				  	<div class="card-img-overlay ml-auto" style="max-height: 30px;max-width: 30px;">
-				  		<img src="../img/person_icon.png" class="rounded-circle"  alt="avatar" width="70" height="70" style="float: right;margin-top: 48px"> 
-				  		<a href="#" style="float: right;">
-				  	 		<i class="fas fa-ellipsis-v" style="color: white"></i>
-				  	 	</a>
-				  	</div>	
-				    <div class="card-body">	   
-
-				    </div>
-				</div>	  
-
-				<div class="card col-lg-3">
-				  	<div class="card-header">				  	 	
-				      	<a href="#"><h5 class="card-title">Lập trình web và ứng dụng</h5></a>
-				      	<h6 class="card-subtitle">Mai Văn Mạnh - web - N3</h6>
-				      	<p class="card-text" style="font-size: 15px;margin-top: 5px">Mai Văn Mạnh</p>
-				  	</div>
-				  	<div class="card-img-overlay ml-auto" style="max-height: 30px;max-width: 30px;">
-				  		<img src="../img/person_icon.png" class="rounded-circle"  alt="avatar" width="70" height="70" style="float: right;margin-top: 48px"> 
-				  		<a href="#" style="float: right;">
-				  	 		<i class="fas fa-ellipsis-v" style="color: white"></i>
-				  	 	</a>
-				  	</div>	
-				    <div class="card-body">	   
-
-				    </div>
-				</div>	  
 			</div>
 		</div>
 	</div>
