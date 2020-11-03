@@ -1,4 +1,18 @@
 <!DOCTYPE html>
+<?php
+	session_start();
+
+	if(!isset($_SESSION['user']) || $_SESSION['user']==null){
+		header('Location: ../index.php');
+		exit();
+	}
+
+	$user = $_SESSION['user'];
+	if ($user["role"]!="Admin" && $user["role"]!="Teacher") {
+		header('Location: ../home.php');
+		exit();
+	}
+?>
 <html lang="en">
 <head>
     <title>Create Classroom - CC Classroom</title>
@@ -78,10 +92,57 @@
 			font-size: 15px;
 		}
 	</style>
+
+	<script>
+		let className;
+		let subject;
+		let room;
+		let errorAlter;
+
+		window.onload = function(){
+			className = document.getElementById('class-name')
+			subject = document.getElementById('subject')
+			room = document.getElementById('class-room')
+			errorAlter = document.getElementById('alter-error')
+		}
+		function createClass(){
+			let fd = new FormData();
+			fd.append('CLASS_NAME', className.value)
+			fd.append('SUBJECT', subject.value)
+			fd.append('ROOM', room.value)
+
+			$.ajax({
+				type:"POST",
+				url:"createClassroomFunction.php",
+				cache: false,
+                contentType: false,
+                processData: false,
+				data:fd,
+				success: function (response) {
+					console.log(response)
+					if (response === 'Insert success') {
+						history.go(-1)
+					}else{
+						error(response)
+					}
+
+					
+				},
+				fail: function(xhr, textStatus, errorThrown){
+					error("Request failed")
+				}
+			});
+		}
+
+		function error(errorStr){
+			errorAlter.innerHTML = errorStr
+			errorAlter.style.display = ""
+		}
+
+	</script>
 </head>
 <body class="text-center">
-	
-	<form method="post" class="form-signin" onsubmit='checkInformation();return false' enctype="multipart/form-data">
+	<form method="post" class="form-signin" onsubmit='createClass();return false' enctype="multipart/form-data">
 		<img src="../img/icon.png" alt="icon" width="auto" height="60">
 		<h3 class="createClass"><b>Create Class</b></h3>
 

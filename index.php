@@ -3,7 +3,7 @@
 	session_start();
 	if(isset($_SESSION['user'])){
 		if($_SESSION['user']!==null){
-    		header('Location: home.php');
+    		header('Location: home/home.php');
 			exit();
 		}
 	}
@@ -129,7 +129,7 @@
 							alertError.innerHTML = "Password wrong"
 						}else if (response === "Login success"){
 							alertError.style.display = "none"
-							window.location.href="home.php"
+							window.location.href="home/home.php"
 						}
 
     				},
