@@ -225,7 +225,7 @@
 
 			let a = document.createElement('a')
 			a.classList.add('dropdown-item')
-			a.href = '#'
+			a.onclick = function(){ deleteUser(data.email,tr) }
 			a.innerHTML = 'Delete'
 
 			let div3 = document.createElement('div')
@@ -293,6 +293,26 @@
 
 		function changeViewPermission(permission){
 			btnPermission.innerHTML = permission
+		}
+
+		function deleteUser(email,view){
+			let fd = new FormData();
+			fd.append('Email', email)
+			$.ajax({
+				type:"POST",
+				url:"deleteUser.php",
+				cache: false,
+                contentType: false,
+                processData: false,
+				data:fd,
+				success: function (response) {
+					if (response==="Delete user success") {
+						view.remove()
+					}
+				},
+				fail: function(xhr, textStatus, errorThrown){
+				}
+			});
 		}
 
 	</script>
