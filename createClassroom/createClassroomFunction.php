@@ -3,7 +3,7 @@
 	$user = $_SESSION['user'];
 	$className = $_POST['CLASS_NAME'];
 	$subject = $_POST['SUBJECT'];
-	$room = $_POST['SUBJECT'];
+	$room = $_POST['ROOM'];
 	$email = $user['email'];
 	$avatar = $_FILES['avatar'];
 
