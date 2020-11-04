@@ -257,11 +257,23 @@
 				       		<i class="fas fa-plus"></i>
 				       	</button>				       	
 				        <div class="dropdown-menu dropdown-menu-lg-right" aria-expanded="true" aria-labelledby="joinClass">
-						    <a class="dropdown-item" data-toggle="modal" href="#modalJoin">Join</a>
+				        	<?php
+						    	if ($user["role"] != 'Admin') {
+						    ?>
+						    	<a class="dropdown-item" data-toggle="modal" href="#modalJoin">Join</a>
+						    <?php
+						    	}
+						    ?>
+						    <?php
+						    	if ($user["role"] === 'Teacher') {
+						    ?>
+						    	<div class="dropdown-divider"></div>
+						    <?php
+						    	}
+						    ?>
 						    <?php
 						    	if ($user["role"] === 'Admin' || $user["role"] === 'Teacher') {
 						    ?>
-						    	<div class="dropdown-divider"></div>
 						    	<a class="dropdown-item" href="../createClassroom/createClassroom.php">Create</a>
 						    <?php
 						    	}
