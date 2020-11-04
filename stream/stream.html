@@ -24,6 +24,12 @@
 			border: 1px solid #50a350;
 
 		}
+		a:hover{
+			text-decoration: none;
+		}
+		a:active{
+			text-decoration: none;
+		}
 		h6{
 			color: black;
 			padding: 2px;
@@ -47,10 +53,22 @@
 			  	</div>	
 			</div>	 
 			<div class="card col-lg">
-			  	<div class="card-header" style="cursor: pointer; background-color: transparent;">			
-			      	<img src="../img/classroom_icon.png" class="rounded-circle" alt="avatar" width="50" height="50" style="float: left; margin: 5px; margin-right: 20px"> 
-			      	<h6 class="card-subtitle" style="margin-top: 10px;">MVM posted a new material: Restful Web Service</h6>
-			      	<p>Nov 3</p>
+			  	<div>		
+			  		<a class="card-header" href="#" style="background-color: transparent;">	
+				      	<img src="../img/classroom_icon.png" class="rounded-circle" alt="avatar" width="50" height="50" style="float: left; margin: 28px; margin-right: 20px"> 
+				      	<h6 class="card-subtitle" style="margin-top: 10px;">MVM posted a new material: Restful Web Service</h6>
+				      	<p>Nov 3</p>
+			      	</a>			      	
+			  	</div>
+			  	<div class="card-img-overlay ml-auto" style="max-height: 30px;max-width: 30px;">
+					<a href="#m" data-toggle="dropdown show" id="postOption" style="float: right;">
+			  	 		<i class="fas fa-ellipsis-v" style="color: black"></i>
+			  	 	</a>
+			  	 	<div class="dropdown-menu dropdown-menu-right" aria-expanded="true" aria-labelledby="postOption">
+					    <a class="dropdown-item" href="#">Edit</a>
+					    <div class="dropdown-divider"></div>
+					    <a class="dropdown-item" data-toggle="modal" href="#modalDelete">Delete</a>
+					</div>
 			  	</div>
 			</div>	
 

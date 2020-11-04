@@ -92,10 +92,10 @@
 		}
 	</style>
 
-<!-- 	<script src="jquery.js"></script>  -->
     <script> 
     	window.onload = function(){
     		$("#streamTab").load("../stream/stream.html"); 
+
     	}
 	    // $(function(){
 	    // 	$("#streamTab").load("../stream/stream.html"); 
@@ -108,7 +108,7 @@
 		<nav class="navbar navbar-expand-sm fixed-top"> 
 	  		<ul class="navbar-nav nav nav-tabs">
 				<li class="nav-item">
-		      		<a href="../home.php">
+		      		<a href="../home/home.php">
 		      			<img src="../img/brand.png" style="width: auto; height: 36px">
 		      		</a>
 			    </li>
@@ -122,13 +122,13 @@
 		  	<ul class="nav-right navbar-nav ml-auto">
 				<li class="nav-item">
 					<div class="dropdown">
-				       	<button class="btn" data-toggle="dropdown" id="joinClass" href="#">
+				       	<button class="btn" data-toggle="dropdown" data-target="#assignment" aria-expanded="true" id="assignment" href="#">
 				       		<i class="fas fa-plus"></i>
 				       	</button>				       	
-				        <div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="joinClass">
-						    <a class="dropdown-item" data-toggle="modal" href="#modalJoin">Assignment</a>
+				        <div class="dropdown-menu dropdown-menu-lg-right dropdown-add" aria-expanded="true" id = "assignment" aria-labelledby="assignment">
+						    <a class="dropdown-item" data-toggle="modal" href="#modalAssignment">Assignment</a>
 						    <div class="dropdown-divider"></div>
-						    <a class="dropdown-item" href="createClassroom/createClassroom.html">Material</a>
+						    <a class="dropdown-item" href="#">Material</a>
 						</div>
 					</div>
 			    </li>
@@ -137,7 +137,7 @@
 				       	<button class="btn" data-toggle="dropdown" id="profile">
 				       		<i class="fas fa-info-circle"></i>
 				       	</button>				       	
-				        <div class="dropdown-menu dropdown-menu-lg-right  dropdown-profile" aria-labelledby="profile">
+				        <div class="dropdown-menu dropdown-menu-lg-right  dropdown-profile" aria-expanded="true" aria-labelledby="profile">
 						    <a class="dropdown-item" href="../profile/profile.html">Edit profile</a>
 						    <div class="dropdown-divider"></div>
 						    <a class="dropdown-item logout" data-toggle="modal" href="#">Logout</a>
@@ -159,18 +159,18 @@
       	</div>
     </main>
 
-	<div class="modal" id="modalJoin" tabindex="-1" role="dialog">
+	<div class="modal" id="modalAssignment" tabindex="-1" role="dialog">
 		<div class="modal-dialog " role="document">
 	    	<div class="modal-content w-75">
 	      		<div class="modal-header">
-	        		<h5 class="modal-title">Join class</h5>
+	        		<h5 class="modal-title">Material</h5>
 	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	         			<span aria-hidden="true">&times;</span>
 	        		</button>
 	      		</div>
 		      	<div class="modal-body">
 		        	<form>
-		        		<label for="inputClasscode">Classcode</label>
+		        		<label for="inputClasscode"></label>
 						<input type="text" class="form-control" id="inputClasscode" placeholder="Enter classcode" >
 					</form>
 		      	</div>

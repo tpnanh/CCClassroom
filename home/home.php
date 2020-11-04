@@ -144,7 +144,7 @@
 				       	<button class="btn" data-toggle="dropdown" id="joinClass" href="#">
 				       		<i class="fas fa-plus"></i>
 				       	</button>				       	
-				        <div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="joinClass">
+				        <div class="dropdown-menu dropdown-menu-lg-right" aria-expanded="true" aria-labelledby="joinClass">
 						    <a class="dropdown-item" data-toggle="modal" href="#modalJoin">Join</a>
 						    <?php
 						    	if ($user["role"] === 'Admin' || $user["role"] === 'Teacher') {
@@ -163,7 +163,7 @@
 				       	<button class="btn" data-toggle="dropdown" id="profile" href="#">
 				       		<i class="fas fa-info-circle"></i>
 				       	</button>				       	
-				        <div class="dropdown-menu dropdown-menu-lg-right  dropdown-profile" aria-labelledby="profile">
+				        <div class="dropdown-menu dropdown-menu-lg-right  dropdown-profile" aria-expanded="true" aria-labelledby="profile">
 						    <a class="dropdown-item" href="../profile/profile.html">Edit profile</a>
 						    <div class="dropdown-divider"></div>
 						    <a class="dropdown-item logout" data-toggle="modal" href="#" onclick="logOut()">Logout</a>
@@ -222,16 +222,16 @@
 			<div class="row">
 			  	<div class="card col-lg-3">
 				  	<div class="card-header">				  	 	
-				      	<a href="../classroom/classroom.html"><h5 class="card-title">Lập trình web và ứng dụng</h5></a>
-				      	<h6 class="card-subtitle">Mai Văn Mạnh - web - N3</h6>
-				      	<p class="card-text" style="font-size: 15px;margin-top: 5px">Mai Văn Mạnh</p>
+				      	<a href="../classroom/classroom.html"><h5 class="card-title">HK1_2020_505404_WEB</h5></a>
+				      	<h6 class="card-subtitle">Lập trình web và ứng dụng</h6>
+				      	<p class="card-text" style="font-size: 15px;margin-top: 5px">Phòng B206-A</p>
 				  	</div>
 				  	<div class="card-img-overlay ml-auto" style="max-height: 30px;max-width: 30px;">
 				  		<img src="../img/person_icon.png" class="rounded-circle"  alt="avatar" width="70" height="70" style="float: right;margin-top: 48px"> 
 				  		<a href="#" data-toggle="dropdown" id="classOption" style="float: right;">
 				  	 		<i class="fas fa-ellipsis-v" style="color: white"></i>
 				  	 	</a>
-				  	 	<div class="dropdown-menu dropdown-menu-right" aria-labelledby="classOption">
+				  	 	<div class="dropdown-menu dropdown-menu-right" aria-expanded="true" aria-labelledby="classOption">
 						    <a class="dropdown-item" href="../editClassroom/editClassroom.html">Edit</a>
 						    <div class="dropdown-divider"></div>
 						    <a class="dropdown-item" data-toggle="modal" href="#modalDelete">Delete</a>
