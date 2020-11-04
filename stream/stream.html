@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Classroom - CC Classroom</title>
+    <title>Stream - CC Classroom</title>
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" type="image/x-icon" href="img/thumbnail.ico" />
@@ -18,7 +18,26 @@
 		}
 		.card{
 			padding: 0px;
-			
+		}
+		.col-lg{
+			margin-top: 15px;
+			border: 1px solid #50a350;
+
+		}
+		a:hover{
+			text-decoration: none;
+		}
+		a:active{
+			text-decoration: none;
+		}
+		h6{
+			color: black;
+			padding: 2px;
+			display: block;
+		}
+		.col-lg p{
+			color: black;
+			font-size: 14px;
 		}
 	</style>
 
@@ -26,18 +45,37 @@
 <body>
 	<div class="container">
 		<div class="row">
-		  	<div class="card col-lg">
-			  	<div class="card-header" style="background-color: #087043;">	
-		
-			      	<h5 class="card-title">Lập trình web và ứng dụng</h5>
-			      	<h6 class="card-subtitle">Mai Văn Mạnh - web - N3</h6>
-			      	<p class="card-text" style="font-size: 15px;margin-top: 5px">Mai Văn Mạnh</p>
-
-			  	</div>			  	
-
+		  	<div class="card col-lg-12">
+			  	<div class="card-header" style="background-color: #087043">			
+			      	<h4 class="card-title">HK1_2020_505404_WEB</h5>
+			      	<h5 class="card-subtitle">Lập trình web và ứng dụng</h6>
+			      	<p class="card-text" style="font-size: 15px;margin-top: 5px">Phòng B206-A</p>
+			  	</div>	
 			</div>	 
+			<div class="card col-lg">
+			  	<div>		
+			  		<a class="card-header" href="#" style="background-color: transparent;">	
+				      	<img src="../img/classroom_icon.png" class="rounded-circle" alt="avatar" width="50" height="50" style="float: left; margin: 28px; margin-right: 20px"> 
+				      	<h6 class="card-subtitle" style="margin-top: 10px;">MVM posted a new material: Restful Web Service</h6>
+				      	<p>Nov 3</p>
+			      	</a>			      	
+			  	</div>
+			  	<div class="card-img-overlay ml-auto" style="max-height: 30px;max-width: 30px;">
+					<a href="#m" data-toggle="dropdown show" id="postOption" style="float: right;">
+			  	 		<i class="fas fa-ellipsis-v" style="color: black"></i>
+			  	 	</a>
+			  	 	<div class="dropdown-menu dropdown-menu-right" aria-expanded="true" aria-labelledby="postOption">
+					    <a class="dropdown-item" href="#">Edit</a>
+					    <div class="dropdown-divider"></div>
+					    <a class="dropdown-item" data-toggle="modal" href="#modalDelete">Delete</a>
+					</div>
+			  	</div>
+			</div>	
+
+
 		</div>
 	</div> 
 	
+
 </body>
 </html>

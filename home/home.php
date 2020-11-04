@@ -231,9 +231,9 @@
 	<div>
 		<nav class="navbar navbar-expand-sm fixed-top"> 
 	  		<ul class="navbar-nav">
-	    		<!-- <li class="nav-item">
-	       			<a class="navbar-brand" href="#"><i class="fas fa-bars"></i></a>
-	    		</li> -->
+	    		<li class="nav-item" >
+	       			<i class="fa fa-home navbar-brand" style="font-size: 27px; color: #D24848"></i>
+	    		</li>
 				<li class="nav-item">
 		      		<img src="../img/brand.png" style="width: auto; height: 36px">
 			    </li>
@@ -256,7 +256,7 @@
 				       	<button class="btn" data-toggle="dropdown" id="joinClass" href="#">
 				       		<i class="fas fa-plus"></i>
 				       	</button>				       	
-				        <div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="joinClass">
+				        <div class="dropdown-menu dropdown-menu-lg-right" aria-expanded="true" aria-labelledby="joinClass">
 						    <a class="dropdown-item" data-toggle="modal" href="#modalJoin">Join</a>
 						    <?php
 						    	if ($user["role"] === 'Admin' || $user["role"] === 'Teacher') {
@@ -275,7 +275,7 @@
 				       	<button class="btn" data-toggle="dropdown" id="profile" href="#">
 				       		<i class="fas fa-info-circle"></i>
 				       	</button>				       	
-				        <div class="dropdown-menu dropdown-menu-lg-right  dropdown-profile" aria-labelledby="profile">
+				        <div class="dropdown-menu dropdown-menu-lg-right  dropdown-profile" aria-expanded="true" aria-labelledby="profile">
 						    <a class="dropdown-item" href="../profile/profile.html">Edit profile</a>
 						    <div class="dropdown-divider"></div>
 						    <a class="dropdown-item logout" data-toggle="modal" href="#" onclick="logOut()">Logout</a>
