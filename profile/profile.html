@@ -50,6 +50,10 @@
 			font-size: 13px;
 			font-weight: bold;
 		}
+
+		img{
+			margin-top: 20px;
+		}
 		
 		.custom-file-label{
 			margin: 0;
@@ -110,25 +114,12 @@
 		<input type="tel" name="user-phone-number" id="user-phone-number" class="form-control" placeholder="Phone number" 
 		pattern="[0-9]{10}" required> 
 
-		<label for="user-role">Role</label>  
-		<div class="dropdown" >
-			<button class="btn btn-sm btn-secondary dropdown-toggle" style="margin-top: 0px" type="button" id="user-role" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			Role
-			</button>
-			<div class="dropdown-menu" aria-labelledby="user-role">
-				<a class="dropdown-item" href="#">Admin</a>
-				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="#">Student</a>
-				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="#">Teacher</a>
-			</div>
-		</div>
-
-		<label for="custom-file">Choose your profile photo</label> 
-		<div class="custom-file">
-			<label class="custom-file-label" for="custom-file">Choose file</label>
-			<input type='file' name="custom-file" class="custom-file-input" id="custom-file" accept="image/*" required>			
-		</div>
+		<img src="../img/classroom_icon.png" style="float: left; width: 30%; padding-right: 15px">
+		<label for="custom-file" style="margin-top: 30px">Choose your classroom picture</label>
+		<div class="custom-file" style="width: 70%;">
+			<label class="custom-file-label"   for="custom-file">Choose file</label>
+			<input type='file' name="custom-file" class="custom-file-input" id="custom-file" accept="image/*" required>		
+		</div>	
 
 		<button class="btn btn-md btn-block" type="submit" name="submit">Save</button>
 
