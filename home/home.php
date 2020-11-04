@@ -3,7 +3,7 @@
 	session_start();
 
 	if(!isset($_SESSION['user']) || $_SESSION['user']==null){
-		header('Location: index.php');
+		header('Location: ../index.php');
 		exit();
 	}
 	$user = $_SESSION['user'];
@@ -96,9 +96,15 @@
 
 	<script>
 		let boardView;
+		let idTemp = ''
+		let viewTemp = null
 		window.onload = function(){
 			boardView = document.getElementById('boardView');
 			getClass()
+
+			$('#modalDelete').on('hidden.bs.modal', function () {
+ 				unsaveClassTemp()
+			})
 		}
 
 		function getClass(){
@@ -165,40 +171,46 @@
 			img.style.marginTop = '48px'
 			div2.appendChild(img)
 
-			let a2 = document.createElement('a')
-			a2.href = '#'
-			a2.setAttribute("data-toggle", "dropdown");
-			a2.id = 'classOption'
-			a2.style.float = 'right'
-			a2.setAttribute("aria-expanded", 'true')
+			let check = '<?= $user['role'] ?>';
+			if (check!='Student') {
+				let a2 = document.createElement('a')
+				a2.href = '#'
+				a2.setAttribute("data-toggle", "dropdown");
+				a2.id = 'classOption'
+				a2.style.float = 'right'
+				a2.setAttribute("aria-expanded", 'true')
 
-			let i = document.createElement('i')
-			i.classList.add('fas','fa-ellipsis-v')
-			i.style.color='white'
-			a2.appendChild(i)
-			div2.appendChild(a2)
+				let i = document.createElement('i')
+				i.classList.add('fas','fa-ellipsis-v')
+				i.style.color='white'
+				a2.appendChild(i)
+				div2.appendChild(a2)
 
-			let div3 = document.createElement('div')
-			div3.classList.add('dropdown-menu','dropdown-menu-right')
-			div3.aria_labelledby = 'classOption'
+				let div3 = document.createElement('div')
+				div3.classList.add('dropdown-menu','dropdown-menu-right')
+				div3.aria_labelledby = 'classOption'
 
-			let a3 = document.createElement('a')
-			a3.classList.add('dropdown-item')
-			a3.href = '../editClassroom/editClassroom.html'
-			a3.innerHTML = 'Edit'
-			div3.appendChild(a3)
+				let a3 = document.createElement('a')
+				a3.classList.add('dropdown-item')
+				a3.href = "../editClassroom/editClassroom.php?id="+data.id_class
+				a3.innerHTML = 'Edit'
+				div3.appendChild(a3)
 
-			let div4 = document.createElement('div')
-			div4.classList.add('dropdown-divider')
-			div3.appendChild(div4)
+				let div4 = document.createElement('div')
+				div4.classList.add('dropdown-divider')
+				div3.appendChild(div4)
 
-			let a4 = document.createElement('a')
-			a4.classList.add('dropdown-item')
-			a4.setAttribute("data-toggle", "modal");
-			a4.href = '#modalDelete'
-			a4.innerHTML = 'Delete'
-			div3.appendChild(a4)
-			div2.appendChild(div3)
+				let a4 = document.createElement('a')
+				a4.classList.add('dropdown-item')
+				a4.setAttribute("data-toggle", "modal");
+				a4.href = '#modalDelete'
+				a4.innerHTML = 'Delete'
+				a4.onclick = function(){ saveClassTemp(data.id_class,div) }
+				div3.appendChild(a4)
+
+				div2.appendChild(div3)
+			}
+			
 			div.appendChild(div2)
 
 			let div5 = document.createElement('div')
@@ -206,6 +218,40 @@
 			div.appendChild(div5)
 			boardView.appendChild(div)
 
+		}
+
+		function deleteClass(){
+			let fd = new FormData();
+			fd.append('id', idTemp)
+			$.ajax({
+				type:"POST",
+				url:"deleteClass.php",
+				cache: false,
+                contentType: false,
+                processData: false,
+				data:fd,
+				success: function (response) {
+					if (response==="Delete class success") {
+						let a = viewTemp
+						viewTemp.remove()
+					}
+
+					$("#modalDelete").modal('hide');
+				},
+				fail: function(xhr, textStatus, errorThrown){
+					$("#modalDelete").modal('hide');
+				}
+			});
+		}
+
+		function saveClassTemp(id, view){
+			idTemp = id
+			viewTemp = view
+		}
+
+		function unsaveClassTemp(){
+			idTemp = ''
+			viewTemp = null
 		}
 
 		function logOut(){
@@ -334,7 +380,7 @@
 		        	<p>Are you sure you want to delete this class?</p>
 		      	</div>
 		      	<div class="modal-footer">
-			        <button type="button" class="btn deleteClass">Delete</button>			        
+			        <button type="button" class="btn deleteClass" onclick="deleteClass()">Delete</button>			        
 		      	</div>
 	    	</div>
 	  	</div>
