@@ -5,12 +5,6 @@
 	$conn = new mysqli('127.0.0.1','root','',"ccclassroom");
 	$emailUser = $user["email"];
 
-// 	SELECT p.*, f.*
-// FROM person p
-// INNER JOIN person_fruit pf
-// ON pf.person_id = p.id
-// INNER JOIN fruits f
-// ON f.fruit_name = pf.fruit_name
 	if ($user['role']==="Admin") {
 		
 		$query = "SELECT c.*, u.*

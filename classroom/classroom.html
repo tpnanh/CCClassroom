@@ -95,7 +95,7 @@
     <script> 
     	window.onload = function(){
     		$("#streamTab").load("../stream/stream.html"); 
-
+    		$("#peopleTab").load("../people/people.html"); 
     	}
 	    // $(function(){
 	    // 	$("#streamTab").load("../stream/stream.html"); 
@@ -122,13 +122,13 @@
 		  	<ul class="nav-right navbar-nav ml-auto">
 				<li class="nav-item">
 					<div class="dropdown">
-				       	<button class="btn" data-toggle="dropdown" data-target="#assignment" aria-expanded="true" id="assignment" href="#">
+				       	<button class="btn" data-toggle="dropdown" data-target="#assignment" aria-expanded="true" id="btnAssignment" href="#">
 				       		<i class="fas fa-plus"></i>
 				       	</button>				       	
-				        <div class="dropdown-menu dropdown-menu-lg-right dropdown-add" aria-expanded="true" id = "assignment" aria-labelledby="assignment">
-						    <a class="dropdown-item" data-toggle="modal" href="#modalAssignment">Assignment</a>
+				        <div class="dropdown-menu dropdown-menu-lg-right dropdown-add" aria-expanded="true" id = "assignment" aria-labelledby="btnAssignment">
+						    <a class="dropdown-item" data-toggle="modal" href="#modalAssignment" style="font-weight: bold;">Assignment</a>
 						    <div class="dropdown-divider"></div>
-						    <a class="dropdown-item" href="#">Material</a>
+						    <a class="dropdown-item" href="#" style="font-weight: bold;">Material</a>
 						</div>
 					</div>
 			    </li>
@@ -138,9 +138,7 @@
 				       		<i class="fas fa-info-circle"></i>
 				       	</button>				       	
 				        <div class="dropdown-menu dropdown-menu-lg-right  dropdown-profile" aria-expanded="true" aria-labelledby="profile">
-						    <a class="dropdown-item" href="../profile/profile.html">Edit profile</a>
-						    <div class="dropdown-divider"></div>
-						    <a class="dropdown-item logout" data-toggle="modal" href="#">Logout</a>
+						    <a class="dropdown-item logout" data-toggle="modal" href="#" style="font-weight: bold;">Logout</a>
 						</div>
 					</div>
 			    </li>
@@ -154,7 +152,6 @@
         	<div class="tab-pane active" id="streamTab">
         	</div>
         	<div class="tab-pane" id="peopleTab">
-          		<h4>test2</h4>
         	</div>
       	</div>
     </main>
