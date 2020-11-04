@@ -12,17 +12,23 @@
 // INNER JOIN fruits f
 // ON f.fruit_name = pf.fruit_name
 	if ($user['role']==="Admin") {
-		SELECT c.*, usercc.*
-		FROM class usercc
-		INNER JOIN class pf
-		ON pf.person_id = p.id
-		INNER JOIN fruits f
-		ON f.fruit_name = pf.fruit_name
-		$query = "select * from usercc where email!= '$emailUser' ORDER BY FIELD(role,'Admin', 'Teacher', 'Student'),ho_ten";
-	}else if ($user['role'] === "Teacher"){
-
-	}else{
-
+		
+		$query = "SELECT c.*, u.*
+				FROM usercc u
+				INNER JOIN class_of_user cof
+				ON cof.email = u.email
+				INNER JOIN class c
+				ON c.id_class = cof.id_class
+				ORDER BY date_created desc";
+	}else {
+		$query = "SELECT c.*, u.*
+				FROM usercc u
+				INNER JOIN class_of_user cof
+				ON cof.email = u.email
+				AND u.email = '$emailUser'
+				INNER JOIN class c
+				ON c.id_class = cof.id_class
+				ORDER BY date_created desc";
 	}
 	
 	$result = $conn->query($query);
@@ -30,7 +36,9 @@
 	$data = array();
 	while($row = mysqli_fetch_array($result)){ 
 
-    	$data[] = array('email' => $row[0], 'user_name' => $row[1], 'password' => $row[2],'ho_ten' => $row[3],'birthday' => $row[4],'sdt' => $row[5],'role' => $row[6],'avatar' => $row[7]);
+    	// $data[] = array('email' => $row[0], 'user_name' => $row[1], 'password' => $row[2],'ho_ten' => $row[3],'birthday' => $row[4],'sdt' => $row[5],'role' => $row[6],'avatar' => $row[7]);
+    	$data[]= array('id_class' => $row["id_class"], 'name_class' => $row["name_class"], 'subject' => $row["subject"], 'room' => $row["room"], 'name_class' => $row["name_class"], 'email' => $row["4"], 'date_created' => $row["date_created"], 'avatar' => $row["avatar_class"]);
+    	// $data[] = $row;
 	}
 	$conn->close();
 	echo(json_encode($data));

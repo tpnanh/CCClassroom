@@ -95,7 +95,119 @@
 	</style>
 
 	<script>
+		let boardView;
+		window.onload = function(){
+			boardView = document.getElementById('boardView');
+			getClass()
+		}
+
+		function getClass(){
+			$.ajax({
+				type:"GET",
+				url:"getClass.php",
+				cache: false,
+                contentType: false,
+                processData: false,
+				success: function (response) {
+					let result = JSON.parse(response)
+					for (i = 0; i < result.length; i++) {
+						appendViewIntoBoardView(result[i])
+					}
+				},
+				fail: function(xhr, textStatus, errorThrown){
+				}
+			});
+		}
+
+		function appendViewIntoBoardView(data){
+				
+			let div = document.createElement('div')
+			div.classList.add('card','col-lg-3')
+
+			let div1 = document.createElement('div')
+			div1.classList.add('card-header')
+
+			let a = document.createElement('a')
+			a.href = '../classroom/classroom.html'
+
+			let h = document.createElement('h5')
+			h.classList.add('card-title')
+			h.innerHTML = data.name_class
+
+			a.appendChild(h)
+			div1.appendChild(a)
+
+			let h2 = document.createElement('h6')
+			h2.classList.add('card-subtitle')
+			h2.innerHTML = data.subject
+			div1.appendChild(h2)
+
+			let p = document.createElement('p')
+			p.classList.add('card-text')
+			p.style.font_size = '15px'
+			p.style.marginTop  = '5px'
+			p.innerHTML = data.room
+			div1.appendChild(p)
+			div.appendChild(div1)
 		
+			let div2 = document.createElement('div')
+			div2.classList.add('card-img-overlay','ml-auto')
+			div2.style.maxHeight = '30px'
+			div2.style.maxWidth = '30px'
+
+			let img = document.createElement('img')
+			img.classList.add('rounded-circle')
+			img.src = data.avatar
+			img.alt = 'avatar'
+			img.width = '70'
+			img.height = '70'
+			img.style.float = 'right'
+			img.style.marginTop = '48px'
+			div2.appendChild(img)
+
+			let a2 = document.createElement('a')
+			a2.href = '#'
+			a2.setAttribute("data-toggle", "dropdown");
+			a2.id = 'classOption'
+			a2.style.float = 'right'
+			a2.setAttribute("aria-expanded", 'true')
+
+			let i = document.createElement('i')
+			i.classList.add('fas','fa-ellipsis-v')
+			i.style.color='white'
+			a2.appendChild(i)
+			div2.appendChild(a2)
+
+			let div3 = document.createElement('div')
+			div3.classList.add('dropdown-menu','dropdown-menu-right')
+			div3.aria_labelledby = 'classOption'
+
+			let a3 = document.createElement('a')
+			a3.classList.add('dropdown-item')
+			a3.href = '../editClassroom/editClassroom.html'
+			a3.innerHTML = 'Edit'
+			div3.appendChild(a3)
+
+			let div4 = document.createElement('div')
+			div4.classList.add('dropdown-divider')
+			div3.appendChild(div4)
+
+			let a4 = document.createElement('a')
+			a4.classList.add('dropdown-item')
+			a4.setAttribute("data-toggle", "modal");
+			a4.href = '#modalDelete'
+			a4.innerHTML = 'Delete'
+			div3.appendChild(a4)
+			div2.appendChild(div3)
+			div.appendChild(div2)
+
+			let div5 = document.createElement('div')
+			div5.classList.add('card-body') 
+			div.appendChild(div5)
+			boardView.appendChild(div)
+
+		}
+
 		function logOut(){
 			$.ajax({
 				type:"POST",
@@ -131,7 +243,7 @@
 			    	<?php
 			    		if ($user["role"]==="Admin") {
 			    	?>
-							<a class="btn" href="listUser/listUser.php">
+							<a class="btn" href="../listUser/listUser.php">
 			       				<i class="fas fa-address-book"></i>
 			      		 	</a>
 					<?php
@@ -219,28 +331,8 @@
 
 	<div>
 		<div class="container-fluid">
-			<div class="row">
-			  	<div class="card col-lg-3">
-				  	<div class="card-header">				  	 	
-				      	<a href="../classroom/classroom.html"><h5 class="card-title">Lập trình web và ứng dụng</h5></a>
-				      	<h6 class="card-subtitle">Mai Văn Mạnh - web - N3</h6>
-				      	<p class="card-text" style="font-size: 15px;margin-top: 5px">Mai Văn Mạnh</p>
-				  	</div>
-				  	<div class="card-img-overlay ml-auto" style="max-height: 30px;max-width: 30px;">
-				  		<img src="../img/person_icon.png" class="rounded-circle"  alt="avatar" width="70" height="70" style="float: right;margin-top: 48px"> 
-				  		<a href="#" data-toggle="dropdown" id="classOption" style="float: right;">
-				  	 		<i class="fas fa-ellipsis-v" style="color: white"></i>
-				  	 	</a>
-				  	 	<div class="dropdown-menu dropdown-menu-right" aria-labelledby="classOption">
-						    <a class="dropdown-item" href="../editClassroom/editClassroom.html">Edit</a>
-						    <div class="dropdown-divider"></div>
-						    <a class="dropdown-item" data-toggle="modal" href="#modalDelete">Delete</a>
-						</div>
-				  	</div>				  	
-				    <div class="card-body">	   
-
-				    </div>
-				</div>	  
+			<div class="row" id="boardView">
+			  	  
 
 			</div>
 		</div>

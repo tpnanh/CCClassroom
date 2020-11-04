@@ -129,7 +129,7 @@
   				listUserView.removeChild(listUserView.lastChild);
 			}
 			$.ajax({
-				type:"POST",
+				type:"GET",
 				url:"getAllUser.php",
 				cache: false,
                 contentType: false,

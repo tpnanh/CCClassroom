@@ -97,16 +97,30 @@
 		let className;
 		let subject;
 		let room;
+		let avatar;
 		let errorAlter;
 
 		window.onload = function(){
+			makeTextInputFile()
 			className = document.getElementById('class-name')
 			subject = document.getElementById('subject')
 			room = document.getElementById('class-room')
+			avatar = document.getElementById('custom-file');
 			errorAlter = document.getElementById('alter-error')
 		}
+
+		//Make text input file has name
+		function makeTextInputFile(){
+			$(".custom-file-input").on("change", function() {
+			  let fileName = $(this).val().split("\\").pop();
+			  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+			});
+		}
+
 		function createClass(){
+			let file = avatar.files[0]
 			let fd = new FormData();
+			fd.append('avatar', file)
 			fd.append('CLASS_NAME', className.value)
 			fd.append('SUBJECT', subject.value)
 			fd.append('ROOM', room.value)
@@ -154,6 +168,12 @@
 		
 		<label for="class-room">Room</label>     
 		<input type="text" name="class-room" id="class-room" class="form-control" placeholder="Room" required> 
+
+		<label for="custom-file" >Choose your classroom picture</label> 
+		<div class="custom-file">
+			<label class="custom-file-label" for="custom-file">Choose file</label>
+			<input type='file' name="custom-file" class="custom-file-input" id="custom-file" accept="image/*" required>			
+		</div>
 
 		<button class="btn btn-md btn-block" type="submit" name="submit">Create</button>
 
