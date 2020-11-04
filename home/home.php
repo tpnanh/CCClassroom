@@ -96,9 +96,15 @@
 
 	<script>
 		let boardView;
+		let idTemp = ''
+		let viewTemp = null
 		window.onload = function(){
 			boardView = document.getElementById('boardView');
 			getClass()
+
+			$('#modalDelete').on('hidden.bs.modal', function () {
+ 				unsaveClassTemp()
+			})
 		}
 
 		function getClass(){
@@ -199,6 +205,7 @@
 				a4.setAttribute("data-toggle", "modal");
 				a4.href = '#modalDelete'
 				a4.innerHTML = 'Delete'
+				a4.onclick = function(){ saveClassTemp(data.id_class,div) }
 				div3.appendChild(a4)
 
 				div2.appendChild(div3)
@@ -211,6 +218,40 @@
 			div.appendChild(div5)
 			boardView.appendChild(div)
 
+		}
+
+		function deleteClass(){
+			let fd = new FormData();
+			fd.append('id', idTemp)
+			$.ajax({
+				type:"POST",
+				url:"deleteClass.php",
+				cache: false,
+                contentType: false,
+                processData: false,
+				data:fd,
+				success: function (response) {
+					if (response==="Delete class success") {
+						let a = viewTemp
+						viewTemp.remove()
+					}
+
+					$("#modalDelete").modal('hide');
+				},
+				fail: function(xhr, textStatus, errorThrown){
+					$("#modalDelete").modal('hide');
+				}
+			});
+		}
+
+		function saveClassTemp(id, view){
+			idTemp = id
+			viewTemp = view
+		}
+
+		function unsaveClassTemp(){
+			idTemp = ''
+			viewTemp = null
 		}
 
 		function logOut(){
@@ -339,7 +380,7 @@
 		        	<p>Are you sure you want to delete this class?</p>
 		      	</div>
 		      	<div class="modal-footer">
-			        <button type="button" class="btn deleteClass">Delete</button>			        
+			        <button type="button" class="btn deleteClass" onclick="deleteClass()">Delete</button>			        
 		      	</div>
 	    	</div>
 	  	</div>
