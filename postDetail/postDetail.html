@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Classroom - CC Classroom</title>
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" type="image/x-icon" href="img/thumbnail.ico" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+	<style>
+		nav{
+			margin: 5px;
+		}
+
+		.nav-right li{
+			margin-left: 20px;
+		}
+		.nav-tabs{
+			z-index: 2;
+		    float: left;
+		    width: 100%;
+		    text-align: center;
+		}
+		.container {
+		  	display: flex;
+		  	justify-content: center;
+		  	margin-top: 80px;
+		}
+		.center {
+		 	width: 800px;
+		}
+		body{
+			width: 100%;
+		}
+		h3{
+			color: #087043;			
+		}
+		p{
+			margin: 0;
+			color: gray;
+		}
+		#time{
+			margin-top: 3px;
+			font-size: 14px;
+		}
+		.first-line{
+			color: #087043;
+			background-color: #087043;
+			height: 1px;
+			border-width:0
+		}
+		.second-line{
+			color: lightgray;
+			background-color: lightgray;
+			height: 1px;
+			border-width:0;
+		}
+		#description{
+			color: black;
+			font-size: 14px;
+			line-height: 1.6;
+		}
+		#link{
+			color: blue;
+			margin-top: 5px;
+		}
+
+	</style>
+
+</head>
+<body>
+	<div>
+		<nav class="navbar navbar-expand-sm fixed-top"> 
+	  		<ul class="navbar-nav nav nav-tabs">
+				<li class="nav-item">
+		      		<a href="../classroom/classroom.html">
+		      			<img src="../img/brand.png" style="width: auto; height: 36px">
+		      		</a>
+			    </li>
+		  	</ul>
+		  	<ul class="nav-right navbar-nav ml-auto">				
+			   	<li class="nav-item">
+			       	<div class="dropdown">
+				       	<button class="btn" data-toggle="dropdown" id="profile">
+				       		<i class="fas fa-info-circle"></i>
+				       	</button>				       	
+				        <div class="dropdown-menu dropdown-menu-lg-right  dropdown-profile" aria-expanded="true" aria-labelledby="profile">
+						    <a class="dropdown-item logout" data-toggle="modal" href="#" style="font-weight: bold;">Logout</a>
+						</div>
+					</div>
+			    </li>
+		  	</ul>
+		</nav>
+	</div>
+	<div class="container">
+		<div class="center">
+			<h3>Đề tài đồ án cuối kì</h3>
+			<p>Mai Văn Mạnh</p>
+			<p id="time">Nov 3</p>
+			<hr class="first-line">
+			<p id="description"> Các em xem mô tả đề tài cuối kỳ trong tập tin đính kèm.
+			<br>- Tất cả các nhóm đều làm cùng đề bài này.
+			<br>- Deadline nộp bài là 30/11/2020.
+			<br>- Nếu có các vấn đề thắc mắc các em trao đổi trực tiếp với thầy.
+			<br>- Các nhóm có thể bắt đầu thực hiện từ hôm nay
+			</p>
+			<a href="../file/plan.pdf" download>
+				<p id="link">plan.pdf</p>
+			</a>
+			<hr class="second-line">
+		</div>
+	</div>
+		
+</body>
+</html>

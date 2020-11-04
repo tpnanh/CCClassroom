@@ -53,11 +53,6 @@
 		.logout:focus{
 			background-color: lightgray;
 		}
-		.container-fluid{
-			margin-left:10px;
-			width: 99%;
-			margin-top: 70px;
-		}
 		a{
 			color:white;
 		}
@@ -90,16 +85,24 @@
             overflow: hidden;
             text-overflow: ellipsis; 
 		}
+		label{
+			font-weight: bold;
+			color: #43437B;
+		}
 	</style>
 
     <script> 
     	window.onload = function(){
+    		makeTextInputFile()
     		$("#streamTab").load("../stream/stream.html"); 
     		$("#peopleTab").load("../people/people.html"); 
     	}
-	    // $(function(){
-	    // 	$("#streamTab").load("../stream/stream.html"); 
-	    // });
+	    function makeTextInputFile(){
+			$(".custom-file-input").on("change", function() {
+			  let fileName = $(this).val().split("\\").pop();
+			  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+			});
+		}
     </script>
 
 </head>
@@ -128,7 +131,8 @@
 				        <div class="dropdown-menu dropdown-menu-lg-right dropdown-add" aria-expanded="true" id = "assignment" aria-labelledby="btnAssignment">
 						    <a class="dropdown-item" data-toggle="modal" href="#modalAssignment" style="font-weight: bold;">Assignment</a>
 						    <div class="dropdown-divider"></div>
-						    <a class="dropdown-item" href="#" style="font-weight: bold;">Material</a>
+						    <a class="dropdown-item" data-toggle="modal" href="#modalPost" style="font-weight: bold;">Post
+						    </a>
 						</div>
 					</div>
 			    </li>
@@ -156,28 +160,67 @@
       	</div>
     </main>
 
-	<div class="modal" id="modalAssignment" tabindex="-1" role="dialog">
+	<div class="modal" style="margin-top: 80px" id="modalAssignment" tabindex="-1" role="dialog">
 		<div class="modal-dialog " role="document">
 	    	<div class="modal-content w-75">
 	      		<div class="modal-header">
-	        		<h5 class="modal-title">Material</h5>
+	        		<h5 class="modal-title">Assignment</h5>
 	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	         			<span aria-hidden="true">&times;</span>
 	        		</button>
 	      		</div>
 		      	<div class="modal-body">
 		        	<form>
-		        		<label for="inputClasscode"></label>
-						<input type="text" class="form-control" id="inputClasscode" placeholder="Enter classcode" >
+		        		<label for="assignmentTitle">Title</label>
+						<input type="text" class="form-control" id="assignmentTitle" placeholder="Title" >
+						<label for="assignmentDescription" style="margin-top: 10px">Description</label>
+						<textarea class="form-control" id="assignmentDescription" placeholder="Description (optional)" rows="3"></textarea>
+						<label for="custom-file" style="margin-top: 10px; display: block;">Add your file</label>
+						<div class="custom-file" style=" display: block;">
+							<label class="custom-file-label" for="custom-file">Choose file</label>
+							<input type='file' name="custom-file" class="custom-file-input" id="custom-file" multiple="multiple"  required>		
+						</div>		
+						<label for="due" style="margin-top: 10px; margin-right: 20px">Due</label>
+ 						<input type="datetime-local" style="margin-top: 20px;" name="due">
 					</form>
 		      	</div>
 		      	<div class="modal-footer">
-			        <button type="button" class="btn joinClass">Join</button>			        
+			        <button type="button" class="btn postAssignment" style="background-color: #43437B;color: white;">Post
+			        </button>			        
 		      	</div>
 	    	</div>
 	  	</div>
 	</div>
 	
+	<div class="modal" style="margin-top: 80px" id="modalPost" tabindex="-1" role="dialog">
+		<div class="modal-dialog " role="document">
+	    	<div class="modal-content w-75">
+	      		<div class="modal-header">
+	        		<h5 class="modal-title">Post</h5>
+	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	         			<span aria-hidden="true">&times;</span>
+	        		</button>
+	      		</div>
+		      	<div class="modal-body">
+		        	<form>
+		        		<label for="postTitle">Title</label>
+						<input type="text" class="form-control" id="postTitle" placeholder="Title" >
+						<label for="postDescription" style="margin-top: 10px">Description</label>
+						<textarea class="form-control" id="postDescription" placeholder="Description (optional)" rows="3"></textarea>
+						<label for="custom-file" style="margin-top: 10px; display: block;">Add your file</label>
+						<div class="custom-file" style=" display: block;">
+							<label class="custom-file-label" for="custom-file">Choose file</label>
+							<input type='file' name="custom-file" class="custom-file-input" id="custom-file" multiple="multiple"  required>		
+						</div>		
+					</form>
+		      	</div>
+		      	<div class="modal-footer">
+			        <button type="button" class="btn postpost" style="background-color: #43437B;color: white;">Post
+			        </button>			        
+		      	</div>
+	    	</div>
+	  	</div>
+	</div>
 	
 </body>
 </html>
