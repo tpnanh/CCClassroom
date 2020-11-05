@@ -100,21 +100,121 @@
 			font-size: 14px;
 		}
 	</style>
+
+	<script>
+		let avatarFile
+		let imageAvatar
+		let errorAlter
+		let userName
+		let fullName
+		let email
+		let birth
+		let phone
+
+		window.onload = function(){
+			makeTextInputFile()
+			avatarFile = document.getElementById('custom-file');
+			imageAvatar = document.getElementById('imageAvatar');
+			errorAlter = document.getElementById('alter-error');
+			userName = document.getElementById('username');
+			email = document.getElementById('user-email');
+			birth = document.getElementById('user-date-of-birth');
+			phone = document.getElementById('user-phone-number');
+			fullname = document.getElementById('fullname');
+		}
+
+		//Make text input file has name
+		function makeTextInputFile(){
+			$(".custom-file-input").on("change", function() {
+			  	let fileName = $(this).val().split("\\").pop();
+			  	$(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+
+				let file = avatarFile.files[0]
+				compressFile(file)
+			});
+		}
+
+		function compressFile(file){
+			let fd = new FormData();
+			fd.append('avatar', file)
+
+			$.ajax({
+				type:"POST",
+				url:"../img/base64ImageEncode.php",
+				cache: false,
+                contentType: false,
+                processData: false,
+				data:fd,
+				success: function (response) {
+					if (response === 'File so big') {
+						error(response)
+					}else{
+						imageAvatar.src = response
+					}
+
+					
+				},
+				fail: function(xhr, textStatus, errorThrown){
+					error("Request failed")
+				}
+			});
+		}
+
+		function updateProfile(){
+			let fd = new FormData();
+			fd.append('EMAIL',email.value)
+			fd.append('USER_NAME',userName.value)
+			fd.append('FULL_NAME',fullname.value)
+			fd.append('BIRTH',birth.value)
+			fd.append('PHONE',phone.value)
+			fd.append('AVATAR', imageAvatar.src)
+
+			$.ajax({
+				type:"POST",
+				url:"updateProfile.php",
+				cache: false,
+                contentType: false,
+                processData: false,
+				data:fd,
+				success: function (response) {
+					console.log(response)
+					if (response === 'Update success') {
+						history.go(-1)
+					}else{
+						error(response)
+					}
+
+					
+				},
+				fail: function(xhr, textStatus, errorThrown){
+					error("Request failed")
+				}
+			});
+		}
+
+		function error(errorStr){
+			errorAlter.innerHTML = errorStr
+			errorAlter.style.display = ""
+		}
+	</script>
 </head>
 <body class="text-center">
-	
-	<form method="post" class="form-signin" onsubmit='checkInformation();return false' enctype="multipart/form-data">
+	<form method="post" class="form-signin" onsubmit='updateProfile();return false'>
 		<img src="../img/icon.png" alt="icon" width="auto" height="60">
 		<h3 class="userProfile"><b>Profile</b></h3>
 
-		<label for="user-name">Username</label>     
-		<input type="text" name="user-name" id="username" class="form-control" placeholder="Username" required autofocus value="<?= $user['user_name'] ?>">    
+		<label for="user-name">Username</label> 
+		<input type="text" name="user-name" id="username" class="form-control" placeholder="Username" required autofocus value="<?= $user['user_name'] ?>"> 
+
+		<label for="full-name">Full name</label> 
+		<input type="text" name="full-name" id="fullname" class="form-control" placeholder="Full name" required autofocus value="<?= $user['ho_ten'] ?>">   
 
 		<!-- <label for="user-password">Password</label>     
-		<input type="text" name="user-password" id="user-password" class="form-control" placeholder="Password" required > -->   
+		<input type="text" name="user-password" id="user-password" class="form-control" placeholder="Password" required > -->    
+
 		
 		<label for="user-email">Email</label>     
-		<input type="email" name="user-email" id="user-email" class="form-control" placeholder="Email" required value="<?= $user['email'] ?>"> 
+		<input type="email" name="user-email" id="user-email" class="form-control" placeholder="Email" style="pointer-events: none;" required value="<?= $user['email'] ?>" disabled> 
 
 		<label for="user-date-of-birth" >Date of birth</label>     
 		<input type="date" name="user-date-of-birth" id="user-date-of-birth" class="form-control" placeholder="Date of birth" required value="<?= $user['birthday'] ?>"> 	
@@ -123,12 +223,13 @@
 		<input type="tel" name="user-phone-number" id="user-phone-number" class="form-control" placeholder="Phone number" 
 		pattern="[0-9]{10}" required value="<?= $user['sdt'] ?>"> 
 
-		
-		<img src="../img/classroom_icon.png" style="float: left; width: 30%; padding-right: 15px">
-		<label for="custom-file" style="margin-top: 30px">Choose your classroom picture</label>
+		<?php
+			echo ('<img id="imageAvatar" src="'.$user['avatar'].'" style="float: left; width: 30%; padding-right: 15px">');
+		?>
+		<label for="custom-file" style="margin-top: 30px">Choose your profile picture</label>
 		<div class="custom-file" style="width: 70%;">
 			<label class="custom-file-label"   for="custom-file">Choose file</label>
-			<input type='file' name="custom-file" class="custom-file-input" id="custom-file" accept="image/*" required>		
+			<input type='file' name="custom-file" class="custom-file-input" id="custom-file" accept="image/*">		
 		</div>	
 
 		<button class="btn btn-md btn-block" type="submit" name="submit">Save</button>
