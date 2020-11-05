@@ -229,16 +229,14 @@
 		<label for="class-room">Room</label>     
 		<input type="text" name="class-room" id="class-room" class="form-control" placeholder="Room" value="<?= $room ?>"required> 
 
-		<!-- ../ -->
-		<label for="custom-file">Choose your classroom picture</label> 
-		<div class="custom-file">
-			<label class="custom-file-label" for="custom-file">Choose file</label>
-			<input type='file' name="custom-file" class="custom-file-input" id="custom-file" accept="image/*">			
-		</div>
 		<?php
-			echo ('<img id="imageAvatar" src="'.$avatar.'" width="200" height="200">');
+			echo ('<img id="imageAvatar" src="'.$avatar.'" style="float: left; width: 30%; padding-right: 15px">');
 		?>
-		
+		<label for="custom-file" style="margin-top: 30px">Choose your classroom picture</label>
+		<div class="custom-file" style="width: 70%;">
+			<label class="custom-file-label"   for="custom-file">Choose file</label>
+			<input type='file' name="custom-file" class="custom-file-input" id="custom-file" accept="image/*" required>		
+		</div>		
 
 		<button class="btn btn-md btn-block" type="submit" name="submit">Save</button>
 
