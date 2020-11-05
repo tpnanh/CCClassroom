@@ -334,7 +334,7 @@
 				       		<i class="fas fa-info-circle"></i>
 				       	</button>				       	
 				        <div class="dropdown-menu dropdown-menu-lg-right  dropdown-profile" aria-expanded="true" aria-labelledby="profile">
-						    <a class="dropdown-item" href="../profile/profile.html">Edit profile</a>
+						    <a class="dropdown-item" href="../profile/profile.php">Edit profile</a>
 						    <div class="dropdown-divider"></div>
 						    <a class="dropdown-item logout" data-toggle="modal" href="#" onclick="logOut()">Logout</a>
 						</div>

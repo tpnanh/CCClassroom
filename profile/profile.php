@@ -1,4 +1,13 @@
 <!DOCTYPE html>
+<?php
+	session_start();
+
+	if(!isset($_SESSION['user']) || $_SESSION['user']==null){
+		header('Location: ../index.php');
+		exit();
+	}
+	$user = $_SESSION['user'];
+?>
 <html lang="en">
 <head>
     <title>Profile - CC Classroom</title>
@@ -99,21 +108,22 @@
 		<h3 class="userProfile"><b>Profile</b></h3>
 
 		<label for="user-name">Username</label>     
-		<input type="text" name="user-name" id="username" class="form-control" placeholder="Username" required autofocus>    
+		<input type="text" name="user-name" id="username" class="form-control" placeholder="Username" required autofocus value="<?= $user['user_name'] ?>">    
 
-		<label for="user-password">Password</label>     
-		<input type="text" name="user-password" id="user-password" class="form-control" placeholder="Password" required >   
+		<!-- <label for="user-password">Password</label>     
+		<input type="text" name="user-password" id="user-password" class="form-control" placeholder="Password" required > -->   
 		
 		<label for="user-email">Email</label>     
-		<input type="email" name="user-email" id="user-email" class="form-control" placeholder="Email" required> 
+		<input type="email" name="user-email" id="user-email" class="form-control" placeholder="Email" required value="<?= $user['email'] ?>"> 
 
 		<label for="user-date-of-birth" >Date of birth</label>     
-		<input type="date" name="user-date-of-birth" id="user-date-of-birth" class="form-control" placeholder="Date of birth" required> 	
+		<input type="date" name="user-date-of-birth" id="user-date-of-birth" class="form-control" placeholder="Date of birth" required value="<?= $user['birthday'] ?>"> 	
 
 		<label for="user-phone-number">Phone number</label>     
 		<input type="tel" name="user-phone-number" id="user-phone-number" class="form-control" placeholder="Phone number" 
-		pattern="[0-9]{10}" required> 
+		pattern="[0-9]{10}" required value="<?= $user['sdt'] ?>"> 
 
+		
 		<img src="../img/classroom_icon.png" style="float: left; width: 30%; padding-right: 15px">
 		<label for="custom-file" style="margin-top: 30px">Choose your classroom picture</label>
 		<div class="custom-file" style="width: 70%;">
