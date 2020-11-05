@@ -98,12 +98,21 @@
 		let boardView;
 		let idTemp = ''
 		let viewTemp = null
+		let inputClasscode
+		let errorJoinClass
 		window.onload = function(){
 			boardView = document.getElementById('boardView');
+			errorJoinClass = document.getElementById('errorJoinClass');
+			inputClasscode = document.getElementById('inputClasscode');
 			getClass()
 
 			$('#modalDelete').on('hidden.bs.modal', function () {
  				unsaveClassTemp()
+			})
+
+			$('#modalJoin').on('hidden.bs.modal', function () {
+ 				inputClasscode.value = ''
+ 				errorJoinClass.style.display = 'none'
 			})
 		}
 
@@ -134,7 +143,7 @@
 			div1.classList.add('card-header')
 
 			let a = document.createElement('a')
-			a.href = '../classroom/classroom.html'
+			a.href = "../classroom/classroom.html?idClass="+data.id_class
 
 			let h = document.createElement('h5')
 			h.classList.add('card-title')
@@ -172,43 +181,50 @@
 			div2.appendChild(img)
 
 			let check = '<?= $user['role'] ?>';
+			let mailCurrentUser = '<?= $user['email'] ?>';
+			let mailClassUser = data.email;
 			if (check!='Student') {
-				let a2 = document.createElement('a')
-				a2.href = '#'
-				a2.setAttribute("data-toggle", "dropdown");
-				a2.id = 'classOption'
-				a2.style.float = 'right'
-				a2.setAttribute("aria-expanded", 'true')
+				if (check =='Teacher' && mailClassUser!= mailCurrentUser) {
 
-				let i = document.createElement('i')
-				i.classList.add('fas','fa-ellipsis-v')
-				i.style.color='white'
-				a2.appendChild(i)
-				div2.appendChild(a2)
+				}else{
+					let a2 = document.createElement('a')
+					a2.href = '#'
+					a2.setAttribute("data-toggle", "dropdown");
+					a2.id = 'classOption'
+					a2.style.float = 'right'
+					a2.setAttribute("aria-expanded", 'true')
 
-				let div3 = document.createElement('div')
-				div3.classList.add('dropdown-menu','dropdown-menu-right')
-				div3.aria_labelledby = 'classOption'
+					let i = document.createElement('i')
+					i.classList.add('fas','fa-ellipsis-v')
+					i.style.color='white'
+					a2.appendChild(i)
+					div2.appendChild(a2)
 
-				let a3 = document.createElement('a')
-				a3.classList.add('dropdown-item')
-				a3.href = "../editClassroom/editClassroom.php?id="+data.id_class
-				a3.innerHTML = 'Edit'
-				div3.appendChild(a3)
+					let div3 = document.createElement('div')
+					div3.classList.add('dropdown-menu','dropdown-menu-right')
+					div3.aria_labelledby = 'classOption'
 
-				let div4 = document.createElement('div')
-				div4.classList.add('dropdown-divider')
-				div3.appendChild(div4)
+					let a3 = document.createElement('a')
+					a3.classList.add('dropdown-item')
+					a3.href = "../editClassroom/editClassroom.php?id="+data.id_class
+					a3.innerHTML = 'Edit'
+					div3.appendChild(a3)
 
-				let a4 = document.createElement('a')
-				a4.classList.add('dropdown-item')
-				a4.setAttribute("data-toggle", "modal");
-				a4.href = '#modalDelete'
-				a4.innerHTML = 'Delete'
-				a4.onclick = function(){ saveClassTemp(data.id_class,div) }
-				div3.appendChild(a4)
+					let div4 = document.createElement('div')
+					div4.classList.add('dropdown-divider')
+					div3.appendChild(div4)
 
-				div2.appendChild(div3)
+					let a4 = document.createElement('a')
+					a4.classList.add('dropdown-item')
+					a4.setAttribute("data-toggle", "modal");
+					a4.href = '#modalDelete'
+					a4.innerHTML = 'Delete'
+					a4.onclick = function(){ saveClassTemp(data.id_class,div) }
+					div3.appendChild(a4)
+
+					div2.appendChild(div3)
+				}
+				
 			}
 			
 			div.appendChild(div2)
@@ -252,6 +268,33 @@
 		function unsaveClassTemp(){
 			idTemp = ''
 			viewTemp = null
+		}
+
+		function joinClass(){
+			let fd = new FormData();
+			fd.append('ID', inputClasscode.value)
+			$.ajax({
+				type:"POST",
+				url:"joinClass.php",
+				cache: false,
+                contentType: false,
+                processData: false,
+				data:fd,
+				success: function (response) {
+					if (response==="Join success") {
+						
+						window.location.href="../classroom/classroom.html?idClass="+inputClasscode.value
+
+						$("#modalJoin").modal('hide');
+					}else{
+						errorJoinClass.style.display = ''
+						errorJoinClass.innerHTML = response
+					}
+
+				},
+				fail: function(xhr, textStatus, errorThrown){
+				}
+			});
 		}
 
 		function logOut(){
@@ -336,7 +379,7 @@
 				        <div class="dropdown-menu dropdown-menu-lg-right  dropdown-profile" aria-expanded="true" aria-labelledby="profile">
 						    <a class="dropdown-item" href="../profile/profile.php">Edit profile</a>
 						    <div class="dropdown-divider"></div>
-						    <a class="dropdown-item" href="../profile/changePassword.php">Change password</a>
+						    <a class="dropdown-item" href="../profile/changePassword.php">Update password</a>
 						    <div class="dropdown-divider"></div>
 						    <a class="dropdown-item logout" data-toggle="modal" href="#" onclick="logOut()">Logout</a>
 						</div>
@@ -360,10 +403,13 @@
 		        	<form>
 		        		<label for="inputClasscode">Classcode</label>
 						<input type="text" class="form-control" id="inputClasscode" placeholder="Enter classcode" >
+						<p style="font-size: 13px;color: red;margin-top: 10px; margin-bottom: 0px;display: none" id="errorJoinClass">ID Class is not available</p>
 					</form>
 		      	</div>
+
 		      	<div class="modal-footer">
-			        <a type="button" href="../classroom/Classroom.html" class="btn joinClass">Join</a>			        
+
+			        <a type="button" onclick="joinClass()" class="btn joinClass">Join</a>			        
 		      	</div>
 	    	</div>
 	  	</div>
