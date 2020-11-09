@@ -124,22 +124,36 @@
 	</style>
 
 	<script>
+		let url = "https://www.youtube.com/watch?v=5C7rn-FgYTI"
 		function get_youtube($url){
 
-			 $youtube = "http://www.youtube.com/oembed?url=". $url ."&format=json";
+			let youtube = "http://www.youtube.com/oembed?url="+url+"&format=json";
 
-			 $curl = curl_init($youtube);
-			 curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-			 $return = curl_exec($curl);
-			 curl_close($curl);
-			 return json_decode($return, true);
+			let curl = curl_init(youtube);
+			curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+			let return1 = curl_exec($curl);
+			curl_close(curl);
+			return json_decode($return1, true);
 
 		 }
 
-		$url = "https://www.youtube.com/watch?v=5C7rn-FgYTI"
-
-		// Display Data 
-		print_r(get_youtube($url));
+		
+		function logOut(){
+			$.ajax({
+				type:"POST",
+				url:"../logOut/logOut.php",
+				cache: false,
+                contentType: false,
+                processData: false,
+				success: function (response) {
+					if (response=="LogOut Success") {
+						window.location.href = '../index.php'
+					}
+				},
+				fail: function(xhr, textStatus, errorThrown){
+				}
+			});
+		}
 	</script>
 
 </head>
@@ -160,7 +174,7 @@
 				       		<i class="fas fa-info-circle"></i>
 				       	</button>				       	
 				        <div class="dropdown-menu dropdown-menu-lg-right  dropdown-profile" aria-expanded="true" aria-labelledby="profile">
-						    <a class="dropdown-item logout" data-toggle="modal" href="#" style="font-weight: bold;">Logout</a>
+						    <a class="dropdown-item logout"  onclick="logOut()" data-toggle="modal" href="#" style="font-weight: bold;">Logout</a>
 						</div>
 					</div>
 			    </li>

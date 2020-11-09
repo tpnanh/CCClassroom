@@ -235,7 +235,7 @@
 		<label for="custom-file" style="margin-top: 30px">Choose your classroom picture</label>
 		<div class="custom-file" style="width: 70%;">
 			<label class="custom-file-label"   for="custom-file">Choose file</label>
-			<input type='file' name="custom-file" class="custom-file-input" id="custom-file" accept="image/*" required>		
+			<input type='file' name="custom-file" class="custom-file-input" id="custom-file" accept="image/*">		
 		</div>		
 
 		<button class="btn btn-md btn-block" type="submit" name="submit">Save</button>

@@ -1,4 +1,13 @@
 <!DOCTYPE html>
+<?php
+	session_start();
+
+	if(!isset($_SESSION['user']) || $_SESSION['user']==null){
+		header('Location: ../index.php');
+		exit();
+	}
+	$user = $_SESSION['user'];
+?>
 <html lang="en">
 <head>
     <title>Classroom - CC Classroom</title>
@@ -91,16 +100,53 @@
 		}
 	</style>
 
-    <script> 
+    <script>
+    	let idClass; 
     	window.onload = function(){
     		makeTextInputFile()
     		$("#streamTab").load("../stream/stream.html"); 
-    		$("#peopleTab").load("../people/people.html"); 
+    		$("#peopleTab").load("../people/people.html");
+    		getUrl()
+    		console.log('Classroom: '+idClass)
+    		
+
     	}
+
+    	function getUrl(){
+            idClass = getParameterByName('idClass');
+        }
+
+         function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+
 	    function makeTextInputFile(){
 			$(".custom-file-input").on("change", function() {
 			  let fileName = $(this).val().split("\\").pop();
 			  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+			});
+		}
+
+		function logOut(){
+			$.ajax({
+				type:"POST",
+				url:"../logOut/logOut.php",
+				cache: false,
+                contentType: false,
+                processData: false,
+				success: function (response) {
+					if (response=="LogOut Success") {
+						window.location.href = '../index.php'
+					}
+				},
+				fail: function(xhr, textStatus, errorThrown){
+				}
 			});
 		}
     </script>
@@ -142,7 +188,7 @@
 				       		<i class="fas fa-info-circle"></i>
 				       	</button>				       	
 				        <div class="dropdown-menu dropdown-menu-lg-right  dropdown-profile" aria-expanded="true" aria-labelledby="profile">
-						    <a class="dropdown-item logout" data-toggle="modal" href="#" style="font-weight: bold;">Logout</a>
+						    <a class="dropdown-item logout" data-toggle="modal" href="#" style="font-weight: bold;" onclick="logOut()">Logout</a>
 						</div>
 					</div>
 			    </li>

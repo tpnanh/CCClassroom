@@ -143,7 +143,7 @@
 			div1.classList.add('card-header')
 
 			let a = document.createElement('a')
-			a.href = "../classroom/classroom.html?idClass="+data.id_class
+			a.href = "../classroom/classroom.php?idClass="+data.id_class
 
 			let h = document.createElement('h5')
 			h.classList.add('card-title')
@@ -283,7 +283,7 @@
 				success: function (response) {
 					if (response==="Join success") {
 						
-						window.location.href="../classroom/classroom.html?idClass="+inputClasscode.value
+						window.location.href="../classroom/classroom.php?idClass="+inputClasscode.value
 
 						$("#modalJoin").modal('hide');
 					}else{
