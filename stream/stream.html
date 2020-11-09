@@ -45,16 +45,58 @@
 			font-weight: bold;
 		}
 	</style>
+	<script>
+		let cardNameClass;
+		let cardSubjectClass;
+		let cardRoomClass;
+		getIdElement()
 
+		function getIdElement(){
+			cardNameClass = document.getElementById('cardNameClass')
+			cardSubjectClass = document.getElementById('cardSubjectClass')
+			cardRoomClass = document.getElementById('cardRoomClass')
+
+			getDataClassById()
+		}
+
+		function getDataClassById(){
+			let fd = new FormData();
+			fd.append('id', idClass)
+			$.ajax({
+				type:"GET",
+				url:"../stream/getInfoClass.php?",
+				data: { 
+        			id: idClass
+    			},
+				success: function (response) {
+					let result = JSON.parse(response)
+					console.log(result)
+					if (response==="Classroom not found") {
+						window.location.href="../home/home.php"
+					}else{
+						cardNameClass.innerHTML = result.name_class
+						cardSubjectClass.innerHTML = result.subject
+						cardRoomClass.innerHTML = result.room
+					}
+				},
+				fail: function(xhr, textStatus, errorThrown){
+				}
+			});
+		}
+		
+
+		
+	</script>
 </head>
+
 <body>
 	<div class="container">
 		<div class="row">
 		  	<div class="card col-lg-12">
 			  	<div class="card-header" style="background-color: #087043">			
-			      	<h4 class="card-title">HK1_2020_505404_WEB</h5>
-			      	<h5 class="card-subtitle">Lập trình web và ứng dụng</h6>
-			      	<p class="card-text" style="font-size: 15px;margin-top: 5px">Phòng B206-A</p>
+			      	<h4 class="card-title" id="cardNameClass">HK1_2020_505404_WEB</h5>
+			      	<h5 class="card-subtitle" id="cardSubjectClass">Lập trình web và ứng dụng</h6>
+			      	<p class="card-text" style="font-size: 15px;margin-top: 5px" id="cardRoomClass">Phòng B206-A</p>
 			  	</div>	
 			</div>	 
 			<div class="card col-lg-12">

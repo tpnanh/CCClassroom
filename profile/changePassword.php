@@ -1,4 +1,13 @@
 <!DOCTYPE html>
+<?php
+	session_start();
+
+	if(!isset($_SESSION['user']) || $_SESSION['user']==null){
+		header('Location: ../index.php');
+		exit();
+	}
+	$user = $_SESSION['user'];
+?>
 <html lang="en">
 <head>
     <title>Profile - CC Classroom</title>
@@ -91,32 +100,74 @@
 			font-size: 14px;
 		}
 	</style>
+
+	<script>
+		let errorAlter
+		let oldPass
+		let newPass
+		let confirmPass
+
+		window.onload = function(){
+			errorAlter = document.getElementById('alter-error')
+			oldPass = document.getElementById('old-password')
+			newPass = document.getElementById('new-password')
+			confirmPass = document.getElementById('confirm-password')
+		}
+
+		function updatePassword(){
+			if (newPass.value != confirmPass.value) {
+				error("Password and confirm password not match")
+			}else if(newPass.value.length<8){
+				error("New password must longer 8 characters")
+			}else{
+				let fd = new FormData();
+				fd.append('PASS',newPass.value)
+				fd.append('OLD_PASS',oldPass.value)
+
+				$.ajax({
+					type:"POST",
+					url:"changePasswordFuction.php",
+					cache: false,
+	                contentType: false,
+	                processData: false,
+					data:fd,
+					success: function (response) {
+						console.log(response)
+						if (response === 'Update success') {
+							history.go(-1)
+						}else{
+							error(response)
+						}
+
+						
+					},
+					fail: function(xhr, textStatus, errorThrown){
+						error("Request failed")
+					}
+				});
+			}
+		}
+
+		function error(errorStr){
+			errorAlter.innerHTML = errorStr
+			errorAlter.style.display = ""
+		}
+	</script>
 </head>
 <body class="text-center">
-	
-	<form method="post" class="form-signin" onsubmit='checkInformation();return false' enctype="multipart/form-data">
+	<form method="post" class="form-signin" onsubmit='updatePassword();return false'>
 		<img src="../img/icon.png" alt="icon" width="auto" height="60">
-		<h3 class="userProfile"><b>Profile</b></h3>
+		<h3 class="userProfile"><b>Update Password</b></h3>
 
-		<label for="user-name">Username</label>     
-		<input type="text" name="user-name" id="username" class="form-control" placeholder="Username" required autofocus>    
-		
-		<label for="user-email">Email</label>     
-		<input type="email" name="user-email" id="user-email" class="form-control" placeholder="Email" required> 
+		<label for="old-password">Old Password</label>     
+		<input type="password" name="old-password" id="old-password" class="form-control" placeholder="Old password" required >
 
-		<label for="user-date-of-birth" >Date of birth</label>     
-		<input type="date" name="user-date-of-birth" id="user-date-of-birth" class="form-control" placeholder="Date of birth" required> 	
+		<label for="new-password">New Password</label>     
+		<input type="password" name="new-password" id="new-password" class="form-control" placeholder="New password" required >
 
-		<label for="user-phone-number">Phone number</label>     
-		<input type="tel" name="user-phone-number" id="user-phone-number" class="form-control" placeholder="Phone number" 
-		pattern="[0-9]{10}" required> 
+		<label for="confirm-password">Confirm Password</label>     
+		<input type="password" name="confirm-password" id="confirm-password" class="form-control" placeholder="Confirm password" required >    
 
-		<img src="../img/classroom_icon.png" style="float: left; width: 30%; padding-right: 15px">
-		<label for="custom-file" style="margin-top: 30px">Choose your profile picture</label>
-		<div class="custom-file" style="width: 70%;">
-			<label class="custom-file-label"   for="custom-file">Choose file</label>
-			<input type='file' name="custom-file" class="custom-file-input" id="custom-file" accept="image/*" required>		
-		</div>	
 
 		<button class="btn btn-md btn-block" type="submit" name="submit">Save</button>
 

@@ -28,13 +28,18 @@
 	}
 	
 	$result = $conn->query($query);
-
+	$key_class = array();
 	$data = array();
 	while($row = mysqli_fetch_array($result)){ 
-
-    	// $data[] = array('email' => $row[0], 'user_name' => $row[1], 'password' => $row[2],'ho_ten' => $row[3],'birthday' => $row[4],'sdt' => $row[5],'role' => $row[6],'avatar' => $row[7]);
-    	$data[]= array('id_class' => $row["id_class"], 'name_class' => $row["name_class"], 'subject' => $row["subject"], 'room' => $row["room"], 'email' => $row["4"], 'date_created' => $row["date_created"], 'avatar' => $row["avatar_class"]);	
+    
+		if(in_array($row["id_class"], $key_class)){
+			continue;
+		}
+    	$data[]= array('id_class' => $row["id_class"], 'name_class' => $row["name_class"], 'subject' => $row["subject"], 'room' => $row["room"], 'email' => $row["4"], 'date_created' => $row["date_created"], 'avatar' => $row["avatar_class"]);
+    	$key_class[] = 	$row["id_class"];
+    	//$data[] = $row;
 	}
+	//echo ($result);
 	$conn->close();
 	echo(json_encode($data));
 ?>

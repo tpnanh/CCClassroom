@@ -7,14 +7,10 @@
 		exit();
 	}
 	$user = $_SESSION['user'];
-	if ($user['role']==='Student') {
-		header('Location: ../index.php');
-		exit();
-	}
 ?>
 <html lang="en">
 <head>
-    <title>Edit Classroom - CC Classroom</title>
+    <title>Profile - CC Classroom</title>
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" type="image/x-icon" href="img/thumbnail.ico" />
@@ -63,11 +59,15 @@
 			font-size: 13px;
 			font-weight: bold;
 		}
+
+		img{
+			margin-top: 20px;
+		}
 		
 		.custom-file-label{
 			margin: 0;
 		}
-
+		
 		input{		
 			margin-bottom: 10px;
 			border-bottom-right-radius: 0;
@@ -82,6 +82,7 @@
 		
 		.btn{
 			color: white;
+			/*blue*/
 			background-color: #7492c4;
 			margin-top: 20px;
 		}
@@ -90,25 +91,36 @@
 			margin-top: 15px;
 			font-size: 15px;
 		}
+
+		.dropdown{
+			display: flex;
+			justify-content: flex-start;
+		}
+		.dropdown-menu{
+			font-size: 14px;
+		}
 	</style>
 
 	<script>
 		let avatarFile
-		let errorAlter
 		let imageAvatar
-		let className
-		let subject
-		let room
-		let idClass
+		let errorAlter
+		let userName
+		let fullName
+		let email
+		let birth
+		let phone
+
 		window.onload = function(){
 			makeTextInputFile()
-			idClass = document.getElementById('idClass');
 			avatarFile = document.getElementById('custom-file');
-			errorAlter = document.getElementById('alter-error');
 			imageAvatar = document.getElementById('imageAvatar');
-			className = document.getElementById('class-name');
-			subject = document.getElementById('subject');
-			room = document.getElementById('class-room');
+			errorAlter = document.getElementById('alter-error');
+			userName = document.getElementById('username');
+			email = document.getElementById('user-email');
+			birth = document.getElementById('user-date-of-birth');
+			phone = document.getElementById('user-phone-number');
+			fullname = document.getElementById('fullname');
 		}
 
 		//Make text input file has name
@@ -148,17 +160,18 @@
 			});
 		}
 
-		function updateClass(){
+		function updateProfile(){
 			let fd = new FormData();
-			fd.append('id',idClass.innerHTML)
-			fd.append('avatar', imageAvatar.src)
-			fd.append('CLASS_NAME', className.value)
-			fd.append('SUBJECT', subject.value)
-			fd.append('ROOM', room.value)
+			fd.append('EMAIL',email.value)
+			fd.append('USER_NAME',userName.value)
+			fd.append('FULL_NAME',fullname.value)
+			fd.append('BIRTH',birth.value)
+			fd.append('PHONE',phone.value)
+			fd.append('AVATAR', imageAvatar.src)
 
 			$.ajax({
 				type:"POST",
-				url:"updateClassroom.php",
+				url:"updateProfile.php",
 				cache: false,
                 contentType: false,
                 processData: false,
@@ -183,64 +196,45 @@
 			errorAlter.innerHTML = errorStr
 			errorAlter.style.display = ""
 		}
-
 	</script>
 </head>
 <body class="text-center">
-	<?php
-
-		if(isset($_GET['id'])){
-			$id = $_GET['id'];
-
-			$conn = new mysqli('127.0.0.1','root','',"ccclassroom");
-			$sql = "select * from class where id_class='$id'";
-			$result = $conn->query($sql);
-			
-        	if($result->num_rows<=0){
-          		header('Location: ../index.php');
-				exit();
-        	}
-        	$data = $result->fetch_assoc();
-        	if ($user["role"]!='Admin' && $data['email'] != $user['email']){
-        		header('Location: ../index.php');
-				exit();
-        	}
-         	$name = $data['name_class'];
-			$subject = $data['subject'];
-			$room = $data['room'];
-			$avatar = $data['avatar_class'];
-
-		}else{
-			header('Location: ../home/home.php');
-			exit();
-		}
-	?>
-	<p id="idClass" style="display: none;"><?= $id ?></p>
-	<form method="post" class="form-signin" onsubmit='updateClass();return false'>
+	<form method="post" class="form-signin" onsubmit='updateProfile();return false'>
 		<img src="../img/icon.png" alt="icon" width="auto" height="60">
-		<h3 class="createClass"><b>Edit Classroom</b></h3>
+		<h3 class="userProfile"><b>Profile</b></h3>
 
-		<label for="class-name">Class name</label>     
-		<input type="text" name="class-name" id="class-name" class="form-control" placeholder="Class name" value="<?= $name ?>"required autofocus>    
+		<label for="user-name">Username</label> 
+		<input type="text" name="user-name" id="username" class="form-control" placeholder="Username" required autofocus value="<?= $user['user_name'] ?>"> 
 
-		<label for="subject"> Subject</label>     
-		<input type="text" name="subject" id="subject" class="form-control" placeholder="Subject" value="<?= $subject ?>" required >   
+		<label for="full-name">Full name</label> 
+		<input type="text" name="full-name" id="fullname" class="form-control" placeholder="Full name" required autofocus value="<?= $user['ho_ten'] ?>">   
+
+		<!-- <label for="user-password">Password</label>     
+		<input type="text" name="user-password" id="user-password" class="form-control" placeholder="Password" required > -->    
+
 		
-		<label for="class-room">Room</label>     
-		<input type="text" name="class-room" id="class-room" class="form-control" placeholder="Room" value="<?= $room ?>"required> 
+		<label for="user-email">Email</label>     
+		<input type="email" name="user-email" id="user-email" class="form-control" placeholder="Email" style="pointer-events: none;" required value="<?= $user['email'] ?>" disabled> 
+
+		<label for="user-date-of-birth" >Date of birth</label>     
+		<input type="date" name="user-date-of-birth" id="user-date-of-birth" class="form-control" placeholder="Date of birth" required value="<?= $user['birthday'] ?>"> 	
+
+		<label for="user-phone-number">Phone number</label>     
+		<input type="tel" name="user-phone-number" id="user-phone-number" class="form-control" placeholder="Phone number" 
+		pattern="[0-9]{10}" required value="<?= $user['sdt'] ?>"> 
 
 		<?php
-			echo ('<img id="imageAvatar" src="'.$avatar.'" style="float: left; width: 30%; padding-right: 15px">');
+			echo ('<img id="imageAvatar" src="'.$user['avatar'].'" style="float: left; width: 30%; padding-right: 15px">');
 		?>
-		<label for="custom-file" style="margin-top: 30px">Choose your classroom picture</label>
+		<label for="custom-file" style="margin-top: 30px">Choose your profile picture</label>
 		<div class="custom-file" style="width: 70%;">
 			<label class="custom-file-label"   for="custom-file">Choose file</label>
 			<input type='file' name="custom-file" class="custom-file-input" id="custom-file" accept="image/*">		
-		</div>		
+		</div>	
 
 		<button class="btn btn-md btn-block" type="submit" name="submit">Save</button>
 
-		<div class="alert alert-success" style="display: none;" id="alter-success">Class has been updated</div>
+		<div class="alert alert-success" style="display: none;" id="alter-success">Information has been saved</div>
 		<div class="alert alert-danger" style="display: none;" id="alter-error"></div>
 	</form>
 	
