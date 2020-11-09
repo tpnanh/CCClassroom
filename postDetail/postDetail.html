@@ -123,25 +123,6 @@
 
 	</style>
 
-	<script>
-		function get_youtube($url){
-
-			 $youtube = "http://www.youtube.com/oembed?url=". $url ."&format=json";
-
-			 $curl = curl_init($youtube);
-			 curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-			 $return = curl_exec($curl);
-			 curl_close($curl);
-			 return json_decode($return, true);
-
-		 }
-
-		$url = "https://www.youtube.com/watch?v=5C7rn-FgYTI"
-
-		// Display Data 
-		print_r(get_youtube($url));
-	</script>
-
 </head>
 <body>
 	<div>
@@ -179,14 +160,6 @@
 			<br>- Nếu có các vấn đề thắc mắc các em trao đổi trực tiếp với thầy.
 			<br>- Các nhóm có thể bắt đầu thực hiện từ hôm nay
 			</p>
-			<div class="application">
-			  <div class="video-meta">
-			      <a href="../file/plan.pdf" download>
-				<p id="link">plan.pdf</p>
-				</a>
-			  </div>
-			  <textarea id="link" rows="8"></textarea>
-			</div>
 			<a href="../file/plan.pdf" download>
 				<p id="link">plan.pdf</p>
 			</a>
@@ -195,7 +168,7 @@
 		      	<img src="../img/person_icon.png" class="rounded-circle" alt="avatar" width="50" height="50" style="float: left;"> 
 		      	<span class="user card-subtitle" style="margin: 10px">Ngọc Tâm<span class="date" style="margin-left: 10px">Nov 3</span>		
 		      	<a href="#" data-toggle="dropdown" id="deleteComment" style="float: right;margin-right: 8px;">
-			  	 		<i class="fas fa-ellipsis-v" style="color: black"></i>
+			  	 	<i class="fas fa-ellipsis-v" style="color: black"></i>
 		  	 	</a>
 		  	 	<div class="dropdown-menu dropdown-menu-right" aria-expanded="true" aria-labelledby="deleteComment">
 				    <a class="dropdown-item" data-toggle="modal" href="#" style="font-weight: bold;">Delete</a>
@@ -209,7 +182,7 @@
 		      	<img src="../img/person_icon.png" class="rounded-circle" alt="avatar" width="50" height="50" style="float: left;"> 
 		      	<span class="user card-subtitle" style="margin: 10px">Ngọc Tâm<span class="date" style="margin-left: 10px">Nov 3</span>		
 		      	<a href="#" data-toggle="dropdown" id="deleteComment" style="float: right;margin-right: 8px;">
-			  	 		<i class="fas fa-ellipsis-v" style="color: black"></i>
+			  	 	<i class="fas fa-ellipsis-v" style="color: black"></i>
 		  	 	</a>
 		  	 	<div class="dropdown-menu dropdown-menu-right" aria-expanded="true" aria-labelledby="deleteComment">
 				    <a class="dropdown-item" data-toggle="modal" href="#" style="font-weight: bold;">Delete</a>

@@ -92,6 +92,14 @@
             overflow: hidden;
             text-overflow: ellipsis; 
 		}
+		.findClass{
+			background-color: #214996;
+			color: white;
+		}
+		.findClass:hover{
+			background-color: #2e446e;
+			color: white;
+		}
 	</style>
 
 	<script>
@@ -283,8 +291,8 @@
 				<li class="nav-item">
 		      		<img src="../img/brand.png" style="width: auto; height: 36px">
 			    </li>
-		  	</ul>
-		  	<ul class="nav-right navbar-nav ml-auto">
+		  	</ul>		  	
+		  	<ul class="nav-right navbar-nav ml-auto">		  	
 			    <li class="nav-item">
 			    	<?php
 			    		if ($user["role"]==="Admin") {
@@ -294,8 +302,7 @@
 			      		 	</a>
 					<?php
 						}
-			    	?>
-			       
+			    	?>			       
 			    </li>
 				<li class="nav-item">
 					<div class="dropdown">
@@ -385,15 +392,23 @@
 	    	</div>
 	  	</div>
 	</div>
-	
+	<div style="float: left;width: 100%">
+		<form class="form-inline"  style="float: right;margin-right: 15px; margin-bottom: 15px;">
+		<input class="form-control ml-sm-2" placeholder="Find Class" style="margin-right: 10px;" aria-label="Search" id="inputTextFindView">
+		<button class="btn findClass" type="submit">Search</button>
+	</form>
+	</div>
 
 	<div>
-		<div class="container-fluid">
+			
+		<div class="container-fluid" >
 			<div class="row" id="boardView">
 			  	  
 
 			</div>
 		</div>
 	</div>
+
+
 </body>
 </html>

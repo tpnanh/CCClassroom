@@ -6,6 +6,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" type="image/x-icon" href="img/thumbnail.ico" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -23,6 +25,10 @@
 		
 		img{
 			margin-bottom: 20px;
+		}
+		i{
+			font-size: 18px;
+			color: gray;
 		}
 
 		.form-signin {
@@ -90,10 +96,16 @@
 		<label for="description" style="margin-top: 10px">Description</label>
 		<textarea class="form-control" id="description" placeholder="Description (optional)"></textarea>
 		<label for="custom-file" style="margin-top: 10px; display: block;">Add your file</label>
-		<a href="../file/plan.pdf" style="text-align: left" download>
+		<a href="#" id="deleteFile" style="float: right;margin-right: 8px;">
+	  	 	<i class="fas fa-minus-circle"></i>
+  	 	</a>
+		<a href="../file/plan.pdf" style="text-align: left;" download>
 			<p id="link">plan.pdf</p>
 		</a>
-		<a href="../file/plan.pdf" style="text-align: left" download>
+		<a href="#" id="deleteFile" style="float: right;margin-right: 8px;">
+	  	 	<i class="fas fa-minus-circle"></i>
+  	 	</a>
+		<a href="../file/plan.pdf" style="text-align: left;" download>
 			<p id="link">plan.pdf</p>
 		</a>
 		<div class="custom-file" style=" display: block;">
