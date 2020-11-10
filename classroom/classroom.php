@@ -102,13 +102,39 @@
 
     <script>
     	let idClass; 
+    	let btnSumitPost;
+    	let titlePost;
+    	let desPost;
+    	let filePost;
+
+    	let titleAssign;
+    	let desAssign;
+    	let fileAssign;
+    	let dueAssign;
+    	let btnSumitAssign;
     	window.onload = function(){
     		makeTextInputFile()
     		$("#streamTab").load("../stream/stream.html"); 
     		$("#peopleTab").load("../people/people.html");
     		getUrl()
-    		console.log('Classroom: '+idClass)
-    		
+    		btnSumitPost = document.getElementById('btnSumitPost')
+    		titlePost = document.getElementById('postTitle')
+    		desPost = document.getElementById('postDescription')
+    		filePost = document.getElementById('custom-file-post')
+
+    		titleAssign = document.getElementById('assignmentTitle')
+    		desAssign = document.getElementById('assignmentDescription')
+    		fileAssign = document.getElementById('custom-file-assignment')
+    		dueAssign = document.getElementById('dueAssign')
+    		btnSumitAssign = document.getElementById('btnSumitAssign')
+
+    		$('#modalPost').on('hidden.bs.modal', function () {
+ 				deleteTextInputPost()
+			})
+
+			$('#modalAssignment').on('hidden.bs.modal', function () {
+ 				deletTeTextInputAssignment()
+			})
 
     	}
 
@@ -148,6 +174,38 @@
 				fail: function(xhr, textStatus, errorThrown){
 				}
 			});
+		}
+
+		function callBtnPostPost(){
+			btnSumitPost.click()
+		}
+
+		function callBtnPostAssign(){
+			btnSumitAssign.click()
+		}
+
+		function postNewPost(){
+
+		}
+
+		function postNewAssign(){
+
+		}
+
+		function deleteTextInputPost(){
+			titlePost.value = ''
+			desPost.value = ''
+			filePost.value = ''
+			$(".custom-file-input").siblings(".custom-file-label").addClass("selected").html('Choose file')
+		}
+
+		function deletTeTextInputAssignment(){
+			titleAssign.value = ''
+    		desAssign.value = ''
+    		fileAssign.value = ''
+    		dueAssign.value = ''
+    		$(".custom-file-input").siblings(".custom-file-label").addClass("selected").html('Choose file')
+
 		}
     </script>
 
@@ -216,28 +274,31 @@
 	        		</button>
 	      		</div>
 		      	<div class="modal-body">
-		        	<form>
+		        	<form method="post" class="form-signin" onsubmit='postNewAssign();return false'>
 		        		<label for="assignmentTitle">Title</label>
-						<input type="text" class="form-control" id="assignmentTitle" placeholder="Title" >
+						<input type="text" class="form-control" id="assignmentTitle" placeholder="Title" required>
 						<label for="assignmentDescription" style="margin-top: 10px">Description</label>
 						<textarea class="form-control" id="assignmentDescription" placeholder="Description (optional)" rows="3"></textarea>
 						<label for="custom-file" style="margin-top: 10px; display: block;">Add your file</label>
 						<div class="custom-file" style=" display: block;">
-							<label class="custom-file-label" for="custom-file">Choose file</label>
-							<input type='file' name="custom-file" class="custom-file-input" id="custom-file" multiple="multiple"  required>		
+							<label class="custom-file-label" for="custom-file-assignment">Choose file</label>
+							<input type='file' name="custom-file" class="custom-file-input" id="custom-file-assignment" multiple="multiple" >		
 						</div>	
 							
 						<label for="due" style="margin-top: 10px; margin-right: 20px">Due</label>
- 						<input type="datetime-local" style="margin-top: 20px;" name="due">
+ 						<input type="datetime-local" style="margin-top: 20px;" name="due" id="dueAssign" required>
+
+ 						<button type="submit" style="display: none;" id="btnSumitAssign"></button>
 					</form>
 		      	</div>
 		      	<div class="modal-footer">
-			        <button type="button" class="btn postAssignment" style="background-color: #43437B;color: white;">Post
+			        <button type="button" class="btn postAssignment" style="background-color: #43437B;color: white;" onclick="callBtnPostAssign()">Post
 			        </button>			        
 		      	</div>
 	    	</div>
 	  	</div>
 	</div>
+
 	
 	<div class="modal" style="margin-top: 50px" id="modalPost" tabindex="-1" role="dialog">
 		<div class="modal-dialog " role="document">
@@ -249,20 +310,21 @@
 	        		</button>
 	      		</div>
 		      	<div class="modal-body">
-		        	<form>
+		        	<form method="post" class="form-signin" onsubmit='postNewPost();return false'>
 		        		<label for="postTitle">Title</label>
-						<input type="text" class="form-control" id="postTitle" placeholder="Title" >
+						<input type="text" class="form-control" id="postTitle" placeholder="Title" required>
 						<label for="postDescription" style="margin-top: 10px">Description</label>
 						<textarea class="form-control" id="postDescription" placeholder="Description (optional)" rows="3"></textarea>
 						<label for="custom-file" style="margin-top: 10px; display: block;">Add your file</label>
 						<div class="custom-file" style=" display: block;">
-							<label class="custom-file-label" for="custom-file">Choose file</label>
-							<input type='file' name="custom-file" class="custom-file-input" id="custom-file" multiple="multiple"  required>		
-						</div>		
+							<label class="custom-file-label" for="custom-file-post">Choose file</label>
+							<input type='file' name="custom-file" class="custom-file-input" id="custom-file-post" multiple="multiple">		
+						</div>
+						<button type="submit" style="display: none;" id="btnSumitPost"></button>
 					</form>
 		      	</div>
 		      	<div class="modal-footer">
-			        <button type="button" class="btn postpost" style="background-color: #43437B;color: white;">Post
+			        <button type="button" class="btn postpost" style="background-color: #43437B;color: white;" onclick="callBtnPostPost()">Post
 			        </button>			        
 		      	</div>
 	    	</div>
