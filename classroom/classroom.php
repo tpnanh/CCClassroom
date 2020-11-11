@@ -114,7 +114,7 @@
     	let btnSumitAssign;
     	window.onload = function(){
     		makeTextInputFile()
-    		$("#streamTab").load("../stream/stream.html"); 
+    		$("#streamTab").load("../stream/stream.php"); 
     		$("#peopleTab").load("../people/people.html");
     		getUrl()
     		btnSumitPost = document.getElementById('btnSumitPost')
@@ -186,10 +186,65 @@
 
 		function postNewPost(){
 
+			let file = filePost.files[0]
+			let fd = new FormData();
+			fd.append('FILE', file)
+			fd.append('ID_CLASS',idClass)
+			fd.append('TITLE',titlePost.value)
+			fd.append('DES',desPost.value)
+			fd.append('DUE','')
+			fd.append('TYPE','POST')
+			$.ajax({
+				type:"POST",
+				url:"postMaterial.php",
+				cache: false,
+                contentType: false,
+                processData: false,
+				data:fd,
+				success: function (response) {
+					console.log(response)
+					if (response==="Insert success") {
+						
+					}
+					$("#modalPost .close").click();
+					$("#modalPost .close").trigger("click"); 
+				},
+				fail: function(xhr, textStatus, errorThrown){
+					$("#modalPost .close").click();
+					$("#modalPost .close").trigger("click"); 
+				}
+			});
 		}
 
 		function postNewAssign(){
-
+			let file = fileAssign.files[0]
+			let fd = new FormData();
+			fd.append('FILE', file)
+			fd.append('ID_CLASS',idClass)
+			fd.append('TITLE',titleAssign.value)
+			fd.append('DES',desAssign.value)
+			fd.append('DUE',dueAssign.value)
+			fd.append('TYPE','ASSIGN')
+			$.ajax({
+				type:"POST",
+				url:"postMaterial.php",
+				cache: false,
+                contentType: false,
+                processData: false,
+				data:fd,
+				success: function (response) {
+					console.log(response)
+					if (response==="Insert success") {
+						
+					}
+					$("#modalAssignment .close").click();
+					$("#modalAssignment .close").trigger("click"); 
+				},
+				fail: function(xhr, textStatus, errorThrown){
+					$("#modalAssignment .close").click();
+					$("#modalAssignment .close").trigger("click"); 
+				}
+			});
 		}
 
 		function deleteTextInputPost(){
