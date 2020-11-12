@@ -7,6 +7,7 @@
 		exit();
 	}
 	$user = $_SESSION['user'];
+	#include ('../stream/stream.php');
 ?>
 <html lang="en">
 <head>
@@ -19,6 +20,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	
 
 	<style>
 		nav{
@@ -101,6 +103,7 @@
 	</style>
 
     <script>
+
     	let idClass; 
     	let btnSumitPost;
     	let titlePost;
@@ -112,7 +115,9 @@
     	let fileAssign;
     	let dueAssign;
     	let btnSumitAssign;
+
     	window.onload = function(){
+    		
     		makeTextInputFile()
     		$("#streamTab").load("../stream/stream.php"); 
     		$("#peopleTab").load("../people/people.html");
@@ -204,7 +209,7 @@
 				success: function (response) {
 					console.log(response)
 					if (response==="Insert success") {
-						
+						$("#streamTab").load("../stream/stream.php");
 					}
 					$("#modalPost .close").click();
 					$("#modalPost .close").trigger("click"); 
@@ -235,7 +240,7 @@
 				success: function (response) {
 					console.log(response)
 					if (response==="Insert success") {
-						
+						$("#streamTab").load("../stream/stream.php");
 					}
 					$("#modalAssignment .close").click();
 					$("#modalAssignment .close").trigger("click"); 
@@ -247,7 +252,7 @@
 			});
 		}
 
-		function deleteTextInputPost(){
+		function deleteTextInputPost(){  
 			titlePost.value = ''
 			desPost.value = ''
 			filePost.value = ''
@@ -266,6 +271,7 @@
 
 </head>
 <body>
+
 	<div>
 		<nav class="navbar navbar-expand-lg fixed-top" style="padding: 20px;"> 
 	  		<ul class="navbar-nav nav nav-tabs">

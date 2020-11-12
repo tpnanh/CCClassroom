@@ -54,15 +54,20 @@
 		}
 	</style>
 	<script>
-		let cardNameClass;
-		let cardSubjectClass;
-		let cardRoomClass;
-		let streamList;
-		let emailClassOfUser = '';
-		let emailCurrentUser = '';
-		let roleCurrentUser = '';
-		getIdElement()
-
+		try{
+			let cardNameClass;
+			let cardSubjectClass;
+			let cardRoomClass;
+			let streamList;
+			let emailClassOfUser = '';
+			let emailCurrentUser = '';
+			let roleCurrentUser = '';
+			getIdElement()
+		}
+		catch(err){
+			getStream()
+		}
+		
 		function getIdElement(){
 			cardNameClass = document.getElementById('cardNameClass')
 			cardSubjectClass = document.getElementById('cardSubjectClass')
@@ -72,6 +77,9 @@
 			roleCurrentUser = '<?= $user['role'] ?>';
 			getDataClassById()
 			getStream()
+			// var d = new Date();
+			// var n = d.toUTCString();
+			// console.log(n)
 		}
 
 		function getDataClassById(){
@@ -82,7 +90,6 @@
         			id: idClass
     			},
 				success: function (response) {
-					
 					if (response==="Classroom not found") {
 						window.location.href="../home/home.php"
 					}else{
@@ -159,8 +166,13 @@
 			
 			a.appendChild(h6)
 
+			
+			let date = new Date(data.dateCreate).toDateString()
+			let [, month, day, year] = date.split(' ')
+			let MmDD = `${month} ${day}`
 			let p1 = document.createElement('p')
-			p1.innerHTML = data.dateCreate
+			p1.innerHTML = MmDD
+
 			a.appendChild(p1)
 			div1.appendChild(a)
 

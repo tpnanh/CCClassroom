@@ -34,12 +34,12 @@
 
 			if (!empty($nameFile)){
 				if (move_uploaded_file($tmp_name, $path.$nameFile)) {
-					echo ('Uploaded!');
+					//echo ('Uploaded!');
 				}
 			}
 		}
 	}
-	$timeNow = date("Y/M/d H:m:s");
+	$timeNow = gmdate("Y-m-d\TH:i:s\Z"); 
 	$conn = new mysqli('127.0.0.1','root','',"ccclassroom");
 
 	$query = "insert into material(title, des, due, email, type, idClass, nameFile,date_create) values('$title','$des','$due','$emailUser','$type', $idClass,'$nameFile','$timeNow')";
