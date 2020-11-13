@@ -118,7 +118,7 @@
 						//window.location.href="../home/home.php"
 					}else{
 						let result = JSON.parse(response)
-						console.log(result)
+						removeAllChildNodes(stream)
 						for (i = 0; i < result.length; i++) {
 							appendViewIntoTable(result[i])
 						}
@@ -127,6 +127,12 @@
 				fail: function(xhr, textStatus, errorThrown){
 				}
 			});
+		}
+
+		function removeAllChildNodes(parent) {
+    		while (parent.firstChild) {
+        		parent.removeChild(parent.firstChild);
+    		}
 		}
 
 		function appendViewIntoTable(data){
@@ -212,7 +218,7 @@
 
 				let a4 = document.createElement('a')
 				a4.classList.add('dropdown-item')
-				a4.href = "#"
+				a4.onclick = function(){deleteItem(this,data.id,idClass)};
 				a4.style.fontWeight = "bold"
 				a4.innerHTML = "Delete"
 				div3.appendChild(a4)
@@ -224,6 +230,27 @@
 			div.appendChild(div1)
 			stream.appendChild(div)
 		}
+
+		function deleteItem(view,idMaterial,idClass){
+			let fd = new FormData();
+			fd.append('ID_CLASS', idClass)
+			fd.append('ID_MATERIAL', idMaterial)
+			$.ajax({
+				type:"POST",
+				url:"../classroom/deleteMaterial.php",
+				cache: false,
+                contentType: false,
+                processData: false,
+				data:fd,
+				success: function (response) {
+					if (response==="Delete material success") {
+						view.parentNode.parentNode.parentNode.parentNode.remove()
+					}
+				},
+				fail: function(xhr, textStatus, errorThrown){
+				}
+			});
+		}
 		
 
 		
@@ -232,52 +259,17 @@
 
 <body>
 	<div class="container">
-		<div class="row" id="stream">
+		<div class="row">
 		  	<div class="card col-lg-12">
 			  	<div class="card-header" style="background-color: #087043">			
 			      	<h4 class="card-title" id="cardNameClass">HK1_2020_505404_WEB</h5>
 			      	<h5 class="card-subtitle" id="cardSubjectClass">Lập trình web và ứng dụng</h6>
 			      	<p class="card-text" style="font-size: 15px;margin-top: 5px" id="cardRoomClass">Phòng B206-A</p>
 			  	</div>	
-			</div>	 
-		<!-- 	<div class="card col-lg-12">
-			  	<div class="card-header">		
-			  		<a  href="../postDetail/postDetail.html" style="background-color: transparent;">	
-				      	<img src="../img/postt.png" alt="avatar" width="60" height="60" style="float: left; margin: 25px; margin-right: 20px;"> 
-				      	<h6 class="card-subtitle" style="margin-top: 30px;">MVM posted a new material: Restful Web Service</h6>
-				      	<p>Nov 3</p>
-			      	</a>			      	
-			  	</div>
-			  	<div class="card-img-overlay ml-auto" style="max-height: 30px;max-width: 30px;">
-					<a href="#" data-toggle="dropdown" id="postOption" style="float: right;">
-			  	 		<i class="fas fa-ellipsis-v" style="color: black"></i>
-			  	 	</a>
-			  	 	<div class="dropdown-menu dropdown-menu-right" aria-expanded="true" aria-labelledby="postOption">
-					    <a class="dropdown-item" href="../editPost/editPost.html" style="font-weight: bold;">Edit</a>
-					    <div class="dropdown-divider"></div>
-					    <a class="dropdown-item" data-toggle="modal" href="#" style="font-weight: bold;">Delete</a>
-					</div>
-			  	</div>
-			</div>	
-			<div class="card col-lg-12">
-			  	<div class="card-header">		
-			  		<a  href="../postDetail/postDetail.html" style="background-color: transparent;">	
-				      	<img src="../img/due.png" alt="avatar" width="60" height="60" style="float: left; margin: 25px; margin-right: 20px;"> 
-				      	<h6 class="card-subtitle" style="margin-top: 30px;">MVM posted a new assignment: Đồ án cuối kì</h6>
-				      	<p>Nov 3</p>
-			      	</a>			      	
-			  	</div>
-			  	<div class="card-img-overlay ml-auto" style="max-height: 30px;max-width: 30px;">
-					<a href="#" data-toggle="dropdown" id="postOption" style="float: right;">
-			  	 		<i class="fas fa-ellipsis-v" style="color: black"></i>
-			  	 	</a>
-			  	 	<div class="dropdown-menu dropdown-menu-right" aria-expanded="true" aria-labelledby="postOption">
-					    <a class="dropdown-item" href="#" style="font-weight: bold;">Edit</a>
-					    <div class="dropdown-divider"></div>
-					    <a class="dropdown-item" data-toggle="modal" href="#" style="font-weight: bold;">Delete</a>
-					</div>
-			  	</div>
-			</div> -->	
+			</div>
+		</div>
+		<div class="row" id="stream">
+		  	
 		</div>
 	</div> 
 	
