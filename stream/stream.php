@@ -201,7 +201,7 @@
 
 				let a3 = document.createElement('a')
 				a3.classList.add('dropdown-item')
-				a3.href = "../editPost/editPost.html"
+				a3.href = "../editPost/editPost.php?idMaterial="+data.id+"&&idClass="+idClass
 				a3.style.fontWeight = "bold"
 				a3.innerHTML = "Edit"
 				div3.appendChild(a3)
