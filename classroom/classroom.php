@@ -120,7 +120,7 @@
     		
     		makeTextInputFile()
     		$("#streamTab").load("../stream/stream.php"); 
-    		$("#peopleTab").load("../people/people.html");
+    		$("#peopleTab").load("../people/people.php");
     		getUrl()
     		btnSumitPost = document.getElementById('btnSumitPost')
     		titlePost = document.getElementById('postTitle')

@@ -7,9 +7,6 @@
 
 	$result = $conn->query($query);
 
-	if($result->num_rows<=0){
-    	die("Classroom not found");
-    } 
 	$data = array();
 	while($row = mysqli_fetch_array($result)){ 
     	$data[] = array('id' => $row[0], 'title' => $row[1], 'des' => $row[2],'due' => $row[3],'email' => $row[4],'type' => $row[5],'idClass' => $row[6],'nameFile' => $row[7], 'dateCreate' => $row[8] );
