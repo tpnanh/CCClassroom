@@ -108,10 +108,12 @@
 		let viewTemp = null
 		let inputClasscode
 		let errorJoinClass
+		let inputTextFindView
 		window.onload = function(){
 			boardView = document.getElementById('boardView');
 			errorJoinClass = document.getElementById('errorJoinClass');
 			inputClasscode = document.getElementById('inputClasscode');
+			inputTextFindView = document.getElementById('inputTextFindView')
 			getClass()
 
 			$('#modalDelete').on('hidden.bs.modal', function () {
@@ -321,6 +323,31 @@
 				}
 			});
 		}
+
+		function removeAllChildNode(parent) {
+    		while (parent.firstChild) {
+        		parent.removeChild(parent.firstChild);
+    		}
+		}
+
+		function findClass(){
+			$.ajax({
+				type:"GET",
+				url:"findClass.php",
+				data: { 
+        			KEY_WORD: inputTextFindView.value
+    			},
+				success: function (response) {
+					let result = JSON.parse(response)
+					removeAllChildNode(boardView)
+					for (i = 0; i < result.length; i++) {
+						appendViewIntoBoardView(result[i])
+					}
+				},
+				fail: function(xhr, textStatus, errorThrown){
+				}
+			});
+		}
 	</script>
 
 </head>
@@ -441,10 +468,10 @@
 	  	</div>
 	</div>
 	<div style="float: left;width: 100%">
-		<form class="form-inline"  style="float: right;margin-right: 15px; margin-bottom: 15px;">
-		<input class="form-control ml-sm-2" placeholder="Find Class" style="margin-right: 10px;" aria-label="Search" id="inputTextFindView">
-		<button class="btn findClass" type="submit">Search</button>
-	</form>
+		<form class="form-inline"  style="float: right;margin-right: 15px; margin-bottom: 15px;" onsubmit="findClass();return false;">
+			<input class="form-control ml-sm-2" placeholder="Find Class" style="margin-right: 10px;" aria-label="Search" id="inputTextFindView">
+			<button class="btn findClass" type="submit">Search</button>
+		</form>
 	</div>
 
 	<div>
