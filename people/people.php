@@ -61,6 +61,7 @@
 			let emailCurrentUser = '';
 			let roleCurrentUser = '';
 			let inputAddUser;
+			let inputTextFindView;
 			getId()
 		}
 		catch(err){
@@ -70,6 +71,7 @@
 		function getId(){
 			peopleList = document.getElementById('people')
 			inputAddUser = document.getElementById('inputAddUser')
+			inputTextFindView = document.getElementById('inputTextFindView')
 			emailCurrentUser = '<?= $user['email'] ?>';
 			roleCurrentUser = '<?= $user['role'] ?>';
 			getDataClassById()
@@ -217,6 +219,27 @@
 					}else{
 						alert(response)
 					}
+				},
+				fail: function(xhr, textStatus, errorThrown){
+				}
+			});
+		}
+
+		function findUser(){
+			$.ajax({
+				type:"GET",
+				url:"../people/findUser.php?",
+				data: { 
+        			ID: idClass,
+        			KEY_WORD: inputTextFindView.value
+    			},
+				success: function (response) {
+					let result = JSON.parse(response)
+					removeAllChildNode(peopleList)
+					for (i = 0; i < result.length; i++) {
+						appendView(result[i])
+					}
+					
 				},
 				fail: function(xhr, textStatus, errorThrown){
 				}

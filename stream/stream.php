@@ -181,7 +181,7 @@
 
 			a.appendChild(p1)
 			div1.appendChild(a)
-
+			
 			if (roleCurrentUser === "Admin" || emailCurrentUser === data.email || emailCurrentUser === emailClassOfUser) {
 				let div2 = document.createElement('div')
 				div2.classList.add('card-img-overlay','ml-auto')
