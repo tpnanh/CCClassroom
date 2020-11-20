@@ -60,7 +60,7 @@
 			let emailClassOfUser = '';
 			let emailCurrentUser = '';
 			let roleCurrentUser = '';
-
+			let inputAddUser;
 			getId()
 		}
 		catch(err){
@@ -69,6 +69,7 @@
 
 		function getId(){
 			peopleList = document.getElementById('people')
+			inputAddUser = document.getElementById('inputAddUser')
 			emailCurrentUser = '<?= $user['email'] ?>';
 			roleCurrentUser = '<?= $user['role'] ?>';
 			getDataClassById()
@@ -197,13 +198,38 @@
         		parent.removeChild(parent.firstChild);
     		}
 		}
+
+		function addPeople(){
+			let fd = new FormData();
+			fd.append('ID', idClass)
+			fd.append('EMAIL', inputAddUser.value)
+			$.ajax({
+				type:"POST",
+				url:"../people/addPeople.php",
+				cache: false,
+                contentType: false,
+                processData: false,
+				data:fd,
+				success: function (response) {
+					console.log(response)
+					if (response==="Add success") {
+						getPeople()
+					}else{
+						alert(response)
+					}
+				},
+				fail: function(xhr, textStatus, errorThrown){
+				}
+			});
+		}
+
 	</script>
 
 </head>
 <body>
 	<nav class="navbar">	
-		<form class="form-inline" style="margin-right: auto;margin-top: 10px;" onsubmit="findUser();return false;">
-			<input class="form-control ml-sm-2" placeholder="Student Email" style="margin-right: 10px;" aria-label="Add" id="inputTextFindView">
+		<form class="form-inline" style="margin-right: auto;margin-top: 10px;" onsubmit="addPeople();return false;">
+			<input class="form-control ml-sm-2" placeholder="Student Email" style="margin-right: 10px;" aria-label="Add" id="inputAddUser" required>
 			<button class="btn addButton" type="submit">Add</button>
 		</form>	
 		<form class="form-inline" style="margin-left: auto;" onsubmit="findUser();return false;">
