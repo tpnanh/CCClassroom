@@ -143,7 +143,7 @@
 			div1.classList.add('card-header')
 
 			let a = document.createElement('a')
-			a.href = "../postDetail/postDetail.html"
+			a.href = "../postDetail/postDetail.php?idPost="+data.id+"&&idClass="+idClass
 			a.style.backgroundColor = "transparent"
 
 			let img = document.createElement('img')

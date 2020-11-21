@@ -62,6 +62,7 @@
 			let roleCurrentUser = '';
 			let inputAddUser;
 			let inputTextFindView;
+			let formAddUser
 			getId()
 		}
 		catch(err){
@@ -72,6 +73,7 @@
 			peopleList = document.getElementById('people')
 			inputAddUser = document.getElementById('inputAddUser')
 			inputTextFindView = document.getElementById('inputTextFindView')
+			formAddUser = document.getElementById('formAddUser')
 			emailCurrentUser = '<?= $user['email'] ?>';
 			roleCurrentUser = '<?= $user['role'] ?>';
 			getDataClassById()
@@ -135,8 +137,6 @@
 			div.appendChild(img)
 			if (roleCurrentUser === "Admin" || emailCurrentUser === emailClassOfUser) {
 				if (data.emailPeople !== data.emailUserOfClass) {
-					console.log(data.emailPeople)
-					console.log(data.emailUserOfClass)
 					let a = document.createElement('a')
 					a.setAttribute("data-toggle", "dropdown");
 					a.id = "deleteUser"
@@ -160,7 +160,11 @@
 					a2.onclick = function(){deleteUser(this,data.id_class,data.emailPeople)};
 					div2.appendChild(a2)
 					div.appendChild(div2)
+				}else{
+					formAddUser.style.display = "none"
 				}
+			}else{
+				formAddUser.style.display = "none"
 			}
 
 			let p = document.createElement('p')
@@ -251,11 +255,11 @@
 </head>
 <body>
 	<nav class="navbar">	
-		<form class="form-inline" style="margin-right: auto;margin-top: 10px;" onsubmit="addPeople();return false;">
+		<form class="form-inline" style="margin-right: auto;margin-top: 10px;" onsubmit="addPeople();return false;" id="formAddUser">
 			<input class="form-control ml-sm-2" placeholder="Student Email" style="margin-right: 10px;" aria-label="Add" id="inputAddUser" required>
 			<button class="btn addButton" type="submit">Add</button>
 		</form>	
-		<form class="form-inline" style="margin-left: auto;" onsubmit="findUser();return false;">
+		<form class="form-inline" style="margin-left: auto;margin-top: 10px" onsubmit="findUser();return false;">
 			<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="inputTextFindView">
 			<button class="btn searchButton" type="submit">Search</button>
 		</form>
