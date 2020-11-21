@@ -98,6 +98,8 @@
 		let idMaterial
 		let idClass
 		let title
+		let linkAssign;
+    	let assignAlert;
 		let description
 		let customFile
 		let time
@@ -109,6 +111,8 @@
 		window.onload = function(){
 			makeTextInputFile()
 			title = document.getElementById('title')
+			linkAssign = document.getElementById('assignLink')
+    		assignAlert = document.getElementById('assignAlert')
 			description = document.getElementById('description')
 			customFile = document.getElementById('custom_file')
 			time = document.getElementById('time')
@@ -180,32 +184,39 @@
         }
 
         function updatePost(){
-        	let file = customFile.files[0]
-			let fd = new FormData();
-			fd.append('ID_CLASS',idClass)
-			fd.append('ID_MATERIAL',idMaterial)
-			fd.append('TITLE',title.value)
-			fd.append('DES',description.value)
-			fd.append('DUE',time.value)
-			fd.append('FILE', file)
-			fd.append('OLD_FILE',nameFileOld)
+        	if (checkRegex()){
+				assignAlert.style.display = "none"
+				let file = customFile.files[0]
+				let fd = new FormData();
+				fd.append('ID_CLASS',idClass)
+				fd.append('ID_MATERIAL',idMaterial)
+				fd.append('TITLE',title.value)
+				fd.append('DES',description.value)
+				fd.append('DUE',time.value)
+				fd.append('FILE', file)
+				fd.append('OLD_FILE',nameFileOld)
 
-        	$.ajax({
-				type:"POST",
-				url:"updateMaterial.php",
-				cache: false,
-                contentType: false,
-                processData: false,
-				data:fd,
-				success: function (response) {
-					console.log(response)
-					if (response==="Update success") {
-						history.go(-1)
+	        	$.ajax({
+					type:"POST",
+					url:"updateMaterial.php",
+					cache: false,
+	                contentType: false,
+	                processData: false,
+					data:fd,
+					success: function (response) {
+						console.log(response)
+						if (response==="Update success") {
+							history.go(-1)
+						}
+					},
+					fail: function(xhr, textStatus, errorThrown){
 					}
-				},
-				fail: function(xhr, textStatus, errorThrown){
-				}
-			});
+				});
+			}
+			else{
+				assignAlert.style.display = ""
+			}
+        	
         }
 
         function deleteViewFile(view){
@@ -213,6 +224,15 @@
         	downFile.style.display = "none"
         	view.style.display = "none"
         }
+        function checkRegex(){
+			let str = linkAssign.value
+			let regex = /(?:https?\:\/\/docs.google.com.forms.d.e\/)|(?:https?\:\/\/forms.gle\/)/
+			let result = str.match(regex);
+			if (result!=null){
+				return true
+			}
+			return false
+		}
 	</script>
 
 	
@@ -223,6 +243,9 @@
 		<h3 class="createClass"><b>Edit Material</b></h3>
 		<label for="title">Title</label>
 		<input type="text" class="form-control" id="title" placeholder="Title" required >
+		<label for="assignLink" style="margin-top: 10px">Assignment</label>
+		<input type="url" class="form-control" id="assignLink" placeholder="Link Google Form" required>
+		<p id="assignAlert" style="color: red; margin-top: 5px; margin-bottom: 0px; justify-content: flex-start; display: none; font-size: 14px;">Your Google Form link is invalid!</p>
 		<label for="description" style="margin-top: 10px">Description</label>
 		<textarea class="form-control" id="description" placeholder="Description (optional)"></textarea>
 		<label for="custom-file" style="margin-top: 10px; display: block;">Add your file</label>

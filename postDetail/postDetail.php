@@ -37,12 +37,10 @@
 		.container {
 		  	display: flex;
 		  	justify-content: center;
-		  	margin-top: 90px;
+		  	margin-top: 80px;
 		  	margin-bottom: 50px;
-		  	margin-left: 40px;
-		  	margin-right: 0px;
-		  	float: left;
-		  	width: 70%;
+		  	margin-left: 100px;
+		  	width: 100%;
 		  	padding: 0px;
 		}
 		.center {
@@ -89,6 +87,7 @@
 			color: black;
 			font-size: 14px;
 			line-height: 1.6;
+			margin-bottom: 2px;
 		}
 		#link{
 			color: blue;
@@ -114,18 +113,18 @@
 			border-radius: 80px; 
 			padding: 9px;
 			padding-left: 18px;
-			padding-right: 46px;
+			padding-right: 18px;
 			margin-left: 8px;
 			margin-top: 5px;
 			border-top-color: white; 
 			border-bottom-color: darkgray; 
 			border-left-color: lightgray;
 			border-right-color: gray;
-			width: 92%;
-			background-image:url('../img/send.png');
+			width: 87%;
+/*			background-image:url('../img/send.png');
     		background-repeat:no-repeat;
     		background-position: right 14px center;
-    		background-size: 23px;
+    		background-size: 23px;*/
 
 		}
 		input:focus{
@@ -135,7 +134,7 @@
 		a{
 			font-size: 14px;
 		}
-		.turnIn{
+		/*.turnIn{
 			background-color: #214996;
 			color: white;
 			width: 87%;
@@ -147,7 +146,7 @@
 		.turnIn:hover{
 			background-color: #2e446e;
 			color: white;
-		}
+		}*/
 
 	</style>
 
@@ -307,6 +306,9 @@
 			<p id="timeCreate" style="float: left">Nov 3</p>
 			<p id="timeDue" style="text-align: right;font-size: 14px; margin-right: 20px;">Due Nov 3</p>
 			<hr class="first-line">
+			<p style="font-weight: bold;color: black;margin-bottom: 0px">Assignment</p>     
+			<a href="https://forms.gle/QCaVodHtHs5xkVWq8" target="_blank">https://forms.gle/QCaVodHtHs5xkVWq8</a>
+			<p></p>
 			<p id="description"> Các em xem mô tả đề tài cuối kỳ trong tập tin đính kèm.
 			<br>- Tất cả các nhóm đều làm cùng đề bài này.
 			<br>- Deadline nộp bài là 30/11/2020.
@@ -345,9 +347,15 @@
 		  	</div>
 		  	<hr class="third-line">
 		  	<div>		
-		      	<img src="../img/person_icon.png" id="iconCurrentUser" class="rounded-circle" alt="avatar" width="50" height="50" style="float: left;"> 
-		      	<input type="text" name="comment" placeholder="Add class comment">     	
+		  		<form>
+					<img src="../img/person_icon.png" id="iconCurrentUser" class="rounded-circle" alt="avatar" width="50" height="50" style="float: left;margin-top: 5px"> 
+			      	<input type="text" name="comment" id="btnSend" placeholder="Add class comment">    
+			      	<a href="#"><img src="../img/send.png" width="23px" style="position: right;margin-left: 7px;margin-bottom: 3px"></a>
+		      	</form>	
 		  	</div>
+
+		  		
+		      
 		</div>
 	</div>
 		

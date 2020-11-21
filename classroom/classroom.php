@@ -111,6 +111,8 @@
     	let filePost;
 
     	let titleAssign;
+    	let linkAssign;
+    	let assignAlert;
     	let desAssign;
     	let fileAssign;
     	let dueAssign;
@@ -128,6 +130,8 @@
     		filePost = document.getElementById('custom-file-post')
 
     		titleAssign = document.getElementById('assignmentTitle')
+    		linkAssign = document.getElementById('assignmentLink')
+    		assignAlert = document.getElementById('assignAlert')
     		desAssign = document.getElementById('assignmentDescription')
     		fileAssign = document.getElementById('custom-file-assignment')
     		dueAssign = document.getElementById('dueAssign')
@@ -185,8 +189,24 @@
 			btnSumitPost.click()
 		}
 
-		function callBtnPostAssign(){
-			btnSumitAssign.click()
+		function callBtnPostAssign(){			
+			if (checkRegex()){
+				assignAlert.style.display = "none"
+				btnSumitAssign.click()
+			}
+			else{
+				assignAlert.style.display = ""
+			}
+		}
+
+		function checkRegex(){
+			let str = linkAssign.value
+			let regex = /(?:https?\:\/\/docs.google.com.forms.d.e\/)|(?:https?\:\/\/forms.gle\/)/
+			let result = str.match(regex);
+			if (result!=null){
+				return true
+			}
+			return false
 		}
 
 		function postNewPost(){
@@ -260,7 +280,9 @@
 		}
 
 		function deletTeTextInputAssignment(){
+			assignAlert.style.display = "none"
 			titleAssign.value = ''
+			linkAssign.value = ''
     		desAssign.value = ''
     		fileAssign.value = ''
     		dueAssign.value = ''
@@ -325,7 +347,7 @@
       	</div>
     </main>
 
-	<div class="modal" style="margin-top: 40px" id="modalAssignment" tabindex="-1" role="dialog">
+	<div class="modal" style="margin-top: 20px" id="modalAssignment" tabindex="-1" role="dialog">
 		<div class="modal-dialog " role="document">
 	    	<div class="modal-content w-75">
 	      		<div class="modal-header">
@@ -338,6 +360,10 @@
 		        	<form method="post" class="form-signin" onsubmit='postNewAssign();return false'>
 		        		<label for="assignmentTitle">Title</label>
 						<input type="text" class="form-control" id="assignmentTitle" placeholder="Title" required>
+						<label for="assignmentLink" style="margin-top: 10px">Assignment</label>
+						<input type="url" class="form-control" id="assignmentLink" placeholder="Link Google Form" 
+						 required>
+						<p id="assignAlert" style="color: red; margin-top: 5px; margin-bottom: 0px; display: none; font-size: 14px;">Your Google Form link is invalid!</p>
 						<label for="assignmentDescription" style="margin-top: 10px">Description</label>
 						<textarea class="form-control" id="assignmentDescription" placeholder="Description (optional)" rows="3"></textarea>
 						<label for="custom-file" style="margin-top: 10px; display: block;">Add your file</label>
@@ -348,12 +374,14 @@
 							
 						<label for="due" style="margin-top: 10px; margin-right: 20px">Due</label>
  						<input type="datetime-local" style="margin-top: 20px;" name="due" id="dueAssign" required>
+ 						
 
  						<button type="submit" style="display: none;" id="btnSumitAssign"></button>
 					</form>
+
 		      	</div>
 		      	<div class="modal-footer">
-			        <button type="button" class="btn postAssignment" style="background-color: #43437B;color: white;" onclick="callBtnPostAssign()">Post
+		      		<button type="button" class="btn postAssignment" style="background-color: #43437B;color: white; float: right;" onclick="callBtnPostAssign()">Post
 			        </button>			        
 		      	</div>
 	    	</div>
