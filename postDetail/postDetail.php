@@ -163,7 +163,7 @@
 		// 	return json_decode($return1, true);
 
 		//  }
-		let title, userCreate,timeCreate, timeDue, description, linkFile, nameFile,iconCurrentUser
+		let title, userCreate,timeCreate, timeDue, description, linkFile, nameFile,iconCurrentUser,comment, listComment
 		let idPost = ""
 		let idClass = ""
 		window.onload = function(){
@@ -175,8 +175,11 @@
 			linkFile = document.getElementById('linkFile')
 			nameFile = document.getElementById('nameFile')
 			iconCurrentUser = document.getElementById('iconCurrentUser')
+			comment = document.getElementById('comment')
+			listComment = document.getElementById('listComment')
 			getUrl()
 			getInfoPost()
+			getListComment()
 			iconCurrentUser.src = '<?= $user['avatar'] ?>';
 		}
 
@@ -212,7 +215,7 @@
 						timeCreate.innerHTML = formateDate(result.date_create)
 						description.innerHTML = result.des
 						if (result.type==="ASSIGN") {
-							timeDue.innerHTML = "Due "+formateDate(result.due)
+							timeDue.innerHTML = "Due "+formateDate2(result.due)
 						}else{
 							timeCreate.style.float = ""
 							timeDue.innerHTML = ""
@@ -237,6 +240,118 @@
 			let MmDD = `${month} ${day}`
 			return MmDD
         }
+
+        function formateDate2(value){
+        	let date = new Date(value).toDateString()
+        	let hour = new Date(value).getHours()
+        	let minute = new Date(value).getMinutes()
+			let [, month, day, year] = date.split(' ')
+			let MmDdYyHhMm = `${month} ${day}, ${year} ${hour}:${minute}`
+			return MmDdYyHhMm
+        }
+
+        function addComment(){
+        	let fd = new FormData();
+			fd.append('CONTENT', comment.value)
+			fd.append('MATERIAL', idPost)
+			$.ajax({
+				type:"POST",
+				url:"addComment.php",
+				cache: false,
+                contentType: false,
+                processData: false,
+				data:fd,
+				success: function (response) {
+					console.log(response)
+					comment.value = ""
+					getListComment()
+				},
+				fail: function(xhr, textStatus, errorThrown){
+				}
+			});
+        }
+
+        function getListComment(){
+			
+			$.ajax({
+				type:"GET",
+				url:"getListComment.php?",
+				data: { 
+        			ID_MATERIAL: idPost
+    			},
+				success: function (response) {
+					removeAllChildNodes(listComment)
+					let result = JSON.parse(response)
+					for (i = 0; i < result.length; i++) {
+					 	addViewComment(result[i])
+					}
+				},
+				fail: function(xhr, textStatus, errorThrown){
+				}
+			});
+        }
+
+        function addViewComment(data){
+        	let div = document.createElement('div')
+
+        	let img = document.createElement('img')
+        	img.classList.add('rounded-circle')
+        	img.alt = "avatar"
+        	img.width = "50"
+        	img.style.float = "left"
+        	img.src = data.avatar
+        	div.appendChild(img)
+
+        	let spanName = document.createElement('span')
+        	spanName.classList.add('user','card-subtitle')
+        	spanName.style.margin = "10px"
+        	spanName.innerHTML = data.email
+        	div.appendChild(spanName)
+
+        	let spanTime = document.createElement('span')
+        	spanTime.classList.add('date')
+        	spanTime.style.marginLeft = "10px"
+        	spanTime.innerHTML = data.time
+        	div.appendChild(spanTime)
+
+        	//dau xoa
+        	let a = document.createElement('a')
+        	a.setAttribute("data-toggle", "dropdown")
+        	a.id = "deleteComment"
+        	a.style.float = "right"
+        	a.style.marginRight = "8px"
+
+        	let i = document.createElement('i')
+        	i.classList.add('fas','fa-ellipsis-v')
+        	i.style.color = "black"
+        	a.appendChild(i)
+        	div.appendChild(a)
+
+        	let div2 = document.createElement('div')
+			div2.classList.add("dropdown-menu","dropdown-menu-right")
+			div2.setAttribute("aria-expanded", "true");
+			div2.setAttribute("aria-labelledby", "deleteComment");
+
+			let a2 = document.createElement('a')
+			a2.classList.add('dropdown-item')
+			a2.setAttribute("data-toggle", "modal");
+			a2.style.fontWeight = "bold"
+			a2.innerHTML = "Delete"
+			//a2.onclick = function(){deleteUser(this,data.id_class,data.emailPeople)};
+			div2.appendChild(a2)
+			div.appendChild(div2)
+
+			let p = document.createElement('p')
+			p.innerHTML = data.content
+			div.appendChild(p)
+			listComment.appendChild(div)
+        }
+
+        function removeAllChildNodes(parent) {
+    		while (parent.firstChild) {
+        		parent.removeChild(parent.firstChild);
+    		}
+		}
 
 		
 		function logOut(){
@@ -319,38 +434,29 @@
 				<p id="nameFile">plan.pdf</p>
 			</a>
 			<hr class="second-line">
-			<div>		
-		      	<img src="../img/person_icon.png" class="rounded-circle" alt="avatar" width="50" height="50" style="float: left;"> 
-		      	<span class="user card-subtitle" style="margin: 10px">Ngọc Tâm<span class="date" style="margin-left: 10px">Nov 3</span>		
-		      	<a href="#" data-toggle="dropdown" id="deleteComment" style="float: right;margin-right: 8px;">
-			  	 	<i class="fas fa-ellipsis-v" style="color: black"></i>
-		  	 	</a>
-		  	 	<div class="dropdown-menu dropdown-menu-right" aria-expanded="true" aria-labelledby="deleteComment">
-				    <a class="dropdown-item" data-toggle="modal" href="#" style="font-weight: bold;">Delete</a>
-				</div>   
-		      	<p class="comment">Tui comment gì đó nè. Tin bầu cử Tổng thống Mỹ 2020 mới nhất: Tổng thống Mexico nói còn quá sớm để chúc mừng Biden; Chiến dịch của Trump đệ đơn kiện ở Arizona.
-		      		Tui comment gì đó nè. Tin bầu cử Tổng thống Mỹ 2020 mới nhất: Tổng thống Mexico nói còn quá sớm để chúc mừng Biden; Chiến dịch của Trump đệ đơn kiện ở Arizona.
-				</p>	
+			<div id="listComment">
+				<div>		
+			      	<img src="../img/person_icon.png" class="rounded-circle" alt="avatar" width="50" height="50" style="float: left;"> 
+			      	<span class="user card-subtitle" style="margin: 10px">Ngọc Tâm</span><span class="date" style="margin-left: 10px">Nov 3</span>		
+			      	<a href="#" data-toggle="dropdown" id="deleteComment" style="float: right;margin-right: 8px;">
+				  	 	<i class="fas fa-ellipsis-v" style="color: black"></i>
+			  	 	</a>
+			  	 	<div class="dropdown-menu dropdown-menu-right" aria-expanded="true" aria-labelledby="deleteComment">
+					    <a class="dropdown-item" data-toggle="modal" href="#" style="font-weight: bold;">Delete</a>
+					</div>   
+			      	<p class="comment">Tui comment gì đó nè. Tin bầu cử Tổng thống Mỹ 2020 mới nhất: Tổng thống Mexico nói còn quá sớm để chúc mừng Biden; Chiến dịch của Trump đệ đơn kiện ở Arizona.
+			      		Tui comment gì đó nè. Tin bầu cử Tổng thống Mỹ 2020 mới nhất: Tổng thống Mexico nói còn quá sớm để chúc mừng Biden; Chiến dịch của Trump đệ đơn kiện ở Arizona.
+					</p>	
 
-		  	</div>
-		  	<div>		
-		      	<img src="../img/person_icon.png" class="rounded-circle" alt="avatar" width="50" height="50" style="float: left;"> 
-		      	<span class="user card-subtitle" style="margin: 10px">Ngọc Tâm<span class="date" style="margin-left: 10px">Nov 3</span>		
-		      	<a href="#" data-toggle="dropdown" id="deleteComment" style="float: right;margin-right: 8px;">
-			  	 	<i class="fas fa-ellipsis-v" style="color: black"></i>
-		  	 	</a>
-		  	 	<div class="dropdown-menu dropdown-menu-right" aria-expanded="true" aria-labelledby="deleteComment">
-				    <a class="dropdown-item" data-toggle="modal" href="#" style="font-weight: bold;">Delete</a>
-				</div>  
-		      	<p class="comment">Tui comment gì đó nè. Tin bầu cử Tổng thống Mỹ 2020 mới nhất: Tổng thống Mexico nói còn quá sớm để chúc mừng Biden; Chiến dịch của Trump đệ đơn kiện ở Arizona.
-				</p>	      	
-		  	</div>
+		  		</div>
+			</div>
+			
 		  	<hr class="third-line">
 		  	<div>		
-		  		<form>
+		  		<form onsubmit="addComment();return false;">
 					<img src="../img/person_icon.png" id="iconCurrentUser" class="rounded-circle" alt="avatar" width="50" height="50" style="float: left;margin-top: 5px"> 
-			      	<input type="text" name="comment" id="btnSend" placeholder="Add class comment">    
-			      	<a href="#"><img src="../img/send.png" width="23px" style="position: right;margin-left: 7px;margin-bottom: 3px"></a>
+			      	<input type="text" name="comment" id="comment" placeholder="Add class comment">    
+			      	<img src="../img/send.png" width="23px" style="position: right;margin-left: 7px;margin-bottom: 3px" onclick="addComment()">
 		      	</form>	
 		  	</div>
 
