@@ -166,6 +166,9 @@
 		let title, userCreate,timeCreate, timeDue, description, linkFile, nameFile,iconCurrentUser,comment, listComment
 		let idPost = ""
 		let idClass = ""
+		let roleCurrentUser = ""
+		let emailCurrentUser = ""
+		let emailClassOfUser = ""
 		window.onload = function(){
 			title = document.getElementById('title')
 			userCreate = document.getElementById('userCreate')
@@ -177,8 +180,11 @@
 			iconCurrentUser = document.getElementById('iconCurrentUser')
 			comment = document.getElementById('comment')
 			listComment = document.getElementById('listComment')
+			roleCurrentUser = '<?= $user['role'] ?>';
+			emailCurrentUser = '<?= $user['email'] ?>';
 			getUrl()
 			getInfoPost()
+			getInfoClass()
 			getListComment()
 			iconCurrentUser.src = '<?= $user['avatar'] ?>';
 		}
@@ -186,6 +192,22 @@
 		function getUrl(){
 			idPost = getParameterByName('idPost')
 			idClass = getParameterByName('idClass')
+		}
+
+		function getInfoClass(){
+			$.ajax({
+				type:"GET",
+				url:"../stream/getInfoClass.php?",
+				data: { 
+        			id: idClass
+    			},
+				success: function (response) {
+					let result = JSON.parse(response)
+					emailClassOfUser = result.email
+				},
+				fail: function(xhr, textStatus, errorThrown){
+				}
+			})
 		}
 
 		function getParameterByName(name, url) {
@@ -311,36 +333,37 @@
         	let spanTime = document.createElement('span')
         	spanTime.classList.add('date')
         	spanTime.style.marginLeft = "10px"
-        	spanTime.innerHTML = data.time
+        	spanTime.innerHTML = formateDate2(data.time)
         	div.appendChild(spanTime)
 
         	//dau xoa
-        	let a = document.createElement('a')
-        	a.setAttribute("data-toggle", "dropdown")
-        	a.id = "deleteComment"
-        	a.style.float = "right"
-        	a.style.marginRight = "8px"
+        	if (roleCurrentUser === "Admin" || emailCurrentUser === data.email || emailCurrentUser === emailClassOfUser) {
+	        	let a = document.createElement('a')
+	        	a.setAttribute("data-toggle", "dropdown")
+	        	a.id = "deleteComment"
+	        	a.style.float = "right"
+	        	a.style.marginRight = "8px"
 
-        	let i = document.createElement('i')
-        	i.classList.add('fas','fa-ellipsis-v')
-        	i.style.color = "black"
-        	a.appendChild(i)
-        	div.appendChild(a)
+	        	let i = document.createElement('i')
+	        	i.classList.add('fas','fa-ellipsis-v')
+	        	i.style.color = "black"
+	        	a.appendChild(i)
+	        	div.appendChild(a)
 
-        	let div2 = document.createElement('div')
-			div2.classList.add("dropdown-menu","dropdown-menu-right")
-			div2.setAttribute("aria-expanded", "true");
-			div2.setAttribute("aria-labelledby", "deleteComment");
+	        	let div2 = document.createElement('div')
+				div2.classList.add("dropdown-menu","dropdown-menu-right")
+				div2.setAttribute("aria-expanded", "true");
+				div2.setAttribute("aria-labelledby", "deleteComment");
 
-			let a2 = document.createElement('a')
-			a2.classList.add('dropdown-item')
-			a2.setAttribute("data-toggle", "modal");
-			a2.style.fontWeight = "bold"
-			a2.innerHTML = "Delete"
-			//a2.onclick = function(){deleteUser(this,data.id_class,data.emailPeople)};
-			div2.appendChild(a2)
-			div.appendChild(div2)
-
+				let a2 = document.createElement('a')
+				a2.classList.add('dropdown-item')
+				a2.setAttribute("data-toggle", "modal");
+				a2.style.fontWeight = "bold"
+				a2.innerHTML = "Delete"
+				//a2.onclick = function(){deleteUser(this,data.id_class,data.emailPeople)};
+				div2.appendChild(a2)
+				div.appendChild(div2)
+			}
 			let p = document.createElement('p')
 			p.innerHTML = data.content
 			div.appendChild(p)
