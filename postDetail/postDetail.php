@@ -336,7 +336,6 @@
         	spanTime.innerHTML = formateDate2(data.time)
         	div.appendChild(spanTime)
 
-        	//dau xoa
         	if (roleCurrentUser === "Admin" || emailCurrentUser === data.email || emailCurrentUser === emailClassOfUser) {
 	        	let a = document.createElement('a')
 	        	a.setAttribute("data-toggle", "dropdown")
@@ -360,7 +359,7 @@
 				a2.setAttribute("data-toggle", "modal");
 				a2.style.fontWeight = "bold"
 				a2.innerHTML = "Delete"
-				//a2.onclick = function(){deleteUser(this,data.id_class,data.emailPeople)};
+				a2.onclick = function(){deleteComment(this,data.id_comment)};
 				div2.appendChild(a2)
 				div.appendChild(div2)
 			}
@@ -368,6 +367,27 @@
 			p.innerHTML = data.content
 			div.appendChild(p)
 			listComment.appendChild(div)
+        }
+
+        function deleteComment(view,idComment){
+        	let fd = new FormData();
+			fd.append('ID_COMMENT', idComment)
+			$.ajax({
+				type:"POST",
+				url:"deleteComment.php",
+				cache: false,
+                contentType: false,
+                processData: false,
+				data:fd,
+				success: function (response) {
+					console.log(response)
+					if (response==="Delete comment success") {
+						view.parentNode.parentNode.remove()
+					}
+				},
+				fail: function(xhr, textStatus, errorThrown){
+				}
+			});
         }
 
         function removeAllChildNodes(parent) {
