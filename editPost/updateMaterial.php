@@ -52,7 +52,7 @@
 	$conn = new mysqli('127.0.0.1','root','',"ccclassroom");
 
 
-	$query = "UPDATE material SET title='$title',des='$des',due='$due',nameFile='$postFile',url_form = '$$urlForm' WHERE idClass=$idClass and id=$idMaterial";
+	$query = "UPDATE material SET title='$title',des='$des',due='$due',nameFile='$postFile',url_form = '$urlForm' WHERE idClass=$idClass and id=$idMaterial";
 	if($conn->query($query)===false){
 
     	$error = $conn->error;

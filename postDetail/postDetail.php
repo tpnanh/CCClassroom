@@ -163,7 +163,7 @@
 		// 	return json_decode($return1, true);
 
 		//  }
-		let title, userCreate,timeCreate, timeDue, description, linkFile, nameFile,iconCurrentUser,comment, listComment
+		let title, userCreate,timeCreate, timeDue, description, linkFile, nameFile,iconCurrentUser,comment, listComment, labelAssign, linkAssign
 		let idPost = ""
 		let idClass = ""
 		let roleCurrentUser = ""
@@ -180,6 +180,8 @@
 			iconCurrentUser = document.getElementById('iconCurrentUser')
 			comment = document.getElementById('comment')
 			listComment = document.getElementById('listComment')
+			labelAssign = document.getElementById('labelAssign')
+			linkAssign = document.getElementById('linkAssign')
 			roleCurrentUser = '<?= $user['role'] ?>';
 			emailCurrentUser = '<?= $user['email'] ?>';
 			getUrl()
@@ -238,7 +240,10 @@
 						description.innerHTML = result.des
 						if (result.type==="ASSIGN") {
 							timeDue.innerHTML = "Due "+formateDate2(result.due)
+							linkAssign.href = result.url_form
 						}else{
+							linkAssign.style.display = "none"
+							labelAssign.style.display = "none"
 							timeCreate.style.float = ""
 							timeDue.innerHTML = ""
 						}
@@ -249,12 +254,27 @@
 						 	nameFile.style.display = "none"
          					linkFile.style.display = "none"
 						}
+						checkTimeAssign()
 					}
 				},
 				fail: function(xhr, textStatus, errorThrown){
 				}
 			});
         }
+
+       	function checkTimeAssign(){
+       		if (linkAssign.style.display==="") {
+				let timeNow = new Date()
+				let timeDeadline = new Date(timeDue.innerHTML)
+				if (timeNow > timeDeadline) {
+					console.log("Tre deadline")
+					timeDue.style.color = "red"
+					linkAssign.style.display = "none"
+				}else{
+					console.log("Chua Tre deadline")
+				}
+        	}
+       	}
 
         function formateDate(value){
         	let date = new Date(value).toDateString()
@@ -464,8 +484,8 @@
 			<p id="timeCreate" style="float: left">Nov 3</p>
 			<p id="timeDue" style="text-align: right;font-size: 14px; margin-right: 20px;">Due Nov 3</p>
 			<hr class="first-line">
-			<p style="font-weight: bold;color: black;margin-bottom: 0px">Assignment</p>     
-			<a href="https://forms.gle/QCaVodHtHs5xkVWq8" target="_blank">https://forms.gle/QCaVodHtHs5xkVWq8</a>
+			<p style="font-weight: bold;color: black;margin-bottom: 0px" id="labelAssign">Assignment</p>     
+			<a href="https://forms.gle/QCaVodHtHs5xkVWq8" target="_blank" id="linkAssign">https://forms.gle/QCaVodHtHs5xkVWq8</a>
 			<p></p>
 			<p id="description"> Các em xem mô tả đề tài cuối kỳ trong tập tin đính kèm.
 			<br>- Tất cả các nhóm đều làm cùng đề bài này.
