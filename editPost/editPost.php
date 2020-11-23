@@ -108,6 +108,7 @@
 		let deleteFile
 		let labelDue
 		let nameFileOld = ""
+		let labelAssignment
 		let dueAlert
 		window.onload = function(){
 			makeTextInputFile()
@@ -122,6 +123,7 @@
 			downFile = document.getElementById('downFile')
 			deleteFile = document.getElementById('deleteFile')
 			labelDue = document.getElementById('labelDue')
+			labelAssignment = document.getElementById('labelAssignment')
 			getUrl()
 			getInfoMaterial()
 		}
@@ -166,9 +168,13 @@
 						if (result.type==="ASSIGN") {
 							time.style.display = ""
 							time.value = result.due
+							linkAssign.style.display = ""
+							linkAssign.value = result.url_form
 						}else{
 							time.style.display = "none"
 							labelDue.style.display = "none"
+							linkAssign.style.display = "none"
+							labelAssignment.style.display = "none"
 						}
 						if (result.nameFile!="") {
 							nameFileOld = result.nameFile
@@ -186,12 +192,15 @@
         }
 
         function checkTime(){
-			let timeNow = new Date()
-			let timeChoose = new Date(time.value)
-			if (timeNow > timeChoose) {
-				return false
-			}
-			return true
+        	if (time.style.display=="") {
+				let timeNow = new Date()
+				let timeChoose = new Date(time.value)
+				if (timeNow > timeChoose) {
+					return false
+				}
+				return true
+        	}
+        	return true
 		}
 
         function updatePost(){
@@ -208,6 +217,7 @@
 					fd.append('DUE',time.value)
 					fd.append('FILE', file)
 					fd.append('OLD_FILE',nameFileOld)
+					fd.append('URL_FORM',linkAssign.value)
 
 		        	$.ajax({
 						type:"POST",
@@ -239,13 +249,17 @@
         	view.style.display = "none"
         }
         function checkRegex(){
-			let str = linkAssign.value
-			let regex = /(?:https?\:\/\/docs.google.com.forms.d.e\/)|(?:https?\:\/\/forms.gle\/)/
-			let result = str.match(regex);
-			if (result!=null){
-				return true
-			}
-			return false
+        	if (linkAssign.style.display=="") {
+        		let str = linkAssign.value
+				let regex = /(?:https?\:\/\/docs.google.com.forms.d.e\/)|(?:https?\:\/\/forms.gle\/)/
+				let result = str.match(regex);
+				if (result!=null){
+					return true
+				}
+				return false
+        	}
+        	return true
+			
 		}
 	</script>
 
@@ -257,8 +271,8 @@
 		<h3 class="createClass"><b>Edit Material</b></h3>
 		<label for="title">Title</label>
 		<input type="text" class="form-control" id="title" placeholder="Title" required >
-		<label for="assignLink" style="margin-top: 10px">Assignment</label>
-		<input type="url" class="form-control" id="assignLink" placeholder="Link Google Form" required>
+		<label for="assignLink" style="margin-top: 10px" id="labelAssignment">Assignment</label>
+		<input type="url" class="form-control" id="assignLink" placeholder="Link Google Form">
 		<p id="assignAlert" style="color: red; margin-top: 5px; margin-bottom: 0px; justify-content: flex-start; font-size: 14px; text-align: left; display: none">Your Google Form link is invalid!</p>
 		<label for="description" style="margin-top: 10px">Description</label>
 		<textarea class="form-control" id="description" placeholder="Description (optional)"></textarea>

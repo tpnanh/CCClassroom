@@ -236,6 +236,7 @@
 			fd.append('DES',desPost.value)
 			fd.append('DUE','')
 			fd.append('TYPE','POST')
+			fd.append('URL_FORM','')
 			$.ajax({
 				type:"POST",
 				url:"postMaterial.php",
@@ -267,6 +268,7 @@
 			fd.append('DES',desAssign.value)
 			fd.append('DUE',dueAssign.value)
 			fd.append('TYPE','ASSIGN')
+			fd.append('URL_FORM',linkAssign.value)
 			$.ajax({
 				type:"POST",
 				url:"postMaterial.php",
