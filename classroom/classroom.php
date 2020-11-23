@@ -116,6 +116,7 @@
     	let desAssign;
     	let fileAssign;
     	let dueAssign;
+    	let dueAlert;
     	let btnSumitAssign;
 
     	window.onload = function(){
@@ -135,6 +136,7 @@
     		desAssign = document.getElementById('assignmentDescription')
     		fileAssign = document.getElementById('custom-file-assignment')
     		dueAssign = document.getElementById('dueAssign')
+    		dueAlert = document.getElementById('dueAlert')
     		btnSumitAssign = document.getElementById('btnSumitAssign')
 
     		$('#modalPost').on('hidden.bs.modal', function () {
@@ -144,8 +146,8 @@
 			$('#modalAssignment').on('hidden.bs.modal', function () {
  				deletTeTextInputAssignment()
 			})
-
     	}
+
 
     	function getUrl(){
             idClass = getParameterByName('idClass');
@@ -189,14 +191,29 @@
 			btnSumitPost.click()
 		}
 
-		function callBtnPostAssign(){			
-			if (checkRegex()){
-				assignAlert.style.display = "none"
-				btnSumitAssign.click()
+		function checkTime(){
+			let timeNow = new Date()
+			let timeChoose = new Date(dueAssign.value)
+			if (timeNow > timeChoose) {
+				return false
 			}
-			else{
-				assignAlert.style.display = ""
+			return true
+		}
+
+		function callBtnPostAssign(){
+			if(checkTime()){
+				dueAlert.style.display = "none"
+				if (checkRegex()){
+					assignAlert.style.display = "none"
+					btnSumitAssign.click()
+				}
+				else{
+					assignAlert.style.display = ""
+				}
+			}else{
+				dueAlert.style.display = ""
 			}
+		
 		}
 
 		function checkRegex(){
@@ -281,6 +298,7 @@
 
 		function deletTeTextInputAssignment(){
 			assignAlert.style.display = "none"
+			dueAlert.style.display = "none"
 			titleAssign.value = ''
 			linkAssign.value = ''
     		desAssign.value = ''
@@ -374,6 +392,7 @@
 							
 						<label for="due" style="margin-top: 10px; margin-right: 20px">Due</label>
  						<input type="datetime-local" style="margin-top: 20px;" name="due" id="dueAssign" required>
+ 						<p id="dueAlert" style="color: red; margin-top: 5px; margin-bottom: 0px; font-size: 14px; display: none">Time assignment is invalid!</p>
  						
 
  						<button type="submit" style="display: none;" id="btnSumitAssign"></button>

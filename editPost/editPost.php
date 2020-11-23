@@ -108,11 +108,13 @@
 		let deleteFile
 		let labelDue
 		let nameFileOld = ""
+		let dueAlert
 		window.onload = function(){
 			makeTextInputFile()
 			title = document.getElementById('title')
 			linkAssign = document.getElementById('assignLink')
     		assignAlert = document.getElementById('assignAlert')
+    		dueAlert = document.getElementById('dueAlert')
 			description = document.getElementById('description')
 			customFile = document.getElementById('custom_file')
 			time = document.getElementById('time')
@@ -183,40 +185,52 @@
 			});
         }
 
-        function updatePost(){
-        	if (checkRegex()){
-				assignAlert.style.display = "none"
-				let file = customFile.files[0]
-				let fd = new FormData();
-				fd.append('ID_CLASS',idClass)
-				fd.append('ID_MATERIAL',idMaterial)
-				fd.append('TITLE',title.value)
-				fd.append('DES',description.value)
-				fd.append('DUE',time.value)
-				fd.append('FILE', file)
-				fd.append('OLD_FILE',nameFileOld)
+        function checkTime(){
+			let timeNow = new Date()
+			let timeChoose = new Date(time.value)
+			if (timeNow > timeChoose) {
+				return false
+			}
+			return true
+		}
 
-	        	$.ajax({
-					type:"POST",
-					url:"updateMaterial.php",
-					cache: false,
-	                contentType: false,
-	                processData: false,
-					data:fd,
-					success: function (response) {
-						console.log(response)
-						if (response==="Update success") {
-							history.go(-1)
+        function updatePost(){
+        	if (checkTime()) {
+        		dueAlert.style.display = "none"
+        		if (checkRegex()){
+					assignAlert.style.display = "none"
+					let file = customFile.files[0]
+					let fd = new FormData();
+					fd.append('ID_CLASS',idClass)
+					fd.append('ID_MATERIAL',idMaterial)
+					fd.append('TITLE',title.value)
+					fd.append('DES',description.value)
+					fd.append('DUE',time.value)
+					fd.append('FILE', file)
+					fd.append('OLD_FILE',nameFileOld)
+
+		        	$.ajax({
+						type:"POST",
+						url:"updateMaterial.php",
+						cache: false,
+		                contentType: false,
+		                processData: false,
+						data:fd,
+						success: function (response) {
+							console.log(response)
+							if (response==="Update success") {
+								history.go(-1)
+							}
+						},
+						fail: function(xhr, textStatus, errorThrown){
 						}
-					},
-					fail: function(xhr, textStatus, errorThrown){
-					}
-				});
-			}
-			else{
-				assignAlert.style.display = ""
-			}
-        	
+					});
+		        }else{
+					assignAlert.style.display = ""
+				}
+			}else{
+				dueAlert.style.display = ""
+        	}
         }
 
         function deleteViewFile(view){
@@ -245,7 +259,7 @@
 		<input type="text" class="form-control" id="title" placeholder="Title" required >
 		<label for="assignLink" style="margin-top: 10px">Assignment</label>
 		<input type="url" class="form-control" id="assignLink" placeholder="Link Google Form" required>
-		<p id="assignAlert" style="color: red; margin-top: 5px; margin-bottom: 0px; justify-content: flex-start; display: none; font-size: 14px;">Your Google Form link is invalid!</p>
+		<p id="assignAlert" style="color: red; margin-top: 5px; margin-bottom: 0px; justify-content: flex-start; font-size: 14px; text-align: left; display: none">Your Google Form link is invalid!</p>
 		<label for="description" style="margin-top: 10px">Description</label>
 		<textarea class="form-control" id="description" placeholder="Description (optional)"></textarea>
 		<label for="custom-file" style="margin-top: 10px; display: block;">Add your file</label>
@@ -262,6 +276,7 @@
 		</div>
 		<label for="due" style="margin-top: 25px; margin-right: 10px; float: left" id="labelDue">Due</label>
 		<input type="datetime-local" style="margin-top: 20px;width: 88%" name="due" id="time">
+		<p id="dueAlert" style="color: red; margin-top: 5px; margin-bottom: 0px; justify-content: flex-start; font-size: 14px; text-align: left;display: none">Time assignment is invalid!</p>
 		<button class="btn btn-md btn-block" type="submit" name="submit">Save</button>
 		<div class="alert alert-success" style="display: none;" id="alter-success">Information has been updated</div>
 	</form>
