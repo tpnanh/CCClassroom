@@ -478,7 +478,7 @@
 			</a>
 			<hr class="second-line">
 			<div id="listComment">
-				<div>		
+				<!-- <div>		
 			      	<img src="../img/person_icon.png" class="rounded-circle" alt="avatar" width="50" height="50" style="float: left;"> 
 			      	<span class="user card-subtitle" style="margin: 10px">Ngọc Tâm</span><span class="date" style="margin-left: 10px">Nov 3</span>		
 			      	<a href="#" data-toggle="dropdown" id="deleteComment" style="float: right;margin-right: 8px;">
@@ -491,7 +491,7 @@
 			      		Tui comment gì đó nè. Tin bầu cử Tổng thống Mỹ 2020 mới nhất: Tổng thống Mexico nói còn quá sớm để chúc mừng Biden; Chiến dịch của Trump đệ đơn kiện ở Arizona.
 					</p>	
 
-		  		</div>
+		  		</div> -->
 			</div>
 			
 		  	<hr class="third-line">
