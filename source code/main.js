@@ -473,6 +473,61 @@ function postStreamAssign(file, idClass, titleAssign, desAssign, dueAssign, link
 	})
 }
 
+function getDataClassroomById(idClass){
+	return new Promise((resolve, reject)=>{
+		$.ajax({
+			type:"GET",
+			url:"../stream/getInfoClass.php?",
+			data: { 
+    			id: idClass
+			},
+			success: function (response) {
+				resolve(response)
+			},
+			fail: function(xhr, textStatus, errorThrown){
+			}
+		});
+	})
+}
+
+function getDataStream(idClass){
+	return new Promise((resolve, reject)=>{
+		$.ajax({
+			type:"GET",
+			url:"../stream/getStream.php?",
+			data: { 
+    			id: idClass
+			},
+			success: function (response) {
+				resolve(response)
+			},
+			fail: function(xhr, textStatus, errorThrown){
+			}
+		});
+	})
+}
+
+function deleteItemStream(idMaterial,idClass){
+	return new Promise((resolve, reject)=>{
+		let fd = new FormData();
+		fd.append('ID_CLASS', idClass)
+		fd.append('ID_MATERIAL', idMaterial)
+		$.ajax({
+			type:"POST",
+			url:"../classroom/deleteMaterial.php",
+			cache: false,
+            contentType: false,
+            processData: false,
+			data:fd,
+			success: function (response) {
+				resolve(response)
+			},
+			fail: function(xhr, textStatus, errorThrown){
+			}
+		});
+	})
+}
+
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, '\\$&');

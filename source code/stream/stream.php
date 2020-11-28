@@ -55,56 +55,31 @@
 
 		function getDataClassById(){
 			idViewClass.innerHTML = "ID: "+idClass
-			$.ajax({
-				type:"GET",
-				url:"../stream/getInfoClass.php?",
-				data: { 
-        			id: idClass
-    			},
-				success: function (response) {
-					if (response==="Classroom not found") {
-						window.location.href="../home/home.php"
-					}else{
-						let result = JSON.parse(response)
-						cardNameClass.innerHTML = result.name_class
-						cardSubjectClass.innerHTML = result.subject
-						cardRoomClass.innerHTML = result.room
-						emailClassOfUser = result.email
-					}
-				},
-				fail: function(xhr, textStatus, errorThrown){
+			getDataClassroomById(idClass).then(function(response){
+				if (response==="Classroom not found") {
+					window.location.href="../home/home.php"
+				}else{
+					let result = JSON.parse(response)
+					cardNameClass.innerHTML = result.name_class
+					cardSubjectClass.innerHTML = result.subject
+					cardRoomClass.innerHTML = result.room
+					emailClassOfUser = result.email
 				}
-			});
+			})
 		}
 
 		function getStream(){
-			$.ajax({
-				type:"GET",
-				url:"../stream/getStream.php?",
-				data: { 
-        			id: idClass
-    			},
-				success: function (response) {
-					
-					if (response==="Classroom not found") {
-						//window.location.href="../home/home.php"
-					}else{
-						let result = JSON.parse(response)
-						removeAllChildNodes(stream)
-						for (i = 0; i < result.length; i++) {
-							appendViewIntoTable(result[i])
-						}
+			getDataStream(idClass).then(function(response){
+				if (response==="Classroom not found") {
+					//window.location.href="../home/home.php"
+				}else{
+					let result = JSON.parse(response)
+					removeAllChildNode(stream)
+					for (i = 0; i < result.length; i++) {
+						appendViewIntoTable(result[i])
 					}
-				},
-				fail: function(xhr, textStatus, errorThrown){
 				}
-			});
-		}
-
-		function removeAllChildNodes(parent) {
-    		while (parent.firstChild) {
-        		parent.removeChild(parent.firstChild);
-    		}
+			})
 		}
 
 		function appendViewIntoTable(data){
@@ -208,27 +183,12 @@
 		}
 
 		function deleteItem(view,idMaterial,idClass){
-			let fd = new FormData();
-			fd.append('ID_CLASS', idClass)
-			fd.append('ID_MATERIAL', idMaterial)
-			$.ajax({
-				type:"POST",
-				url:"../classroom/deleteMaterial.php",
-				cache: false,
-                contentType: false,
-                processData: false,
-				data:fd,
-				success: function (response) {
-					if (response==="Delete material success") {
-						view.parentNode.parentNode.parentNode.parentNode.remove()
-					}
-				},
-				fail: function(xhr, textStatus, errorThrown){
+			deleteItemStream(idMaterial,idClass).then(function(response){
+				if (response==="Delete material success") {
+					view.parentNode.parentNode.parentNode.parentNode.remove()
 				}
-			});
+			})
 		}
-		
-
 		
 	</script>
 </head>
