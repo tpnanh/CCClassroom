@@ -1,0 +1,75 @@
+.bodyLogin {
+	color: #43437B;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 20px;
+	padding-bottom: 80px;
+	height: 100%;
+	font-family:verdana;
+}
+
+.imgLogin{
+	margin-bottom: 10px;
+}
+
+.formLogin {
+	width: 100%;
+	max-width: 330px;
+	margin: 10px;
+}
+
+.formControlLogin{
+	position: relative;
+	box-sizing: border-box;
+	height: auto;
+	margin-top: 5px;
+	font-size: 16px;
+}
+
+.formControlLogin:focus {
+	z-index: 2;
+}
+
+.labelLogin{
+	display: block;
+	text-align: left;
+	margin-top: 10px;
+}
+
+.inputEmailLogin {
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.inputPassLogin {
+	margin-bottom: 10px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+
+.tagALogin{
+	color: #43437B;
+}
+
+.forgotPasswordLinkLogin{
+	display: block;
+	text-align: left;
+	margin-bottom: 30px;		
+}
+
+.btnLogin:hover{
+	background-color: #43437B;
+	color: white;
+}
+
+.btnLogin{
+	color: white;
+	background-color: #7492c4;
+}
+
+.dont-have-account{
+	text-align: left;
+	margin-top: 10px;	
+	color: dimgrey;		
+}
