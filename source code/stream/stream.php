@@ -64,6 +64,7 @@
 			let emailClassOfUser = '';
 			let emailCurrentUser = '';
 			let roleCurrentUser = '';
+			let idViewClass
 			getIdElement()
 		}
 		catch(err){
@@ -75,6 +76,7 @@
 			cardSubjectClass = document.getElementById('cardSubjectClass')
 			cardRoomClass = document.getElementById('cardRoomClass')
 			stream = document.getElementById('stream')
+			idViewClass = document.getElementById('idClass')
 			emailCurrentUser = '<?= $user['email'] ?>';
 			roleCurrentUser = '<?= $user['role'] ?>';
 			getDataClassById()
@@ -85,6 +87,7 @@
 		}
 
 		function getDataClassById(){
+			idViewClass.innerHTML = "ID: "+idClass
 			$.ajax({
 				type:"GET",
 				url:"../stream/getInfoClass.php?",
@@ -266,8 +269,10 @@
 	<div class="container">
 		<div class="row">
 		  	<div class="card col-lg-12" style="padding-left: 0px; padding-right: 0px;">
-			  	<div class="card-header" style="background-color: #087043">			
+			  	<div class="card-header" style="background-color: #087043">
+
 			      	<h4 class="card-title" id="cardNameClass">HK1_2020_505404_WEB</h5>
+		      		<h5 id="idClass">ID: 4</h4>	
 			      	<h5 class="card-subtitle" id="cardSubjectClass">Lập trình web và ứng dụng</h6>
 			      	<p class="card-text" style="font-size: 15px;margin-top: 5px" id="cardRoomClass">Phòng B206-A</p>
 			  	</div>	
