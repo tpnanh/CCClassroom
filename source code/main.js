@@ -391,3 +391,32 @@ function createClassroom(file, className, subject, room){
 		});
 	})
 }
+
+function updatePasswordUser(newPass, confirmPass, oldPass){
+	return new Promise((resolve, reject)=>{
+		if (newPass != confirmPass) {
+			resolve("Password and confirm password not match")
+		}else if(newPass.length<8){
+			resolve("New password must longer 8 characters")
+		}else{
+			let fd = new FormData();
+			fd.append('PASS',newPass)
+			fd.append('OLD_PASS',oldPass)
+
+			$.ajax({
+				type:"POST",
+				url:"changePasswordFuction.php",
+				cache: false,
+                contentType: false,
+                processData: false,
+				data:fd,
+				success: function (response) {
+					resolve(response)
+				},
+				fail: function(xhr, textStatus, errorThrown){
+					resolve("Request failed")
+				}
+			});
+		}
+	})
+}
