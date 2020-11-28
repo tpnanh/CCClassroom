@@ -57,113 +57,53 @@
 			getInfoMaterial()
 		}
 
-		function makeTextInputFile(){
-			$(".custom-file-input").on("change", function() {
-			  let fileName = $(this).val().split("\\").pop();
-			  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-			});
-		}
-
 		function getUrl(){
             idMaterial = getParameterByName('idMaterial');
             idClass = getParameterByName('idClass');
         }
 
-        function getParameterByName(name, url) {
-            if (!url) url = window.location.href;
-            name = name.replace(/[\[\]]/g, '\\$&');
-            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-                results = regex.exec(url);
-            if (!results) return null;
-            if (!results[2]) return '';
-            return decodeURIComponent(results[2].replace(/\+/g, ' '));
-        }
-
         function getInfoMaterial(){
-        	$.ajax({
-				type:"GET",
-				url:"getMaterial.php?",
-				data: { 
-        			id: idMaterial,
-        			idClass: idClass
-    			},
-				success: function (response) {
-					if (response==="Post/Assignment not found") {
-						window.location.href="../home/home.php"
+        	getInfoMaterialPost(idMaterial, idClass).then(function(response){
+				if (response==="Post/Assignment not found") {
+					window.location.href="../home/home.php"
+				}else{
+					let result = JSON.parse(response)
+					title.value = result.title
+					description.value = result.des
+					if (result.type==="ASSIGN") {
+						time.style.display = ""
+						time.value = result.due
+						linkAssign.style.display = ""
+						linkAssign.value = result.url_form
 					}else{
-						let result = JSON.parse(response)
-						title.value = result.title
-						description.value = result.des
-						if (result.type==="ASSIGN") {
-							time.style.display = ""
-							time.value = result.due
-							linkAssign.style.display = ""
-							linkAssign.value = result.url_form
-						}else{
-							time.style.display = "none"
-							labelDue.style.display = "none"
-							linkAssign.style.display = "none"
-							labelAssignment.style.display = "none"
-						}
-						if (result.nameFile!="") {
-							nameFileOld = result.nameFile
-							link.innerHTML = "File previous: "+result.nameFile
-							downFile.href = "../Uploads/files/"+idClass+"/"+result.nameFile
-						}else{
-							downFile.style.display = "none"
-        					deleteFile.style.display = "none"
-						}
+						time.style.display = "none"
+						labelDue.style.display = "none"
+						linkAssign.style.display = "none"
+						labelAssignment.style.display = "none"
 					}
-				},
-				fail: function(xhr, textStatus, errorThrown){
+					if (result.nameFile!="") {
+						nameFileOld = result.nameFile
+						link.innerHTML = "File previous: "+result.nameFile
+						downFile.href = "../Uploads/files/"+idClass+"/"+result.nameFile
+					}else{
+						downFile.style.display = "none"
+    					deleteFile.style.display = "none"
+					}
 				}
-			});
+			})
         }
-
-        function checkTime(){
-        	if (time.style.display=="") {
-				let timeNow = new Date()
-				let timeChoose = new Date(time.value)
-				if (timeNow > timeChoose) {
-					return false
-				}
-				return true
-        	}
-        	return true
-		}
 
         function updatePost(){
-        	if (checkTime()) {
+        	if (checkTime(time.value)) {
         		dueAlert.style.display = "none"
-        		if (checkRegex()){
+        		if (checkRegex(linkAssign.value)){
 					assignAlert.style.display = "none"
 					let file = customFile.files[0]
-					let fd = new FormData();
-					fd.append('ID_CLASS',idClass)
-					fd.append('ID_MATERIAL',idMaterial)
-					fd.append('TITLE',title.value)
-					fd.append('DES',description.value)
-					fd.append('DUE',time.value)
-					fd.append('FILE', file)
-					fd.append('OLD_FILE',nameFileOld)
-					fd.append('URL_FORM',linkAssign.value)
-
-		        	$.ajax({
-						type:"POST",
-						url:"updateMaterial.php",
-						cache: false,
-		                contentType: false,
-		                processData: false,
-						data:fd,
-						success: function (response) {
-							console.log(response)
-							if (response==="Update success") {
-								history.go(-1)
-							}
-						},
-						fail: function(xhr, textStatus, errorThrown){
+					updateInfoMaterialPost(idClass, idMaterial, title.value, description.value, time.value, file, nameFileOld, linkAssign.value ).then(function(response){
+						if (response==="Update success") {
+							history.go(-1)
 						}
-					});
+					})
 		        }else{
 					assignAlert.style.display = ""
 				}
@@ -177,19 +117,6 @@
         	downFile.style.display = "none"
         	view.style.display = "none"
         }
-        function checkRegex(){
-        	if (linkAssign.style.display=="") {
-        		let str = linkAssign.value
-				let regex = /(?:https?\:\/\/docs.google.com.forms.d.e\/)|(?:https?\:\/\/forms.gle\/)/
-				let result = str.match(regex);
-				if (result!=null){
-					return true
-				}
-				return false
-        	}
-        	return true
-			
-		}
 	</script>
 
 	

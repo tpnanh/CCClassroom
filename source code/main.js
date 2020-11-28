@@ -632,6 +632,52 @@ function updateInfoClassroom(idClass, imageAvatar, className, subject, room){
 	})
 }
 
+function getInfoMaterialPost(idMaterial,idClass){
+	return new Promise((resolve, reject)=>{
+		$.ajax({
+			type:"GET",
+			url:"getMaterial.php?",
+			data: { 
+    			id: idMaterial,
+    			idClass: idClass
+			},
+			success: function (response) {
+				resolve(response)
+			},
+			fail: function(xhr, textStatus, errorThrown){
+			}
+		});
+	})
+}
+
+function updateInfoMaterialPost(idClass, idMaterial, title, description, time, file, nameFileOld, linkAssign){
+	return new Promise((resolve, reject)=>{
+		let fd = new FormData();
+		fd.append('ID_CLASS',idClass)
+		fd.append('ID_MATERIAL',idMaterial)
+		fd.append('TITLE',title)
+		fd.append('DES',description)
+		fd.append('DUE',time)
+		fd.append('FILE', file)
+		fd.append('OLD_FILE',nameFileOld)
+		fd.append('URL_FORM',linkAssign)
+
+    	$.ajax({
+			type:"POST",
+			url:"updateMaterial.php",
+			cache: false,
+            contentType: false,
+            processData: false,
+			data:fd,
+			success: function (response) {
+				resolve(response)
+			},
+			fail: function(xhr, textStatus, errorThrown){
+			}
+		});
+	})
+}
+
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, '\\$&');

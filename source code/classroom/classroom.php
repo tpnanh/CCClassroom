@@ -114,9 +114,9 @@
 			})
 		}
 
-		function postStreamAssign(){
+		function postNewAssign(){
 			let file = fileAssign.files[0]
-			postStreamPost(file, idClass, titleAssign.value, desAssign.value, dueAssign.value, linkAssign.value ).then(function(response){
+			postStreamAssign(file, idClass, titleAssign.value, desAssign.value, dueAssign.value, linkAssign.value ).then(function(response){
 				if (response==="Insert success") {
 					$("#streamTab").load("../stream/stream.php");
 				}
