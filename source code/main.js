@@ -79,3 +79,52 @@ function makeTextInputFile(){
 		}
  	})
 }
+
+function sendLinkRsPassword(email){
+	return new Promise((resolve,reject)=>{
+		let fd = new FormData();
+		fd.append('emai', email)
+		$.ajax({
+			type:"POST",
+			url:"send_email_reset_pass.php",
+			cache: false,
+            contentType: false,
+            processData: false,
+			data:fd,
+			success: function (response) {
+				resolve(response)
+			},
+			fail: function(xhr, textStatus, errorThrown){
+				resolve("Error") 
+			}
+		});
+ 	})
+}
+
+function resetPasswordUser(pass, confirmPass,token){
+	return new Promise((resolve,reject)=>{
+		if(pass!==confirmPass){
+			resolve("Password and Confirm password not match")
+		}else if(pass.length<8){
+			resolve("Password must longer 8 characters")
+		}else{
+			let fd = new FormData();
+			fd.append('token',token)
+			fd.append('pass', pass)
+			$.ajax({
+				type:"POST",
+				url:"update_password.php",
+				cache: false,
+                contentType: false,
+                processData: false,
+				data:fd,
+				success: function (response) {
+					resolve(response)
+				},
+				fail: function(xhr, textStatus, errorThrown){
+					resolve("Error")
+				}
+			});
+		}
+ 	})
+}

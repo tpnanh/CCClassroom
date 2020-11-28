@@ -90,10 +90,10 @@
 }
 
 .btnSignUp:hover{
-		background-color: #43437B;
-		color: white;
-		margin-top: 20px;
-	}
+	background-color: #43437B;
+	color: white;
+	margin-top: 20px;
+}
 	
 .btnSignUp{
 	color: white;
@@ -104,4 +104,33 @@
 .alertSignUp{
 	margin-top: 15px;
 	font-size: 15px;
+}
+
+.formRsPassword {
+	width: 100%;
+	max-width: 400px;
+	margin: 30px;
+}
+
+.messageRsPassword{
+	display: block;
+	text-align: left;
+	color: dimgray;
+	margin-top: 10px;
+}
+
+.fullscreen-spinner {
+  	width: 100vw;
+  	height: 100vh;
+  	position: fixed;
+ 	top: 0;
+  	bottom: 0;
+  	left: 0;
+  	right: 0;
+  	z-index: 100000;
+  	background: #CDD4D3D9;
+  	display: flex;
+  	justify-content: center;
+  	align-items: center;
+
 }
