@@ -19,88 +19,8 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-	<script src="../main.js"></script> 
 	<link rel="stylesheet" type="text/css" href="../style.css">
-
-	<style>
-		/*nav{
-			margin: 5px;
-		}
-
-		.nav-right li{
-			margin-left: 20px;
-		}*/
-
-		
-		/*.dropdown-item{
-			font-size: 13px;
-			font-weight: bold;
-		}
-		.dropdown-item:focus, .joinClass, .joinClass:hover, .deleteClass{
-			background-color: #43437B;
-			color: white;
-		}*/
-		/*.logout:hover{
-			color: red;
-		}*/
-		/*.deleteClass:hover, .deleteClass:focus{
-			background-color: red;
-			color: white;
-		}
-		.deleteClass:not(:disabled):not(.disabled):focus {
-			border-color: red;
-		    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.075);
-		}*/
-		/*.logout:focus{
-			background-color: lightgray;
-		}*/
-		/*.container-fluid{
-			margin-left:10px;
-			width: 99%;
-			margin-top: 70px;
-		}*/
-		/*.linkHome{
-			color:white;
-		}
-		.linkHome:hover{
-			color:white;
-		}*/
-		/*.cardHome{
-			width: 100%;
-			margin-top: 5px;
-			padding-left: 0px;
-			padding-right: 0px;
-			background-clip: padding-box;
-			border: 10px solid transparent;
-		}*/
-		/*.card-header{
-			color: white;
-			/*green*/
-			/*background-color: #087043;
-		}
-		.card-title{
-			padding-bottom: 4px;
-		}
-		.card-body{
-			background-color: lightgrey;
-			height: 60px;
-		}*/
-		/*.joinClassHome{
-			width: 90%;
-			white-space: nowrap; 
-            overflow: hidden;
-            text-overflow: ellipsis; 
-		}*/
-		/*.findClass{
-			background-color: #214996;
-			color: white;
-		}
-		.findClass:hover{
-			background-color: #2e446e;
-			color: white;
-		}*/
-	</style>
-
+	<script type="text/javascript" src="../main.js"></script>  
 	<script>
 		let boardView;
 		let idTemp = ''
@@ -113,7 +33,7 @@
 			errorJoinClass = document.getElementById('errorJoinClass');
 			inputClasscode = document.getElementById('inputClasscode');
 			inputTextFindView = document.getElementById('inputTextFindView')
-			getClass()
+			
 
 			$('#modalDelete').on('hidden.bs.modal', function () {
  				unsaveClassTemp()
@@ -125,22 +45,16 @@
 			})
 		}
 
+		$(document).ready(function () {
+        	getClass();
+    	});
+
 		function getClass(){
-			$.ajax({
-				type:"GET",
-				url:"getClass.php",
-				cache: false,
-                contentType: false,
-                processData: false,
-				success: function (response) {
-					let result = JSON.parse(response)
-					for (i = 0; i < result.length; i++) {
-						appendViewIntoBoardView(result[i])
-					}
-				},
-				fail: function(xhr, textStatus, errorThrown){
+		    getAllClassUser().then(function(result){
+				for (i = 0; i < result.length; i++) {
+					appendViewIntoBoardView(result[i])
 				}
-			});
+			})
 		}
 
 		function appendViewIntoBoardView(data){
@@ -248,27 +162,7 @@
 		}
 
 		function deleteClass(){
-			let fd = new FormData();
-			fd.append('id', idTemp)
-			$.ajax({
-				type:"POST",
-				url:"deleteClass.php",
-				cache: false,
-                contentType: false,
-                processData: false,
-				data:fd,
-				success: function (response) {
-					if (response==="Delete class success") {
-						let a = viewTemp
-						viewTemp.remove()
-					}
-
-					$("#modalDelete").modal('hide');
-				},
-				fail: function(xhr, textStatus, errorThrown){
-					$("#modalDelete").modal('hide');
-				}
-			});
+			deleteClassById(idTemp)
 		}
 
 		function saveClassTemp(id, view){
@@ -281,73 +175,33 @@
 			viewTemp = null
 		}
 
-		function joinClass(){
-			let fd = new FormData();
-			fd.append('ID', inputClasscode.value)
-			$.ajax({
-				type:"POST",
-				url:"joinClass.php",
-				cache: false,
-                contentType: false,
-                processData: false,
-				data:fd,
-				success: function (response) {
-					if (response==="Join success") {
-						
-						window.location.href="../classroom/classroom.php?idClass="+inputClasscode.value
-
-						$("#modalJoin").modal('hide');
-					}else{
-						errorJoinClass.style.display = ''
-						errorJoinClass.innerHTML = response
-					}
-
-				},
-				fail: function(xhr, textStatus, errorThrown){
+		function userJoinClass(){
+			joinClassById(inputClasscode.value).then(function(response){
+				if (response==="Join success") {	
+					window.location.href="../classroom/classroom.php?idClass="+inputClasscode.value
+					$("#modalJoin").modal('hide');
+				}else{
+					errorJoinClass.style.display = ''
+					errorJoinClass.innerHTML = response
 				}
-			});
+			})
 		}
 
 		function logOut(){
-			$.ajax({
-				type:"POST",
-				url:"../logOut/logOut.php",
-				cache: false,
-                contentType: false,
-                processData: false,
-				success: function (response) {
-					if (response=="LogOut Success") {
-						window.location.href = '../index.php'
-					}
-				},
-				fail: function(xhr, textStatus, errorThrown){
+			userLogOut().then(function(response){
+				if (response=="LogOut Success") {
+					window.location.href = '../index.php'
 				}
-			});
-		}
-
-		function removeAllChildNode(parent) {
-    		while (parent.firstChild) {
-        		parent.removeChild(parent.firstChild);
-    		}
+			})
 		}
 
 		function findClass(){
-			$.ajax({
-				type:"GET",
-				url:"findClass.php",
-				data: { 
-        			KEY_WORD: inputTextFindView.value
-    			},
-				success: function (response) {
-					let result = JSON.parse(response)
-					removeAllChildNode(boardView)
-					for (i = 0; i < result.length; i++) {
-						appendViewIntoBoardView(result[i])
-					}
-				},
-				fail: function(xhr, textStatus, errorThrown){
+			findClassByKeyWord(inputTextFindView.value).then(function(response){
+				removeAllChildNode(boardView)
+				for (i = 0; i < response.length; i++) {
+					appendViewIntoBoardView(response[i])
 				}
-			});
+			})
 		}
 	</script>
 
@@ -444,7 +298,7 @@
 
 		      	<div class="modal-footer">
 
-			        <a type="button" onclick="joinClass()" class="btn joinClass">Join</a>			        
+			        <a type="button" onclick="userJoinClass()" class="btn joinClass">Join</a>			        
 		      	</div>
 	    	</div>
 	  	</div>

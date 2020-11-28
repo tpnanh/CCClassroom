@@ -128,3 +128,109 @@ function resetPasswordUser(pass, confirmPass,token){
 		}
  	})
 }
+
+function getAllClassUser(){
+	return new Promise((resolve,reject)=>{
+		$.ajax({
+			type:"GET",
+			url:"getClass.php",
+			cache: false,
+            contentType: false,
+            processData: false,
+			success: function (response) {
+				let result = JSON.parse(response)
+				resolve(result)
+			},
+			fail: function(xhr, textStatus, errorThrown){
+			}
+		});
+ 	})
+}
+
+function deleteClassById(id){
+	return new Promise((resolve,reject)=>{
+		let fd = new FormData();
+		fd.append('id', id)
+		$.ajax({
+			type:"POST",
+			url:"deleteClass.php",
+			cache: false,
+            contentType: false,
+            processData: false,
+			data:fd,
+			success: function (response) {
+
+				if (response==="Delete class success") {
+					let a = viewTemp
+					viewTemp.remove()
+				}
+
+				$("#modalDelete").modal('hide');
+			},
+			fail: function(xhr, textStatus, errorThrown){
+				$("#modalDelete").modal('hide');
+			}
+		});
+ 	})
+}
+
+function joinClassById(id){
+	return new Promise((resolve, reject)=>{
+		let fd = new FormData();
+		fd.append('ID', id)
+		$.ajax({
+			type:"POST",
+			url:"joinClass.php",
+			cache: false,
+            contentType: false,
+            processData: false,
+			data:fd,
+			success: function (response) {
+				resolve(response)
+			},
+			fail: function(xhr, textStatus, errorThrown){
+			}
+		});
+	})
+}
+
+function userLogOut(){
+	return new Promise((resolve, reject)=>{
+		$.ajax({
+			type:"POST",
+			url:"../logOut/logOut.php",
+			cache: false,
+            contentType: false,
+            processData: false,
+			success: function (response) {
+				resolve(response)
+			},
+			fail: function(xhr, textStatus, errorThrown){
+			}
+		});
+	})
+}
+
+function removeAllChildNode(parent) {
+	while (parent.firstChild) {
+		parent.removeChild(parent.firstChild);
+	}
+}
+
+function findClassByKeyWord(keyword){
+	return new Promise((resolve, reject)=>{
+		$.ajax({
+			type:"GET",
+			url:"findClass.php",
+			data: { 
+    			KEY_WORD: keyword
+			},
+			success: function (response) {
+				let result = JSON.parse(response)
+				resolve(result)
+			},
+			fail: function(xhr, textStatus, errorThrown){
+			}
+		});
+	})
+}

@@ -27,9 +27,9 @@
 				AND u.email = '$emailUser'
 				INNER JOIN class c
 				ON c.id_class = cof.id_class
-				AND c.name_class LIKE '%$keyword%'
+				AND (c.name_class LIKE '%$keyword%'
 				OR c.subject LIKE '%$keyword%'
-				OR c.room LIKE '%$keyword%'
+				OR c.room LIKE '%$keyword%')
 				ORDER BY date_created desc";
 	}
 	
