@@ -294,23 +294,26 @@
 
         function addComment(){
         	let fd = new FormData();
-			fd.append('CONTENT', comment.value)
-			fd.append('MATERIAL', idPost)
-			$.ajax({
-				type:"POST",
-				url:"addComment.php",
-				cache: false,
-                contentType: false,
-                processData: false,
-				data:fd,
-				success: function (response) {
-					console.log(response)
-					comment.value = ""
-					getListComment()
-				},
-				fail: function(xhr, textStatus, errorThrown){
-				}
-			});
+        	if (!comment.value.isEmpty()) {
+        		fd.append('CONTENT', comment.value)
+				fd.append('MATERIAL', idPost)
+				$.ajax({
+					type:"POST",
+					url:"addComment.php",
+					cache: false,
+	                contentType: false,
+	                processData: false,
+					data:fd,
+					success: function (response) {
+						console.log(response)
+						comment.value = ""
+						getListComment()
+					},
+					fail: function(xhr, textStatus, errorThrown){
+					}
+				});
+        	}
+			
         }
 
         function getListComment(){
