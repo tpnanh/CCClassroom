@@ -22,75 +22,8 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-	<style>	
-		body {
-			color: #43437B;
-			display: flex;
-			justify-content: center;
-			padding-bottom: 80px;
-			height: 100%;
-			width: 100%;
-			font-family:verdana;
-		}
-		
-		img{
-			margin-bottom: 20px;
-		}
-
-		.form-signin {
-			width: 35%;
-			margin: 30px;
-		}	
-		
-		.form-control{
-			position: relative;
-			box-sizing: border-box;
-			height: auto;
-			margin-top: 5px;
-			font-size: 14px;
-		}
-		
-		.form-control:focus {
-			z-index: 2;
-		}
-		
-		label{
-			display: block;
-			text-align: left;
-			margin-top: 20px;
-			color: #43437B;
-			font-size: 13px;
-			font-weight: bold;
-		}
-		
-		.custom-file-label{
-			margin: 0;
-		}
-
-		input{		
-			margin-bottom: 10px;
-			border-bottom-right-radius: 0;
-			border-bottom-left-radius: 0;
-		}
-		
-		.btn:hover{
-			background-color: #43437B;
-			color: white;
-			margin-top: 20px;
-		}
-		
-		.btn{
-			color: white;
-			background-color: #7492c4;
-			margin-top: 20px;
-		}
-		
-		.alert{
-			margin-top: 15px;
-			font-size: 15px;
-		}
-	</style>
+	<script src="../main.js"></script> 
+	<link rel="stylesheet" type="text/css" href="../style.css">
 
 	<script>
 		let avatarFile
@@ -186,7 +119,7 @@
 
 	</script>
 </head>
-<body class="text-center">
+<body class="text-center bodyLogin">
 	<?php
 
 		if(isset($_GET['id'])){
@@ -216,32 +149,32 @@
 		}
 	?>
 	<p id="idClass" style="display: none;"><?= $id ?></p>
-	<form method="post" class="form-signin" onsubmit='updateClass();return false'>
-		<img src="../img/icon.png" alt="icon" width="auto" height="60">
+	<form method="post" class="form-signin formSigninProfile" onsubmit='updateClass();return false'>
+		<img class="imgProfile" src="../img/icon.png" alt="icon" width="auto" height="60">
 		<h3 class="createClass"><b>Edit Classroom</b></h3>
 
-		<label for="class-name">Class name</label>     
-		<input type="text" name="class-name" id="class-name" class="form-control" placeholder="Class name" value="<?= $name ?>"required autofocus>    
+		<label class="labelSignUp" for="class-name">Class name</label>     
+		<input type="text" name="class-name" id="class-name" class="form-control formControlLogin inputPassLogin" placeholder="Class name" value="<?= $name ?>"required autofocus>    
 
-		<label for="subject"> Subject</label>     
-		<input type="text" name="subject" id="subject" class="form-control" placeholder="Subject" value="<?= $subject ?>" required >   
+		<label class="labelSignUp" for="subject"> Subject</label>     
+		<input type="text" name="subject" id="subject" class="form-control formControlLogin inputPassLogin" placeholder="Subject" value="<?= $subject ?>" required >   
 		
-		<label for="class-room">Room</label>     
-		<input type="text" name="class-room" id="class-room" class="form-control" placeholder="Room" value="<?= $room ?>"required> 
+		<label class="labelSignUp" for="class-room">Room</label>     
+		<input type="text" name="class-room" id="class-room" class="form-control formControlLogin inputPassLogin" placeholder="Room" value="<?= $room ?>"required> 
 
 		<?php
-			echo ('<img id="imageAvatar" src="'.$avatar.'" style="float: left; width: 30%; padding-right: 15px">');
+			echo ('<img class="imgProfile" id="imageAvatar" src="'.$avatar.'" style="float: left; width: 30%; padding-right: 15px">');
 		?>
-		<label for="custom-file" style="margin-top: 30px">Choose your classroom picture</label>
+		<label class="labelSignUp" for="custom-file" style="margin-top: 30px">Choose your classroom picture</label>
 		<div class="custom-file" style="width: 70%;">
-			<label class="custom-file-label"   for="custom-file">Choose file</label>
-			<input type='file' name="custom-file" class="custom-file-input" id="custom-file" accept="image/*">		
+			<label class="custom-file-label labelSignUp" style="margin:0px;" for="custom-file">Choose file</label>
+			<input  type='file' name="custom-file" class="custom-file-input inputPassLogin" id="custom-file" accept="image/*">		
 		</div>		
 
-		<button class="btn btn-md btn-block" type="submit" name="submit">Save</button>
+		<button class="btn btnSaveProfile btn-md btn-block" type="submit" name="submit">Save</button>
 
-		<div class="alert alert-success" style="display: none;" id="alter-success">Class has been updated</div>
-		<div class="alert alert-danger" style="display: none;" id="alter-error"></div>
+		<div class="alert alertSignUp alert-success" style="display: none;" id="alter-success">Class has been updated</div>
+		<div class="alert alertSignUp alert-danger" style="display: none;" id="alter-error"></div>
 	</form>
 	
 </body>
