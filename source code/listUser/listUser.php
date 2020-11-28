@@ -45,60 +45,29 @@
 
 			$('#modalPermission').on('shown.bs.modal', function () {
  				btnPermission.innerHTML = 'Permission'
-			})
-
-			getAllUser()	
+			})	
 		}
 
+
+		$(document).ready(function () {
+        	getAllUser();
+    	});
+
 		function getAllUser(){
-			while (listUserView.hasChildNodes()) {
-  				listUserView.removeChild(listUserView.lastChild);
-			}
-			$.ajax({
-				type:"GET",
-				url:"getAllUser.php",
-				cache: false,
-                contentType: false,
-                processData: false,
-				success: function (response) {
-					let result = JSON.parse(response)
-					for (i = 0; i < result.length; i++) {
-						appendViewIntoTable(result[i])
-					}
-					
-				},
-				fail: function(xhr, textStatus, errorThrown){
+			getListUserWeb().then(function(result){
+				for (i = 0; i < result.length; i++) {
+					appendViewIntoTable(result[i])
 				}
-			});
+			})
 		}
 
 		function findUser(){
-			while (listUserView.hasChildNodes()) {
-  				listUserView.removeChild(listUserView.lastChild);
-			}	
-			
-			let fd = new FormData();
-			fd.append('KEY_WORD', inputTextFindView.value)
-			$.ajax({
-				type:"POST",
-				url:"findUser.php",
-				cache: false,
-                contentType: false,
-                processData: false,
-				data:fd,
-				success: function (response) {
-					let result = JSON.parse(response)
-					for (i = 0; i < result.length; i++) {
-						while (listUserView.hasChildNodes()) {
-  							listUserView.removeChild(listUserView.lastChild);
-						}
-						appendViewIntoTable(result[i])
-					}
-					
-				},
-				fail: function(xhr, textStatus, errorThrown){
+			removeAllChildNode(listUserView)
+			findUserWeb(inputTextFindView.value).then(function(result){
+				for (i = 0; i < result.length; i++) {
+					appendViewIntoTable(result[i])
 				}
-			});
+			})
 		}
 
 		function appendViewIntoTable(data){
@@ -191,30 +160,13 @@
 		}
 
 		function savePermissionPerson(){
-			let fd = new FormData();
-			fd.append('Email', emailTemp)
-			fd.append('Role', btnPermission.innerHTML)
-			$.ajax({
-				type:"POST",
-				url:"updateRoleUser.php",
-				cache: false,
-                contentType: false,
-                processData: false,
-				data:fd,
-				success: function (response) {
-					while (listUserView.hasChildNodes()) {
-  						listUserView.removeChild(listUserView.lastChild);
-					}
-					let result = JSON.parse(response)
-					for (i = 0; i < result.length; i++) {
-						appendViewIntoTable(result[i])
-					}
-				},
-				fail: function(xhr, textStatus, errorThrown){
-				}
-			});
+			savePermissionUser(emailTemp,btnPermission.innerHTML).then(function(result){
+				removeAllChildNode(listUserView)
+				for (i = 0; i < result.length; i++) {
+					appendViewIntoTable(result[i])
+				}	
+			})
 			$("#modalPermission").modal('hide');
-
 		}
 
 		function changeViewPermission(permission){
@@ -222,23 +174,11 @@
 		}
 
 		function deleteUser(email,view){
-			let fd = new FormData();
-			fd.append('Email', email)
-			$.ajax({
-				type:"POST",
-				url:"deleteUser.php",
-				cache: false,
-                contentType: false,
-                processData: false,
-				data:fd,
-				success: function (response) {
-					if (response==="Delete user success") {
-						view.remove()
-					}
-				},
-				fail: function(xhr, textStatus, errorThrown){
+			deleteUserWeb(email).then(function(result){
+				if (result==="Delete user success") {
+					view.remove()
 				}
-			});
+			})
 		}
 
 	</script>
