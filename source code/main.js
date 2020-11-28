@@ -234,3 +234,86 @@ function findClassByKeyWord(keyword){
 		});
 	})
 }
+
+function getListUserWeb(){
+	return new Promise((resolve, reject)=>{
+		$.ajax({
+			type:"GET",
+			url:"getAllUser.php",
+			cache: false,
+            contentType: false,
+            processData: false,
+			success: function (response) {
+				let result = JSON.parse(response)
+				resolve(result)
+				
+			},
+			fail: function(xhr, textStatus, errorThrown){
+			}
+		});
+	})
+}
+
+function findUserWeb(keyword){
+	return new Promise((resolve, reject)=>{
+		let fd = new FormData();
+		fd.append('KEY_WORD', keyword)
+		$.ajax({
+			type:"POST",
+			url:"findUser.php",
+			cache: false,
+            contentType: false,
+            processData: false,
+			data:fd,
+			success: function (response) {
+				let result = JSON.parse(response)
+				resolve(result)
+				
+			},
+			fail: function(xhr, textStatus, errorThrown){
+			}
+		});
+	})
+}
+
+function savePermissionUser(email, role){
+	return new Promise((resolve, reject)=>{
+		let fd = new FormData();
+		fd.append('Email', email)
+		fd.append('Role', role)
+		$.ajax({
+			type:"POST",
+			url:"updateRoleUser.php",
+			cache: false,
+            contentType: false,
+            processData: false,
+			data:fd,
+			success: function (response) {
+				let result = JSON.parse(response)
+				resolve(result)
+			},
+			fail: function(xhr, textStatus, errorThrown){
+			}
+		});
+	})
+}
+
+function deleteUserWeb(email){
+	return new Promise((resolve, reject)=>{
+		let fd = new FormData();
+		fd.append('Email', email)
+		$.ajax({
+			type:"POST",
+			url:"deleteUser.php",
+			cache: false,
+	        contentType: false,
+	        processData: false,
+			data:fd,
+			success: function (response) {
+				resolve("Delete user success")
+			},
+			fail: function(xhr, textStatus, errorThrown){
+			}
+		});
+	})
+}
