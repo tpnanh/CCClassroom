@@ -226,11 +226,11 @@ i{
 .navListuser{
 	margin: 20px;
 }
-.searchButton{
+.searchButton, .addButton {
 	background-color: #214996;
 	color: white;
 }
-.searchButton:hover{
+.searchButton:hover, .addButton:hover{
 	background-color: #2e446e;
 	color: white;
 }
@@ -361,4 +361,24 @@ td{
 	color: black;
 	padding: 2px;
 	display: block;
+}
+.studentName{
+	font-weight: 600;
+	margin-left: 80px;
+	padding-top: 15px;
+	font-size: 16px;
+}
+.divideLine{
+	color: gray;
+	background-color: lightgray;
+	height: 1px;
+	border-width:0;
+}
+.imgPeople{
+	margin-left: 20px;
+}
+#deleteUser{
+	float: right;
+	margin-right: 10px;
+	margin-top: 15px;
 }

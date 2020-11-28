@@ -507,8 +507,8 @@
 			  	 	<div class="dropdown-menu dropdown-menu-right" aria-expanded="true" aria-labelledby="deleteComment">
 					    <a class="dropdown-item" data-toggle="modal" href="#" style="font-weight: bold;">Delete</a>
 					</div>   
-			      	<p class="comment">Tui comment gì đó nè. Tin bầu cử Tổng thống Mỹ 2020 mới nhất: Tổng thống Mexico nói còn quá sớm để chúc mừng Biden; Chiến dịch của Trump đệ đơn kiện ở Arizona.
-			      		Tui comment gì đó nè. Tin bầu cử Tổng thống Mỹ 2020 mới nhất: Tổng thống Mexico nói còn quá sớm để chúc mừng Biden; Chiến dịch của Trump đệ đơn kiện ở Arizona.
+			      	<p class="comment">Tin bầu cử Tổng thống Mỹ 2020 mới nhất: Tổng thống Mexico nói còn quá sớm để chúc mừng Biden; Chiến dịch của Trump đệ đơn kiện ở Arizona.
+			      		Tin bầu cử Tổng thống Mỹ 2020 mới nhất: Tổng thống Mexico nói còn quá sớm để chúc mừng Biden; Chiến dịch của Trump đệ đơn kiện ở Arizona.
 					</p>	
 
 		  		</div> -->
