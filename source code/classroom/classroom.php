@@ -20,85 +20,79 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+	<script type="text/javascript" src="../main.js"></script> 
 	
 
 	<style>
-		nav{
-			background-color: white; 
-		}
-		.card{
+		/*.card{
 			width: 100%;
 			margin-top: 5px;
 			padding-left: 0px;
 			padding-right: 0px;
 			background-clip: padding-box;
 			border: 10px solid transparent;
-		}
+		}*/
 		.card-header{
 			color: white;
 			/*green*/
 			background-color: #087043;
 		}
-		.card-title{
+		/*.card-title{
 			padding-bottom: 4px;
 		}
 		.card-body{
 			background-color: lightgrey;
 			height: 60px;
-		}
-		.nav-right li{
+		}*/
+	/*	.nav-right li{
 			margin-left: 20px;
-		}
-		.nav-tabs{
+		}*/
+		/*.navTab{
 			z-index: 2;
 		    float: left;
 		    width: 100%;
-
 		    text-align: center;
-		}
-		.stream{
+		}*/
+		/*.stream{
 			margin-left: auto;
 			font-weight: bold;
 		}
 		.people{
 			margin-right: auto;
 			font-weight: bold;
-		}
-		i{
-			/*violet*/
-			color: #43437B;
-			font-size: 19px;
-		}
-		.dropdown-item{
+		}*/
+		
+		/*.dropdown-item{
 			font-size: 13px;
 			font-weight: bold;
 		}
 		.dropdown-item:focus, .joinClass, .joinClass:hover{
 			background-color: #43437B;
 			color: white;
-		}
-		.logout:hover{
+		}*/
+		/*.logout:hover{
 			color: red;
 		}
 		.logout:focus{
 			background-color: lightgray;
-		}
-		a{
+		}*/
+		/*a{
 			color:white;
 		}
 		a:hover{
 			color:white;
-		}
-		h5, h6{
+		}*/
+		/*.modelTitle{
 			width: 90%;
 			white-space: nowrap; 
             overflow: hidden;
             text-overflow: ellipsis; 
-		}
-		label{
+		}*/
+		/*.labelClassroom{
 			font-weight: bold;
 			color: #43437B;
-		}
+		}*/
 	</style>
 
     <script>
@@ -314,8 +308,8 @@
 <body>
 
 	<div>
-		<nav class="navbar navbar-expand-lg fixed-top" style="padding: 20px;"> 
-	  		<ul class="navbar-nav nav nav-tabs">
+		<nav class="navbar navbar-expand-lg fixed-top navClassroom" style="padding: 20px;"> 
+	  		<ul class="navbar-nav nav nav-tabs navTab">
 				<li class="nav-item">
 		      		<a href="../home/home.php">
 		      			<img src="../img/brand.png" style="width: auto; height: 36px">
@@ -328,7 +322,7 @@
 					<a class="nav-link" data-toggle="tab" href="#peopleTab">People</a>
 				</li>
 		  	</ul>
-		  	<ul class="nav-right navbar-nav ml-auto">
+		  	<ul class="nav-right navbar-nav ml-auto navRightHome">
 				<li class="nav-item">
 					<div class="dropdown">
 				       	<button class="btn" data-toggle="dropdown" data-target="#assignment" aria-expanded="true" id="btnAssignment" href="#">
@@ -370,28 +364,28 @@
 		<div class="modal-dialog " role="document">
 	    	<div class="modal-content w-75">
 	      		<div class="modal-header">
-	        		<h5 class="modal-title">Assignment</h5>
+	        		<h5 class="modal-title modelTitle">Assignment</h5>
 	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	         			<span aria-hidden="true">&times;</span>
 	        		</button>
 	      		</div>
 		      	<div class="modal-body">
 		        	<form method="post" class="form-signin" onsubmit='postNewAssign();return false'>
-		        		<label for="assignmentTitle">Title</label>
+		        		<label class="labelClassroom" for="assignmentTitle">Title</label>
 						<input type="text" class="form-control" id="assignmentTitle" placeholder="Title" required>
-						<label for="assignmentLink" style="margin-top: 10px">Assignment</label>
+						<label class="labelClassroom" for="assignmentLink" style="margin-top: 10px">Assignment</label>
 						<input type="url" class="form-control" id="assignmentLink" placeholder="Link Google Form" 
 						 required>
 						<p id="assignAlert" style="color: red; margin-top: 5px; margin-bottom: 0px; display: none; font-size: 14px;">Your Google Form link is invalid!</p>
-						<label for="assignmentDescription" style="margin-top: 10px">Description</label>
+						<label class="labelClassroom" for="assignmentDescription" style="margin-top: 10px">Description</label>
 						<textarea class="form-control" id="assignmentDescription" placeholder="Description (optional)" rows="3"></textarea>
-						<label for="custom-file" style="margin-top: 10px; display: block;">Add your file</label>
+						<label class="labelClassroom" for="custom-file" style="margin-top: 10px; display: block;">Add your file</label>
 						<div class="custom-file" style=" display: block;">
-							<label class="custom-file-label" for="custom-file-assignment">Choose file</label>
+							<label class="custom-file-label labelClassroom" for="custom-file-assignment">Choose file</label>
 							<input type='file' name="custom-file" class="custom-file-input" id="custom-file-assignment" multiple="multiple" >		
 						</div>	
 							
-						<label for="due" style="margin-top: 10px; margin-right: 20px">Due</label>
+						<label class="labelClassroom" for="due" style="margin-top: 10px; margin-right: 20px">Due</label>
  						<input type="datetime-local" style="margin-top: 20px;" name="due" id="dueAssign" required>
  						<p id="dueAlert" style="color: red; margin-top: 5px; margin-bottom: 0px; font-size: 14px; display: none">Time assignment is invalid!</p>
  						
@@ -413,7 +407,7 @@
 		<div class="modal-dialog " role="document">
 	    	<div class="modal-content w-75">
 	      		<div class="modal-header">
-	        		<h5 class="modal-title">Post</h5>
+	        		<h5 class="modal-title modelTitle">Post</h5>
 	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	         			<span aria-hidden="true">&times;</span>
 	        		</button>

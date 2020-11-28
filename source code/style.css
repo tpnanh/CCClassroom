@@ -312,3 +312,31 @@ td{
 	margin-top: 15px;
 	font-size: 15px;
 }
+.navClassroom{
+	padding: 20px;
+	background-color: white; 
+}
+.navTab{
+	z-index: 2;
+    float: left;
+    width: 100%;
+    text-align: center;
+}
+.stream{
+	margin-left: auto;
+	font-weight: bold;
+}
+.people{
+	margin-right: auto;
+	font-weight: bold;
+}
+.modelTitle{
+	width: 90%;
+	white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+.labelClassroom{
+	font-weight: bold;
+	color: #43437B;
+}
