@@ -35,37 +35,13 @@
 		}
 
 		function updatePassword(){
-			if (newPass.value != confirmPass.value) {
-				error("Password and confirm password not match")
-			}else if(newPass.value.length<8){
-				error("New password must longer 8 characters")
-			}else{
-				let fd = new FormData();
-				fd.append('PASS',newPass.value)
-				fd.append('OLD_PASS',oldPass.value)
-
-				$.ajax({
-					type:"POST",
-					url:"changePasswordFuction.php",
-					cache: false,
-	                contentType: false,
-	                processData: false,
-					data:fd,
-					success: function (response) {
-						console.log(response)
-						if (response === 'Update success') {
-							history.go(-1)
-						}else{
-							error(response)
-						}
-
-						
-					},
-					fail: function(xhr, textStatus, errorThrown){
-						error("Request failed")
-					}
-				});
-			}
+			updatePasswordUser(newPass.value, confirmPass.value, oldPass.value).then(function(response){
+				if (response === 'Update success') {
+					history.go(-1)
+				}else{
+					error(response)
+				}
+			})
 		}
 
 		function error(errorStr){
