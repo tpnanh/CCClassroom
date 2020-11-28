@@ -23,75 +23,8 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-	<style>	
-		body {
-			color: #43437B;
-			display: flex;
-			justify-content: center;
-			padding-bottom: 80px;
-			height: 100%;
-			width: 100%;
-			font-family:verdana;
-		}
-		
-		img{
-			margin-bottom: 20px;
-		}
-
-		.form-signin {
-			width: 35%;
-			margin: 30px;
-		}	
-		
-		.form-control{
-			position: relative;
-			box-sizing: border-box;
-			height: auto;
-			margin-top: 5px;
-			font-size: 14px;
-		}
-		
-		.form-control:focus {
-			z-index: 2;
-		}
-		
-		label{
-			display: block;
-			text-align: left;
-			margin-top: 20px;
-			color: #43437B;
-			font-size: 13px;
-			font-weight: bold;
-		}
-		
-		.custom-file-label{
-			margin: 0;
-		}
-		
-		input{		
-			margin-bottom: 10px;
-			border-bottom-right-radius: 0;
-			border-bottom-left-radius: 0;
-		}
-		
-		.btn:hover{
-			background-color: #43437B;
-			color: white;
-			margin-top: 20px;
-		}
-		
-		.btn{
-			color: white;
-			background-color: #7492c4;
-			margin-top: 20px;
-		}
-		
-		.alert{
-			margin-top: 15px;
-			font-size: 15px;
-		}
-	</style>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+	<script type="text/javascript" src="../main.js"></script>  
 
 	<script>
 		let className;
@@ -155,30 +88,30 @@
 
 	</script>
 </head>
-<body class="text-center">
-	<form method="post" class="form-signin" onsubmit='createClass();return false' enctype="multipart/form-data">
-		<img src="../img/icon.png" alt="icon" width="auto" height="60">
+<body class="text-center bodyLogin">
+	<form method="post" class="form-signin formSigninProfile" onsubmit='createClass();return false' enctype="multipart/form-data">
+		<img class="imgProfile" src="../img/icon.png" alt="icon" width="auto" height="60">
 		<h3 class="createClass"><b>Create Class</b></h3>
 
-		<label for="class-name">Class name</label>     
-		<input type="text" name="class-name" id="class-name" class="form-control" placeholder="Class name" required autofocus>    
+		<label class="labelSignUp" for="class-name">Class name</label>     
+		<input type="text" name="class-name" id="class-name" class="form-control formControlLogin inputPassLogin" placeholder="Class name" required autofocus>    
 
-		<label for="subject"> Subject</label>     
-		<input type="text" name="subject" id="subject" class="form-control" placeholder="Subject" required >   
+		<label class="labelSignUp" for="subject"> Subject</label>     
+		<input type="text" name="subject" id="subject" class="form-control formControlLogin inputPassLogin" placeholder="Subject" required >   
 		
-		<label for="class-room">Room</label>     
-		<input type="text" name="class-room" id="class-room" class="form-control" placeholder="Room" required> 
+		<label class="labelSignUp" for="class-room">Room</label>     
+		<input type="text" name="class-room" id="class-room" class="form-control formControlLogin inputPassLogin" placeholder="Room" required> 
 
-		<label for="custom-file" >Choose your classroom picture</label> 
+		<label class="labelSignUp" for="custom-file" >Choose your classroom picture</label> 
 		<div class="custom-file">
-			<label class="custom-file-label" for="custom-file">Choose file</label>
-			<input type='file' name="custom-file" class="custom-file-input" id="custom-file" accept="image/*" required>			
+			<label class="custom-file-label labelSignUp" style="margin: 0;" for="custom-file">Choose file</label>
+			<input type='file' name="custom-file" class="custom-file-input inputPassLogin" id="custom-file" accept="image/*" required>			
 		</div>
 
-		<button class="btn btn-md btn-block" type="submit" name="submit">Create</button>
+		<button class="btn btnSaveProfile btn-md btn-block" type="submit" name="submit">Create</button>
 
-		<div class="alert alert-success" style="display: none;" id="alter-success">Class has been created</div>
-		<div class="alert alert-danger" style="display: none;" id="alter-error"></div>
+		<div class="alert alertProfile alert-success" style="display: none;" id="alter-success">Class has been created</div>
+		<div class="alert alertProfile alert-danger" style="display: none;" id="alter-error"></div>
 	</form>
 	
 </body>

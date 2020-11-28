@@ -118,7 +118,7 @@
 		}
 	</script>
 </head>
-<body class="text-center" style="color: #43437B; display: flex;	justify-content: center; padding-bottom: 80px; height: 100%; width: 100%; font-family:verdana;">
+<body class="text-center bodyLogin">
 	<form method="post" class="form-signin formSigninProfile" onsubmit='updateProfile();return false'>
 		<img class="imgProfile" src="../img/icon.png" alt="icon" width="auto" height="60">
 		<h3 class="userProfile"><b>Profile</b></h3>
