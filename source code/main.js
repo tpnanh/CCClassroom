@@ -528,6 +528,84 @@ function deleteItemStream(idMaterial,idClass){
 	})
 }
 
+function getPeopleOfClass(idClass){
+	return new Promise((resolve, reject)=>{
+		$.ajax({
+			type:"GET",
+			url:"../people/getUserOfClass.php?",
+			data: { 
+    			id: idClass
+			},
+			success: function (response) {
+				resolve(response)
+			},
+			fail: function(xhr, textStatus, errorThrown){
+			}
+		});
+	})
+}
+
+function deleteUserFromClass(idClass, email){
+	return new Promise((resolve, reject)=>{
+		let fd = new FormData();
+		fd.append('ID_CLASS', idClass)
+		fd.append('EMAIL', email)
+		$.ajax({
+			type:"POST",
+			url:"../people/deleteUser.php",
+			cache: false,
+            contentType: false,
+            processData: false,
+			data:fd,
+			success: function (response) {
+				resolve(response)
+			},
+			fail: function(xhr, textStatus, errorThrown){
+			}
+		});
+	})
+}
+
+function addPeopleToClass(idClass, inputAddUser){
+	return new Promise((resolve, reject)=>{
+		let fd = new FormData();
+		fd.append('ID', idClass)
+		fd.append('EMAIL', inputAddUser)
+		$.ajax({
+			type:"POST",
+			url:"../people/addPeople.php",
+			cache: false,
+            contentType: false,
+            processData: false,
+			data:fd,
+			success: function (response) {
+				resolve(response)
+			},
+			fail: function(xhr, textStatus, errorThrown){
+			}
+		});
+	})
+}
+
+function findUserInClass(idClass, inputTextFindView){
+	return new Promise((resolve, reject)=>{
+		$.ajax({
+			type:"GET",
+			url:"../people/findUser.php?",
+			data: { 
+    			ID: idClass,
+    			KEY_WORD: inputTextFindView
+			},
+			success: function (response) {
+				let result = JSON.parse(response)
+				resolve(result)
+			},
+			fail: function(xhr, textStatus, errorThrown){
+			}
+		});
+	})
+}
+
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, '\\$&');
