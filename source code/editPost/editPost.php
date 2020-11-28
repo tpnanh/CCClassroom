@@ -20,79 +20,8 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-	<style>	
-		body {
-			color: #43437B;
-			display: flex;
-			justify-content: center;
-			padding-bottom: 80px;
-			height: 100%;
-			width: 100%;
-			font-family:verdana;
-		}
-		
-		img{
-			margin-bottom: 20px;
-		}
-		i{
-			font-size: 18px;
-			color: gray;
-		}
-
-		.form-signin {
-			width: 35%;
-			margin: 30px;
-		}	
-		
-		.form-control{
-			position: relative;
-			box-sizing: border-box;
-			height: auto;
-			margin-top: 5px;
-			font-size: 14px;
-		}
-		
-		.form-control:focus {
-			z-index: 2;
-		}
-		
-		label{
-			display: block;
-			text-align: left;
-			margin-top: 20px;
-			color: #43437B;
-			font-size: 13px;
-			font-weight: bold;
-		}
-		
-		.custom-file-label{
-			margin: 0;
-		}
-		
-		input{		
-			margin-bottom: 10px;
-			border-bottom-right-radius: 0;
-			border-bottom-left-radius: 0;
-		}
-		
-		.btn:hover{
-			background-color: #43437B;
-			color: white;
-			margin-top: 20px;
-		}
-		
-		.btn{
-			color: white;
-			background-color: #7492c4;
-			margin-top: 20px;
-		}
-		
-		.alert{
-			margin-top: 15px;
-			font-size: 15px;
-		}
-	</style>
+	<script src="../main.js"></script> 
+	<link rel="stylesheet" type="text/css" href="../style.css">
 
 	<script>
 		let idMaterial
@@ -265,34 +194,34 @@
 
 	
 </head>
-<body class="text-center">
-	<form method="post" class="form-signin" enctype="multipart/form-data" onsubmit='updatePost();return false'>
-		<img src="../img/icon.png" alt="icon" width="auto" height="60">
+<body class="text-center bodyLogin">
+	<form method="post" class="form-signin formSigninProfile" enctype="multipart/form-data" onsubmit='updatePost();return false'>
+		<img class="imgProfile" src="../img/icon.png" alt="icon" width="auto" height="60">
 		<h3 class="createClass"><b>Edit Material</b></h3>
-		<label for="title">Title</label>
-		<input type="text" class="form-control" id="title" placeholder="Title" required >
-		<label for="assignLink" style="margin-top: 10px" id="labelAssignment">Assignment</label>
-		<input type="url" class="form-control" id="assignLink" placeholder="Link Google Form">
+		<label class="labelSignUp" for="title">Title</label>
+		<input type="text" class="form-control formControlLogin inputPassLogin" id="title" placeholder="Title" required >
+		<label class="labelSignUp" for="assignLink" style="margin-top: 10px" id="labelAssignment">Assignment</label>
+		<input type="url" class="form-control formControlLogin inputPassLogin" id="assignLink" placeholder="Link Google Form">
 		<p id="assignAlert" style="color: red; margin-top: 5px; margin-bottom: 0px; justify-content: flex-start; font-size: 14px; text-align: left; display: none">Your Google Form link is invalid!</p>
-		<label for="description" style="margin-top: 10px">Description</label>
-		<textarea class="form-control" id="description" placeholder="Description (optional)"></textarea>
-		<label for="custom-file" style="margin-top: 10px; display: block;">Add your file</label>
+		<label class="labelSignUp" for="description" style="margin-top: 10px">Description</label>
+		<textarea class="form-control formControlLogin" id="description" placeholder="Description (optional)"></textarea>
+		<label class="labelSignUp" for="custom-file" style="margin-top: 10px; display: block;">Add your file</label>
 		<p id="nameFileOld"></p>
 		<a id="deleteFile" style="float: right;margin-right: 8px;" onclick="deleteViewFile(this)">
 	  	 	<i class="fas fa-minus-circle"></i>
   	 	</a>
-		<a href="../file/plan.pdf" style="text-align: left;" id="downFile" download">
+		<a href="../file/plan.pdf" style="text-align: left;" id="downFile" download>
 			<p id="link">plan.pdf</p>
 		</a>
 		<div class="custom-file" style=" display: block;">
-			<label class="custom-file-label" for="custom-file">Choose file</label>
-			<input type='file' name="custom-file" class="custom-file-input" id="custom_file" multiple="multiple">		
+			<label class="custom-file-label labelSignUp" style="margin:0px;" for="custom-file">Choose file</label>
+			<input type='file' name="custom-file" class="custom-file-input inputPassLogin" id="custom_file" multiple="multiple">		
 		</div>
-		<label for="due" style="margin-top: 25px; margin-right: 10px; float: left" id="labelDue">Due</label>
-		<input type="datetime-local" style="margin-top: 20px;width: 88%" name="due" id="time">
+		<label class="labelSignUp" for="due" style="margin-top: 25px; margin-right: 10px; float: left" id="labelDue">Due</label>
+		<input class="inputPassLogin" type="datetime-local" style="margin-top: 20px;width: 88%" name="due" id="time">
 		<p id="dueAlert" style="color: red; margin-top: 5px; margin-bottom: 0px; justify-content: flex-start; font-size: 14px; text-align: left;display: none">Time assignment is invalid!</p>
-		<button class="btn btn-md btn-block" type="submit" name="submit">Save</button>
-		<div class="alert alert-success" style="display: none;" id="alter-success">Information has been updated</div>
+		<button class="btn btnSaveProfile btn-md btn-block" type="submit" name="submit">Save</button>
+		<div class="alert alertSignUp alert-success" style="display: none;" id="alter-success">Information has been updated</div>
 	</form>
 
 	
