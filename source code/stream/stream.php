@@ -22,42 +22,6 @@
 	<script src="../main.js"></script> 
 	<link rel="stylesheet" type="text/css" href="../style.css">
 
-	<style>
-		.container{
-			margin-top: 70px;	
-		}
-		.card{
-			padding: 0px;
-			margin-top: 20px;
-		}
-		.card-header{
-			color: white;
-		}
-		.col-lg{
-			margin-top: 15px;
-			border: 1px solid #50a350;
-
-		}
-		a:hover{
-			text-decoration: none;
-		}
-		a:active{
-			text-decoration: none;
-		}
-		h6{
-			color: black;
-			padding: 2px;
-			display: block;
-		}
-		.col-lg p{
-			color: black;
-			font-size: 14px;
-		}
-		.dropdown-item{
-			font-size: 13px;
-			font-weight: bold;
-		}
-	</style>
 	<script>
 		try{
 			let cardNameClass;
@@ -145,7 +109,7 @@
 
 		function appendViewIntoTable(data){
 			let div = document.createElement('div')
-			div.classList.add('card','col-lg-12')
+			div.classList.add('card','col-lg-12','cardStream')
 			div.style.paddingLeft = "0px"
 			div.style.paddingRight = "0px"
 
@@ -154,6 +118,7 @@
 			div1.classList.add('card-header')
 
 			let a = document.createElement('a')
+			a.classList.add('cardField')
 			a.href = "../postDetail/postDetail.php?idPost="+data.id+"&&idClass="+idClass
 			a.style.backgroundColor = "transparent"
 
@@ -173,7 +138,7 @@
 			a.appendChild(img)
 
 			let h6 = document.createElement('h6')
-			h6.classList.add('card-subtitle')
+			h6.classList.add('card-subtitle','subTitleStream')
 			h6.style.marginTop = "30px"
 			if (data.type === "POST") {
 				h6.innerHTML = data.email + ' posted a new material: '+data.title
@@ -199,7 +164,7 @@
 				div2.style.maxHeight = "30px"
 				div2.style.maxWidth = "30px"
 
-				let a2 = document.createElement('div')
+				let a2 = document.createElement('a')
 				a2.href = "#"
 				a2.setAttribute("data-toggle", "dropdown");
 				a2.id = "postOption"
@@ -269,14 +234,14 @@
 </head>
 
 <body>
-	<div class="container">
+	<div class="container containerStream">
 		<div class="row">
-		  	<div class="card col-lg-12" style="padding-left: 0px; padding-right: 0px;">
-			  	<div class="card-header" style="background-color: #087043">
+		  	<div class="card col-lg-12 cardStream" style="padding-left: 0px; padding-right: 0px;">
+			  	<div class="card-header cardHeaderStream" style="background-color: #087043">
 
-			      	<h4 class="card-title" id="cardNameClass">HK1_2020_505404_WEB</h5>
-		      		<h5 id="idClass">ID: 4</h4>	
-			      	<h5 class="card-subtitle" id="cardSubjectClass">Lập trình web và ứng dụng</h6>
+			      	<h4 class="card-title" id="cardNameClass">HK1_2020_505404_WEB</h4>
+		      		<h5 id="idClass">ID: 4</h5>	
+			      	<h5 class="card-subtitle" id="cardSubjectClass">Lập trình web và ứng dụng</h5>
 			      	<p class="card-text" style="font-size: 15px;margin-top: 5px" id="cardRoomClass">Phòng B206-A</p>
 			  	</div>	
 			</div>

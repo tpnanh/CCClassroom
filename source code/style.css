@@ -340,3 +340,25 @@ td{
 	font-weight: bold;
 	color: #43437B;
 }
+.containerStream{
+	margin-top: 70px;	
+}
+
+.cardStream{
+	padding: 0px;
+	margin-top: 20px;
+}
+.cardHeaderStream{
+	color: white;
+}
+.cardField:hover{
+	text-decoration: none;
+}
+.cardField:active{
+	text-decoration: none;
+}
+.subTitleStream{
+	color: black;
+	padding: 2px;
+	display: block;
+}
