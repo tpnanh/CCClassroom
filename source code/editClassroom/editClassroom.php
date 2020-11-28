@@ -34,7 +34,7 @@
 		let room
 		let idClass
 		window.onload = function(){
-			makeTextInputFile()
+			makeTextInputFileCompress()
 			idClass = document.getElementById('idClass');
 			avatarFile = document.getElementById('custom-file');
 			errorAlter = document.getElementById('alter-error');
@@ -45,7 +45,7 @@
 		}
 
 		//Make text input file has name
-		function makeTextInputFile(){
+		function makeTextInputFileCompress(){
 			$(".custom-file-input").on("change", function() {
 			  	let fileName = $(this).val().split("\\").pop();
 			  	$(this).siblings(".custom-file-label").addClass("selected").html(fileName);
@@ -56,60 +56,23 @@
 		}
 
 		function compressFile(file){
-			let fd = new FormData();
-			fd.append('avatar', file)
-
-			$.ajax({
-				type:"POST",
-				url:"../img/base64ImageEncode.php",
-				cache: false,
-                contentType: false,
-                processData: false,
-				data:fd,
-				success: function (response) {
-					if (response === 'File so big') {
-						error(response)
-					}else{
-						imageAvatar.src = response
-					}
-
-					
-				},
-				fail: function(xhr, textStatus, errorThrown){
-					error("Request failed")
+			compressFileImage(file).then(function(response){
+				if (response === 'File so big') {
+					error(response)
+				}else{
+					imageAvatar.src = response
 				}
-			});
+			})
 		}
 
 		function updateClass(){
-			let fd = new FormData();
-			fd.append('id',idClass.innerHTML)
-			fd.append('avatar', imageAvatar.src)
-			fd.append('CLASS_NAME', className.value)
-			fd.append('SUBJECT', subject.value)
-			fd.append('ROOM', room.value)
-
-			$.ajax({
-				type:"POST",
-				url:"updateClassroom.php",
-				cache: false,
-                contentType: false,
-                processData: false,
-				data:fd,
-				success: function (response) {
-					console.log(response)
-					if (response === 'Update success') {
-						history.go(-1)
-					}else{
-						error(response)
-					}
-
-					
-				},
-				fail: function(xhr, textStatus, errorThrown){
-					error("Request failed")
+			updateInfoClassroom(idClass.innerHTML, imageAvatar.src, className.value, subject.value, room.value).then(function(response){
+				if (response === 'Update success') {
+					history.go(-1)
+				}else{
+					error(response)
 				}
-			});
+			})
 		}
 
 		function error(errorStr){

@@ -606,6 +606,32 @@ function findUserInClass(idClass, inputTextFindView){
 	})
 }
 
+function updateInfoClassroom(idClass, imageAvatar, className, subject, room){
+	return new Promise((resolve, reject)=>{
+		let fd = new FormData();
+		fd.append('id',idClass)
+		fd.append('avatar', imageAvatar)
+		fd.append('CLASS_NAME', className)
+		fd.append('SUBJECT', subject)
+		fd.append('ROOM', room)
+
+		$.ajax({
+			type:"POST",
+			url:"updateClassroom.php",
+			cache: false,
+            contentType: false,
+            processData: false,
+			data:fd,
+			success: function (response) {
+				resolve(response)
+			},
+			fail: function(xhr, textStatus, errorThrown){
+				error("Request failed")
+			}
+		});
+	})
+}
+
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, '\\$&');
