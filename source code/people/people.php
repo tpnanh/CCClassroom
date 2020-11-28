@@ -19,37 +19,8 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-	<style>
-		.searchButton, .addButton{
-			background-color: #214996;
-			color: white;
-		}
-		.searchButton:hover, .addButton:hover{
-			background-color: #2e446e;
-			color: white;
-		}
-		.studentName{
-			font-weight: 600;
-			margin-left: 80px;
-			padding-top: 15px;
-			font-size: 16px;
-		}
-		hr{
-			color: gray;
-			background-color: lightgray;
-			height: 1px;
-			border-width:0;
-		}
-		img{
-			margin-left: 20px;
-		}
-		#deleteUser{
-			float: right;
-			margin-right: 10px;
-			margin-top: 15px;
-		}
-	</style>
+	<script src="../main.js"></script> 
+	<link rel="stylesheet" type="text/css" href="../style.css">
 
 	<script>
 		try{
@@ -125,7 +96,7 @@
 			div.style.marginBottom = "28px"
 
 			let img = document.createElement('img')
-			img.classList.add('rounded-circle')
+			img.classList.add('rounded-circle','imgPeople')
 			img.src = data.img
 			img.alt = "avatar"
 			img.width = "50"
@@ -135,6 +106,7 @@
 			if (roleCurrentUser === "Admin" || emailCurrentUser === emailClassOfUser) {
 				if (data.emailPeople !== data.emailUserOfClass) {
 					let a = document.createElement('a')
+					a.href="#"
 					a.setAttribute("data-toggle", "dropdown");
 					a.id = "deleteUser"
 
@@ -251,6 +223,9 @@
 
 </head>
 <body>
+	<br>
+	<br>
+	<br>
 	<nav class="navbar">	
 		<form class="form-inline" style="margin-right: auto;margin-top: 10px;" onsubmit="addPeople();return false;" id="formAddUser">
 			<input class="form-control ml-sm-2" placeholder="Student Email" style="margin-right: 10px;" aria-label="Add" id="inputAddUser" required>
@@ -261,7 +236,7 @@
 			<button class="btn searchButton" type="submit">Search</button>
 		</form>
 	</nav>
-	<hr>
+	<hr class="divideLine">
 	<div id="people">
 		<!-- <div style="margin-bottom: 28px">		
 			<img src="../img/person_icon.png" class="rounded-circle" alt="avatar" width="50" height="50" style="float: left;"> 		
@@ -271,7 +246,7 @@
   	 		<div class="dropdown-menu dropdown-menu-right" aria-expanded="true" aria-labelledby="deleteUser">
 		    	<a class="dropdown-item" data-toggle="modal" href="#" style="font-weight: bold;">Delete</a>
 			</div>
-			<p class="studentName">Huỳnh Anh Tài ốm</p> 
+			<p class="studentName">Huỳnh Anh Tài</p> 
 		</div> -->
 	</div>
 </body>

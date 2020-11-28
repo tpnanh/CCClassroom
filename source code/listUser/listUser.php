@@ -120,6 +120,7 @@
 
 			let a = document.createElement('a')
 			a.classList.add('dropdown-item','dropdownItemUser')
+			a.href="#"
 			a.onclick = function(){ deleteUser(data.email,tr) }
 			a.innerHTML = 'Delete'
 
