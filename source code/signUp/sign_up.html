@@ -9,75 +9,8 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-	<style>	
-	body {
-		color: #43437B;
-		display: flex;
-		justify-content: center;
-		padding-bottom: 80px;
-		height: 100%;
-		width: 100%;
-		font-family:verdana;
-	}
-	
-	img{
-		margin-bottom: 20px;
-	}
-
-	.form-signin {
-		width: 50%;
-		margin: 20px;
-	}	
-	
-	.form-control{
-		position: relative;
-		box-sizing: border-box;
-		height: auto;
-		margin-top: 5px;
-		font-size: 14px;
-	}
-	
-	.form-control:focus {
-		z-index: 2;
-	}
-	
-	label{
-		display: block;
-		text-align: left;
-		margin-top: 20px;
-		color: #43437B;
-		font-size: 13px;
-		font-weight: bold;
-	}
-	
-	.custom-file-label{
-		margin: 0;
-	}
-	
-	input{		
-		margin-bottom: 10px;
-		border-bottom-right-radius: 0;
-		border-bottom-left-radius: 0;
-	}
-	
-	.btn:hover{
-		background-color: #43437B;
-		color: white;
-		margin-top: 20px;
-	}
-	
-	.btn{
-		color: white;
-		background-color: #7492c4;
-		margin-top: 20px;
-	}
-	
-	.alert{
-		margin-top: 15px;
-		font-size: 15px;
-	}
-	</style>
+	<script src="../main.js"></script>
+	<link rel="stylesheet" type="text/css" href="../style.css">
 
 	<script>
 		let mail;
@@ -104,113 +37,76 @@
 			alertSuccess = document.getElementById('alter-success');
 		}
 
-		//Make text input file has name
-		function makeTextInputFile(){
-			$(".custom-file-input").on("change", function() {
-			  let fileName = $(this).val().split("\\").pop();
-			  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-			});
-		}
-
 		function checkInformation(){
-			if(confirmPass.value !== pass.value){
-				alertError.style.display = ""
-				alertError.innerHTML = "Password and Confirm password not match"
-			}else if(pass.value.length<8){
-				alertError.style.display = ""
-				alertError.innerHTML = "Password must longer 8 characters"
-			}else{
-				let file = avatar.files[0]
-				let fd = new FormData();
-				fd.append('avatar', file)
-				fd.append('mail', mail.value)
-				fd.append('pass', pass.value)
-				fd.append('username', username.value)
-				fd.append('hoTen', hoTen.value)
-				fd.append('birth', birth.value)
-				fd.append('sdt', sdt.value)
-				console.log(avatar.files[0]);
-				$.ajax({
-					type:"POST",
-					url:"sign_up.php",
-					cache: false,
-                    contentType: false,
-                    processData: false,
-					data:fd,
-					success: function (response) {
-						console.log(response)
-
-
-						if(response==="File so big"){
-							alertError.style.display = ""
-							alertError.innerHTML = "File avatar so big"
-							alertSuccess.style.display = "none"
-						}else if(response.includes("Duplicate entry")){
-							alertError.style.display = ""
-							alertError.innerHTML = "User has exist"
-							alertSuccess.style.display = "none"
-						}else if (response === "Insert success"){
-							alertError.style.display = "none"
-							window.location.href="../index.php"
-						}else{
-	        				alertError.style.display = ""
-							alertError.innerHTML = response
-							alertSuccess.style.display = "none"
-						}
-						
-    				},
-    				fail: function(xhr, textStatus, errorThrown){
-    					alertError.style.display = ""
-						alertError.innerHTML = "Request failed"
-						alertSuccess.style.display = "none"
-    				}
-				});
-				
-			}
+			signUp(confirmPass.value, pass.value, avatar.files[0], mail.value, username.value, hoTen.value, birth.value, sdt.value)
+			.then(function(result){
+				if(result==="File so big"){
+					alertError.style.display = ""
+					alertError.innerHTML = "File avatar so big"
+					alertSuccess.style.display = "none"
+				}else if(result.includes("Duplicate entry")){
+					alertError.style.display = ""
+					alertError.innerHTML = "User has exist"
+					alertSuccess.style.display = "none"
+				}else if (result === "Insert success"){
+					alertError.style.display = "none"
+					window.location.href="../index.php"
+				}else if (result === "Password and Confirm password not match"){
+					alertError.style.display = ""
+					alertError.innerHTML = "Password and Confirm password not match"
+				}else if(result === "Password must longer 8 characters"){
+					alertError.style.display = ""
+					alertError.innerHTML = "Password must longer 8 characters"
+				}else{
+    				alertError.style.display = ""
+					alertError.innerHTML = result
+					alertSuccess.style.display = "none"
+				}
+			})
 		}
 		
 	</script>
 
 
 </head>
-<body class="text-center">
+<body class="text-center bodyLogin">
 	
-	<form method="post" class="form-signin" onsubmit='checkInformation();return false' enctype="multipart/form-data">
-		<img src="../img/icon.png" alt="icon" width="auto" height="60">
+	<form method="post" class="form-signin formSignup" onsubmit='checkInformation();return false' enctype="multipart/form-data">
+		<img src="../img/icon.png" alt="icon" width="auto" height="60" class="imgLogin">
 		<h3 class="signup"><b>Sign Up</b></h3>
 
-		<label for="email" >Email</label>     
-		<input type="email" name="email" id="email" class="form-control" placeholder="Email" required autofocus>    
+		<label  class="labelSignUp"for="email" >Email</label>     
+		<input type="email" name="email" id="email" class="form-control formControlLogin inputPassLogin" placeholder="Email" required autofocus>    
 
-		<label for="password" >Password</label>     
-		<input type="password" name="password" id="password" class="form-control" placeholder="Password" required >   
+		<label class="labelSignUp" for="password" >Password</label>     
+		<input type="password" name="password" id="password" class="form-control formControlLogin inputPassLogin" placeholder="Password" required >   
 		
-		<label for="confirm-password" >Confirm Password</label>     
-		<input type="password" name="confirm_password" id="confirm-password" class="form-control" placeholder="Confirm Password" required> 
+		<label class="labelSignUp" for="confirm-password" >Confirm Password</label>     
+		<input type="password" name="confirm_password" id="confirm-password" class="form-control formControlLogin inputPassLogin" placeholder="Confirm Password" required> 
 
-		<label for="username" >Username</label>     
-		<input type="text" name="username" id="username" class="form-control" placeholder="Username" required> 
+		<label class="labelSignUp" for="username" >Username</label>     
+		<input type="text" name="username" id="username" class="form-control formControlLogin inputPassLogin" placeholder="Username" required> 
 
-		<label for="fullname" >Fullname</label>     
-		<input type="text" name="fullname" id="fullname" class="form-control" placeholder="Fullname" required> 
+		<label class="labelSignUp" for="fullname" >Fullname</label>     
+		<input type="text" name="fullname" id="fullname" class="form-control formControlLogin inputPassLogin" placeholder="Fullname" required> 
 
-		<label for="date-of-birth" >Date of birth</label>     
-		<input type="date" name="date-of-birth" id="date-of-birth" class="form-control" placeholder="Date of birth" required> 	
+		<label class="labelSignUp" for="date-of-birth" >Date of birth</label>     
+		<input type="date" name="date-of-birth" id="date-of-birth" class="form-control formControlLogin inputPassLogin" placeholder="Date of birth" required> 	
 
-		<label for="phone-number" >Phone number</label>     
-		<input type="tel" name="phone-number" id="phone-number" class="form-control" placeholder="Phone number" 
+		<label class="labelSignUp" for="phone-number" >Phone number</label>     
+		<input type="tel" name="phone-number" id="phone-number" class="form-control formControlLogin inputPassLogin" placeholder="Phone number" 
 		pattern="[0-9]{10}" required> 
 
-		<label for="custom-file" >Choose your profile picture</label> 
+		<label class="labelSignUp" for="custom-file" >Choose your profile picture</label> 
 		<div class="custom-file">
-			<label class="custom-file-label" for="custom-file">Choose file</label>
-			<input type='file' name="custom-file" class="custom-file-input" id="custom-file" accept="image/*" required>			
+			<label class="labelSignUp custom-file-label" for="custom-file" style="margin: 0;">Choose file</label>
+			<input type='file' name="custom-file" class="custom-file-input inputPassLogin" id="custom-file" accept="image/*" required>			
 		</div>
 
-		<button class="btn btn-md btn-block" type="submit" name="submit">Sign Up</button>
+		<button class="btn btn-md btn-block btnSignUp" type="submit" name="submit">Sign Up</button>
 
-		<div class="alert alert-success" style="display: none;" id="alter-success">Information has been saved</div>
-		<div class="alert alert-danger" style="display: none;" id="alter-error"></div>
+		<div class="alert alert-success alertSignUp" style="display: none;" id="alter-success">Information has been saved</div>
+		<div class="alert alert-danger alertSignUp" style="display: none;" id="alter-error"></div>
 	</form>
 	
 </body>

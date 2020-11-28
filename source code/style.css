@@ -73,3 +73,35 @@
 	margin-top: 10px;	
 	color: dimgrey;		
 }
+
+
+.formSignup {
+	width: 50%;
+	margin: 20px;
+}	
+
+.labelSignUp{
+	display: block;
+	text-align: left;
+	margin-top: 20px;
+	color: #43437B;
+	font-size: 13px;
+	font-weight: bold;
+}
+
+.btnSignUp:hover{
+		background-color: #43437B;
+		color: white;
+		margin-top: 20px;
+	}
+	
+.btnSignUp{
+	color: white;
+	background-color: #7492c4;
+	margin-top: 20px;
+}
+
+.alertSignUp{
+	margin-top: 15px;
+	font-size: 15px;
+}
