@@ -30,6 +30,9 @@
 			padding: 0px;
 			margin-top: 20px;
 		}
+		.card-header{
+			color: white;
+		}
 		.col-lg{
 			margin-top: 15px;
 			border: 1px solid #50a350;
