@@ -420,3 +420,84 @@ function updatePasswordUser(newPass, confirmPass, oldPass){
 		}
 	})
 }
+
+function postStreamPost(file, idClass, titlePost, desPost){
+	return new Promise((resolve, reject)=>{
+		let fd = new FormData();
+		fd.append('FILE', file)
+		fd.append('ID_CLASS',idClass)
+		fd.append('TITLE',titlePost)
+		fd.append('DES',desPost)
+		fd.append('DUE','')
+		fd.append('TYPE','POST')
+		fd.append('URL_FORM','')
+		$.ajax({
+			type:"POST",
+			url:"postMaterial.php",
+			cache: false,
+            contentType: false,
+            processData: false,
+			data:fd,
+			success: function (response) {
+				resolve(response)
+			},
+			fail: function(xhr, textStatus, errorThrown){
+			}
+		});
+	})
+}
+
+function postStreamAssign(file, idClass, titleAssign, desAssign, dueAssign, linkAssign){
+	return new Promise((resolve, reject)=>{
+		let fd = new FormData();
+		fd.append('FILE', file)
+		fd.append('ID_CLASS',idClass)
+		fd.append('TITLE',titleAssign)
+		fd.append('DES',desAssign)
+		fd.append('DUE',dueAssign)
+		fd.append('TYPE','ASSIGN')
+		fd.append('URL_FORM',linkAssign)
+		$.ajax({
+			type:"POST",
+			url:"postMaterial.php",
+			cache: false,
+            contentType: false,
+            processData: false,
+			data:fd,
+			success: function (response) {
+				resolve(response)
+			},
+			fail: function(xhr, textStatus, errorThrown){
+			}
+		});
+	})
+}
+
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
+function checkTime(value){
+	let timeNow = new Date()
+	let timeChoose = new Date(value)
+	if (timeNow > timeChoose) {
+		return false
+	}
+	return true
+}
+
+function checkRegex(value){
+	let str = value
+	let regex = /(?:https?\:\/\/docs.google.com.forms.d.e\/)|(?:https?\:\/\/forms.gle\/)/
+	let result = str.match(regex);
+	if (result!=null){
+		return true
+	}
+	return false
+}
