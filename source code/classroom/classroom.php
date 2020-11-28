@@ -74,57 +74,22 @@
             idClass = getParameterByName('idClass');
         }
 
-         function getParameterByName(name, url) {
-            if (!url) url = window.location.href;
-            name = name.replace(/[\[\]]/g, '\\$&');
-            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-                results = regex.exec(url);
-            if (!results) return null;
-            if (!results[2]) return '';
-            return decodeURIComponent(results[2].replace(/\+/g, ' '));
-        }
-
-	    function makeTextInputFile(){
-			$(".custom-file-input").on("change", function() {
-			  let fileName = $(this).val().split("\\").pop();
-			  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-			});
-		}
-
 		function logOut(){
-			$.ajax({
-				type:"POST",
-				url:"../logOut/logOut.php",
-				cache: false,
-                contentType: false,
-                processData: false,
-				success: function (response) {
-					if (response=="LogOut Success") {
-						window.location.href = '../index.php'
-					}
-				},
-				fail: function(xhr, textStatus, errorThrown){
+			userLogOut().then(function(response){
+				if (response=="LogOut Success") {
+					window.location.href = '../index.php'
 				}
-			});
+			})
 		}
 
 		function callBtnPostPost(){
 			btnSumitPost.click()
 		}
 
-		function checkTime(){
-			let timeNow = new Date()
-			let timeChoose = new Date(dueAssign.value)
-			if (timeNow > timeChoose) {
-				return false
-			}
-			return true
-		}
-
 		function callBtnPostAssign(){
-			if(checkTime()){
+			if(checkTime(dueAssign.value)){
 				dueAlert.style.display = "none"
-				if (checkRegex()){
+				if (checkRegex(linkAssign.value)){
 					assignAlert.style.display = "none"
 					btnSumitAssign.click()
 				}
@@ -137,79 +102,27 @@
 		
 		}
 
-		function checkRegex(){
-			let str = linkAssign.value
-			let regex = /(?:https?\:\/\/docs.google.com.forms.d.e\/)|(?:https?\:\/\/forms.gle\/)/
-			let result = str.match(regex);
-			if (result!=null){
-				return true
-			}
-			return false
-		}
-
 		function postNewPost(){
 
 			let file = filePost.files[0]
-			let fd = new FormData();
-			fd.append('FILE', file)
-			fd.append('ID_CLASS',idClass)
-			fd.append('TITLE',titlePost.value)
-			fd.append('DES',desPost.value)
-			fd.append('DUE','')
-			fd.append('TYPE','POST')
-			fd.append('URL_FORM','')
-			$.ajax({
-				type:"POST",
-				url:"postMaterial.php",
-				cache: false,
-                contentType: false,
-                processData: false,
-				data:fd,
-				success: function (response) {
-					console.log(response)
-					if (response==="Insert success") {
-						$("#streamTab").load("../stream/stream.php");
-					}
-					$("#modalPost .close").click();
-					$("#modalPost .close").trigger("click"); 
-				},
-				fail: function(xhr, textStatus, errorThrown){
-					$("#modalPost .close").click();
-					$("#modalPost .close").trigger("click"); 
+			postStreamPost(file, idClass, titlePost.value,desPost.value ).then(function(response){
+				if (response==="Insert success") {
+					$("#streamTab").load("../stream/stream.php");
 				}
-			});
+				$("#modalPost .close").click();
+				$("#modalPost .close").trigger("click"); 
+			})
 		}
 
-		function postNewAssign(){
+		function postStreamAssign(){
 			let file = fileAssign.files[0]
-			let fd = new FormData();
-			fd.append('FILE', file)
-			fd.append('ID_CLASS',idClass)
-			fd.append('TITLE',titleAssign.value)
-			fd.append('DES',desAssign.value)
-			fd.append('DUE',dueAssign.value)
-			fd.append('TYPE','ASSIGN')
-			fd.append('URL_FORM',linkAssign.value)
-			$.ajax({
-				type:"POST",
-				url:"postMaterial.php",
-				cache: false,
-                contentType: false,
-                processData: false,
-				data:fd,
-				success: function (response) {
-					console.log(response)
-					if (response==="Insert success") {
-						$("#streamTab").load("../stream/stream.php");
-					}
-					$("#modalAssignment .close").click();
-					$("#modalAssignment .close").trigger("click"); 
-				},
-				fail: function(xhr, textStatus, errorThrown){
-					$("#modalAssignment .close").click();
-					$("#modalAssignment .close").trigger("click"); 
+			postStreamPost(file, idClass, titleAssign.value, desAssign.value, dueAssign.value, linkAssign.value ).then(function(response){
+				if (response==="Insert success") {
+					$("#streamTab").load("../stream/stream.php");
 				}
-			});
+				$("#modalAssignment .close").click();
+				$("#modalAssignment .close").trigger("click");  
+			})
 		}
 
 		function deleteTextInputPost(){  
