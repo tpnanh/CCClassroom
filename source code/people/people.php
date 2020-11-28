@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-	session_start();
+	session_start(); 
 
 	if(!isset($_SESSION['user']) || $_SESSION['user']==null){
 		header('Location: ../index.php');
@@ -49,46 +49,28 @@
 		}
 
 		function getDataClass(){
-			$.ajax({
-				type:"GET",
-				url:"../stream/getInfoClass.php?",
-				data: { 
-        			id: idClass
-    			},
-				success: function (response) {
-					if (response==="Classroom not found") {
-						window.location.href="../home/home.php"
-					}else{
-						let result = JSON.parse(response)
-						emailClassOfUser = result.email
-					}
-				},
-				fail: function(xhr, textStatus, errorThrown){
+			getDataClassroomById(idClass).then(function(response){
+				if (response==="Classroom not found") {
+					window.location.href="../home/home.php"
+				}else{
+					let result = JSON.parse(response)
+					emailClassOfUser = result.email
 				}
-			});
+			})
 		}
 		
 		function getPeople(){
-			$.ajax({
-				type:"GET",
-				url:"../people/getUserOfClass.php?",
-				data: { 
-        			id: idClass
-    			},
-				success: function (response) {
-					if (response==="Classroom not found") {
-						//window.location.href="../home/home.php"
-					}else{
-						let result = JSON.parse(response)
-						removeAllChildNode(peopleList)
-						for (i = 0; i < result.length; i++) {
-						 	appendView(result[i])
-						}
+			getPeopleOfClass(idClass).then(function(response){
+				if (response==="Classroom not found") {
+					//window.location.href="../home/home.php"
+				}else{
+					let result = JSON.parse(response)
+					removeAllChildNode(peopleList)
+					for (i = 0; i < result.length; i++) {
+					 	appendView(result[i])
 					}
-				},
-				fail: function(xhr, textStatus, errorThrown){
 				}
-			});
+			})
 		}
 
 		function appendView(data){
@@ -129,7 +111,7 @@
 					a2.onclick = function(){deleteUser(this,data.id_class,data.emailPeople)};
 					div2.appendChild(a2)
 					div.appendChild(div2)
-				}else{
+				}else if(roleCurrentUser !== "Admin"){
 					formAddUser.style.display = "none"
 				}
 			}else{
@@ -147,76 +129,30 @@
 		}
 
 		function deleteUser(view, idClass, email){
-			let fd = new FormData();
-			fd.append('ID_CLASS', idClass)
-			fd.append('EMAIL', email)
-			$.ajax({
-				type:"POST",
-				url:"../people/deleteUser.php",
-				cache: false,
-                contentType: false,
-                processData: false,
-				data:fd,
-				success: function (response) {
-					console.log(response)
-					if (response==="Delete user success") {
-						view.parentNode.parentNode.remove()
-					}
-				},
-				fail: function(xhr, textStatus, errorThrown){
+			deleteUserFromClass(idClass, email).then(function(response){
+				if (response==="Delete user success") {
+					view.parentNode.parentNode.remove()
 				}
-			});
-		}
-
-		function removeAllChildNode(parent) {
-    		while (parent.firstChild) {
-        		parent.removeChild(parent.firstChild);
-    		}
+			})
 		}
 
 		function addPeople(){
-			let fd = new FormData();
-			fd.append('ID', idClass)
-			fd.append('EMAIL', inputAddUser.value)
-			$.ajax({
-				type:"POST",
-				url:"../people/addPeople.php",
-				cache: false,
-                contentType: false,
-                processData: false,
-				data:fd,
-				success: function (response) {
-					console.log(response)
-					if (response==="Add success") {
-						getPeople()
-					}else{
-						alert(response)
-					}
-				},
-				fail: function(xhr, textStatus, errorThrown){
+			addPeopleToClass(idClass, inputAddUser.value).then(function(response){
+				if (response==="Add success") {
+					getPeople()
+				}else{
+					alert(response)
 				}
-			});
+			})
 		}
 
 		function findUser(){
-			$.ajax({
-				type:"GET",
-				url:"../people/findUser.php?",
-				data: { 
-        			ID: idClass,
-        			KEY_WORD: inputTextFindView.value
-    			},
-				success: function (response) {
-					let result = JSON.parse(response)
-					removeAllChildNode(peopleList)
-					for (i = 0; i < result.length; i++) {
-						appendView(result[i])
-					}
-					
-				},
-				fail: function(xhr, textStatus, errorThrown){
+			findUserInClass(idClass, inputTextFindView.value).then(function(result){
+				removeAllChildNode(peopleList)
+				for (i = 0; i < result.length; i++) {
+					appendView(result[i])
 				}
-			});
+			})
 		}
 
 	</script>
