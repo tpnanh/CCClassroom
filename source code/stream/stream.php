@@ -19,6 +19,8 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script src="../main.js"></script> 
+	<link rel="stylesheet" type="text/css" href="../style.css">
 
 	<style>
 		.container{
@@ -138,6 +140,9 @@
 		function appendViewIntoTable(data){
 			let div = document.createElement('div')
 			div.classList.add('card','col-lg-12')
+			div.style.paddingLeft = "0px"
+			div.style.paddingRight = "0px"
+
 
 			let div1 = document.createElement('div')
 			div1.classList.add('card-header')
@@ -260,7 +265,7 @@
 <body>
 	<div class="container">
 		<div class="row">
-		  	<div class="card col-lg-12">
+		  	<div class="card col-lg-12" style="padding-left: 0px; padding-right: 0px;">
 			  	<div class="card-header" style="background-color: #087043">			
 			      	<h4 class="card-title" id="cardNameClass">HK1_2020_505404_WEB</h5>
 			      	<h5 class="card-subtitle" id="cardSubjectClass">Lập trình web và ứng dụng</h6>

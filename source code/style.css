@@ -132,5 +132,81 @@
   	display: flex;
   	justify-content: center;
   	align-items: center;
+}
 
+.navHome{
+	margin: 5px;
+}
+
+.navRightHome li{
+	margin-left: 20px;
+}
+i{
+	font-size: 19px;
+}
+.dropdown-item{
+	font-size: 13px;
+	font-weight: bold;
+}
+.dropdown-item:focus, .joinClass, .joinClass:hover{
+	background-color: #43437B;
+	color: white;
+}
+.logout:hover{
+	color: red;
+}
+.logout:focus{
+	background-color: lightgray;
+}
+.deleteClass{
+	background-color: #43437B;
+	color: white;
+}
+.deleteClass:hover, .deleteClass:focus{
+	background-color: red;
+	color: white;
+}
+.deleteClass:not(:disabled):not(.disabled):focus {
+	border-color: red;
+    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.075);
+}
+.linkHome{
+	color:white;
+}
+.linkHome:hover{
+	color:white;
+}
+.cardHome{
+	width: 100%;
+	margin-top: 5px;
+	padding-left: 0px;
+	padding-right: 0px;
+	background-clip: padding-box;
+	border: 10px solid transparent;
+}
+.cardHeaderHome{
+	color: white;
+	/*green*/
+	background-color: #087043;
+}
+.cardTitleHome{
+	padding-bottom: 4px;
+}
+.cardBodyHome{
+	background-color: lightgrey;
+	height: 60px;
+}
+.joinClassHome{
+	width: 90%;
+	white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+.findClass{
+	background-color: #214996;
+	color: white;
+}
+.findClass:hover{
+	background-color: #2e446e;
+	color: white;
 }

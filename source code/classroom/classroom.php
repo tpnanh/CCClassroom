@@ -26,7 +26,26 @@
 		nav{
 			background-color: white; 
 		}
-
+		.card{
+			width: 100%;
+			margin-top: 5px;
+			padding-left: 0px;
+			padding-right: 0px;
+			background-clip: padding-box;
+			border: 10px solid transparent;
+		}
+		.card-header{
+			color: white;
+			/*green*/
+			background-color: #087043;
+		}
+		.card-title{
+			padding-bottom: 4px;
+		}
+		.card-body{
+			background-color: lightgrey;
+			height: 60px;
+		}
 		.nav-right li{
 			margin-left: 20px;
 		}
@@ -69,26 +88,6 @@
 		}
 		a:hover{
 			color:white;
-		}
-		.card{
-			width: 100%;
-			margin-top: 5px;
-			padding-left: 0px;
-			padding-right: 0px;
-			background-clip: padding-box;
-			border: 10px solid transparent;
-		}
-		.card-header{
-			color: white;
-			/*green*/
-			background-color: #087043;
-		}
-		.card-title{
-			padding-bottom: 4px;
-		}
-		.card-body{
-			background-color: lightgrey;
-			height: 60px;
 		}
 		h5, h6{
 			width: 90%;

@@ -19,65 +19,64 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script src="../main.js"></script> 
+	<link rel="stylesheet" type="text/css" href="../style.css">
 
 	<style>
-		nav{
+		/*nav{
 			margin: 5px;
 		}
 
 		.nav-right li{
 			margin-left: 20px;
-		}
-		i{
-			/*violet*/
-			color: #43437B;
-			font-size: 19px;
-		}
-		.dropdown-item{
+		}*/
+
+		
+		/*.dropdown-item{
 			font-size: 13px;
 			font-weight: bold;
 		}
 		.dropdown-item:focus, .joinClass, .joinClass:hover, .deleteClass{
 			background-color: #43437B;
 			color: white;
-		}
-		.logout:hover{
+		}*/
+		/*.logout:hover{
 			color: red;
-		}
-		.deleteClass:hover, .deleteClass:focus{
+		}*/
+		/*.deleteClass:hover, .deleteClass:focus{
 			background-color: red;
 			color: white;
 		}
 		.deleteClass:not(:disabled):not(.disabled):focus {
 			border-color: red;
 		    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.075);
-		}
-		.logout:focus{
+		}*/
+		/*.logout:focus{
 			background-color: lightgray;
-		}
-		.container-fluid{
+		}*/
+		/*.container-fluid{
 			margin-left:10px;
 			width: 99%;
 			margin-top: 70px;
-		}
-		a{
+		}*/
+		/*.linkHome{
 			color:white;
 		}
-		a:hover{
+		.linkHome:hover{
 			color:white;
-		}
-		.card{
+		}*/
+		/*.cardHome{
 			width: 100%;
 			margin-top: 5px;
 			padding-left: 0px;
 			padding-right: 0px;
 			background-clip: padding-box;
 			border: 10px solid transparent;
-		}
-		.card-header{
+		}*/
+		/*.card-header{
 			color: white;
 			/*green*/
-			background-color: #087043;
+			/*background-color: #087043;
 		}
 		.card-title{
 			padding-bottom: 4px;
@@ -85,21 +84,21 @@
 		.card-body{
 			background-color: lightgrey;
 			height: 60px;
-		}
-		h5, h6{
+		}*/
+		/*.joinClassHome{
 			width: 90%;
 			white-space: nowrap; 
             overflow: hidden;
             text-overflow: ellipsis; 
-		}
-		.findClass{
+		}*/
+		/*.findClass{
 			background-color: #214996;
 			color: white;
 		}
 		.findClass:hover{
 			background-color: #2e446e;
 			color: white;
-		}
+		}*/
 	</style>
 
 	<script>
@@ -147,23 +146,24 @@
 		function appendViewIntoBoardView(data){
 				
 			let div = document.createElement('div')
-			div.classList.add('card','col-lg-3')
+			div.classList.add('card','col-lg-3','cardHome')
 
 			let div1 = document.createElement('div')
-			div1.classList.add('card-header')
+			div1.classList.add('card-header','cardHeaderHome')
 
 			let a = document.createElement('a')
+			a.classList.add('linkHome')
 			a.href = "../classroom/classroom.php?idClass="+data.id_class
 
 			let h = document.createElement('h5')
-			h.classList.add('card-title')
+			h.classList.add('card-title','joinClassHome','cardTitleHome')
 			h.innerHTML = data.name_class
 
 			a.appendChild(h)
 			div1.appendChild(a)
 
 			let h2 = document.createElement('h6')
-			h2.classList.add('card-subtitle')
+			h2.classList.add('card-subtitle','joinClassHome')
 			h2.innerHTML = data.subject
 			div1.appendChild(h2)
 
@@ -198,6 +198,7 @@
 
 				}else{
 					let a2 = document.createElement('a')
+					a2.classList.add('linkHome')
 					a2.href = '#'
 					a2.setAttribute("data-toggle", "dropdown");
 					a2.id = 'classOption'
@@ -240,7 +241,7 @@
 			div.appendChild(div2)
 
 			let div5 = document.createElement('div')
-			div5.classList.add('card-body') 
+			div5.classList.add('card-body','cardBodyHome') 
 			div.appendChild(div5)
 			boardView.appendChild(div)
 
@@ -354,7 +355,7 @@
 <body>
 	<div>
 		<nav class="navbar navbar-expand-sm fixed-top"> 
-	  		<ul class="navbar-nav">
+	  		<ul class="navbar-nav navHome">
 	    		<li class="nav-item" >
 	       			<i class="fa fa-home navbar-brand" style="font-size: 27px; color: #D24848"></i>
 	    		</li>
@@ -362,7 +363,7 @@
 		      		<img src="../img/brand.png" style="width: auto; height: 36px">
 			    </li>
 		  	</ul>		  	
-		  	<ul class="nav-right navbar-nav ml-auto">		  	
+		  	<ul class="nav-right navbar-nav ml-auto navRightHome">		  	
 			    <li class="nav-item">
 			    	<?php
 			    		if ($user["role"]==="Admin") {
@@ -428,7 +429,7 @@
 		<div class="modal-dialog " role="document">
 	    	<div class="modal-content w-75">
 	      		<div class="modal-header">
-	        		<h5 class="modal-title">Join class</h5>
+	        		<h5 class="modal-title joinClassHome">Join class</h5>
 	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	         			<span aria-hidden="true">&times;</span>
 	        		</button>
@@ -453,7 +454,7 @@
 		<div class="modal-dialog " role="document">
 	    	<div class="modal-content w-75">
 	      		<div class="modal-header">
-	        		<h5 class="modal-title">Delete</h5>
+	        		<h5 class="modal-title joinClassHome">Delete</h5>
 	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	         			<span aria-hidden="true">&times;</span>
 	        		</button>
@@ -476,7 +477,7 @@
 
 	<div>
 			
-		<div class="container-fluid" >
+		<div class="container-fluid" style="margin-left:10px; width: 99%; margin-top: 70px;">
 			<div class="row" id="boardView">
 			  	  
 
