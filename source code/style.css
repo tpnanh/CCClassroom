@@ -382,3 +382,85 @@ td{
 	margin-right: 10px;
 	margin-top: 15px;
 }
+.first-line{
+	color: #087043;
+	background-color: #087043;
+	height: 1px;
+	border-width:0
+}
+.second-line{
+	color: lightgray;
+	background-color: lightgray;
+	height: 2px;
+	border-width:0;
+}
+.third-line{
+	color: lightgray;
+	background-color: lightgray;
+	height: 1px;
+	border-width:0;
+	margin-top: 0px;
+}
+.containerPostDetail {
+  	display: flex;
+  	justify-content: center;
+  	margin-top: 80px;
+  	margin-bottom: 50px;
+  	margin-left: 100px;
+  	width: 100%;
+  	padding: 0px;
+}
+.centerPostDetail {
+ 	width: 80%;
+}
+.iconPostDetail{
+	font-size: 16px;
+	margin-top: 8px;
+}
+.titlePostDetail{
+	color: #087043;			
+}
+.centerPostDetail p{
+	color: gray;
+	font-weight: 400;
+}
+#description{
+	color: black;
+	font-size: 14px;
+	line-height: 1.6;
+	margin-bottom: 2px;
+}
+.userPostDetail{
+	font-weight: bold;
+	font-size: 15px;
+}
+.date{
+	font-size: 13px;
+	color: gray;
+	font-weight: 400;
+}
+.comment{
+	margin-left: 60px;
+	margin-top: 5px;
+	color: black;
+	margin-bottom: 0px;
+	width: 90%;
+}
+.commentPostDetail{
+	border-radius: 80px; 
+	padding: 9px;
+	padding-left: 18px;
+	padding-right: 18px;
+	margin-left: 8px;
+	margin-top: 5px;
+	border-top-color: white; 
+	border-bottom-color: darkgray; 
+	border-left-color: lightgray;
+	border-right-color: gray;
+	width: 87%;
+
+}
+.commentPostDetail:focus{
+	outline: none;
+	border-width: 3px;
+}
