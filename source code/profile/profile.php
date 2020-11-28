@@ -32,7 +32,6 @@
 		let phone
 
 		window.onload = function(){
-			makeTextInputFile()
 			avatarFile = document.getElementById('custom-file');
 			imageAvatar = document.getElementById('imageAvatar');
 			errorAlter = document.getElementById('alter-error');
@@ -43,8 +42,12 @@
 			fullname = document.getElementById('fullname');
 		}
 
+		$(document).ready(function () {
+        	makeTextInputFileCompress()
+    	});
+
 		//Make text input file has name
-		function makeTextInputFile(){
+		function makeTextInputFileCompress(){
 			$(".custom-file-input").on("change", function() {
 			  	let fileName = $(this).val().split("\\").pop();
 			  	$(this).siblings(".custom-file-label").addClass("selected").html(fileName);
@@ -55,61 +58,23 @@
 		}
 
 		function compressFile(file){
-			let fd = new FormData();
-			fd.append('avatar', file)
-
-			$.ajax({
-				type:"POST",
-				url:"../img/base64ImageEncode.php",
-				cache: false,
-                contentType: false,
-                processData: false,
-				data:fd,
-				success: function (response) {
-					if (response === 'File so big') {
-						error(response)
-					}else{
-						imageAvatar.src = response
-					}
-
-					
-				},
-				fail: function(xhr, textStatus, errorThrown){
-					error("Request failed")
+			compressFileImage(file).then(function(response){
+				if (response === 'File so big') {
+					error(response)
+				}else{
+					imageAvatar.src = response
 				}
-			});
+			})
 		}
 
 		function updateProfile(){
-			let fd = new FormData();
-			fd.append('EMAIL',email.value)
-			fd.append('USER_NAME',userName.value)
-			fd.append('FULL_NAME',fullname.value)
-			fd.append('BIRTH',birth.value)
-			fd.append('PHONE',phone.value)
-			fd.append('AVATAR', imageAvatar.src)
-
-			$.ajax({
-				type:"POST",
-				url:"updateProfile.php",
-				cache: false,
-                contentType: false,
-                processData: false,
-				data:fd,
-				success: function (response) {
-					console.log(response)
-					if (response === 'Update success') {
-						history.go(-1)
-					}else{
-						error(response)
-					}
-
-					
-				},
-				fail: function(xhr, textStatus, errorThrown){
-					error("Request failed")
+			updateProfileUser(email.value, userName.value, fullname.value, birth.value, phone.value, imageAvatar.src).then(function(response){
+				if (response === 'Update success') {
+					history.go(-1)
+				}else{
+					error(response)
 				}
-			});
+			})
 		}
 
 		function error(errorStr){

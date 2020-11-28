@@ -317,3 +317,52 @@ function deleteUserWeb(email){
 		});
 	})
 }
+
+function compressFileImage(file){
+	return new Promise((resolve, reject)=>{
+		let fd = new FormData();
+		fd.append('avatar', file)
+
+		$.ajax({
+			type:"POST",
+			url:"../img/base64ImageEncode.php",
+			cache: false,
+            contentType: false,
+            processData: false,
+			data:fd,
+			success: function (response) {
+				resolve(response)
+			},
+			fail: function(xhr, textStatus, errorThrown){
+				resolve("Request failed")
+			}
+		});
+	})
+}
+
+function updateProfileUser(email, userName,fullname,birth,phone,imageAvatar){
+	return new Promise((resolve, reject)=>{
+		let fd = new FormData();
+		fd.append('EMAIL',email)
+		fd.append('USER_NAME',userName)
+		fd.append('FULL_NAME',fullname)
+		fd.append('BIRTH',birth)
+		fd.append('PHONE',phone)
+		fd.append('AVATAR', imageAvatar)
+
+		$.ajax({
+			type:"POST",
+			url:"updateProfile.php",
+			cache: false,
+            contentType: false,
+            processData: false,
+			data:fd,
+			success: function (response) {
+				resolve(response)
+			},
+			fail: function(xhr, textStatus, errorThrown){
+				resolve("Request failed")
+			}
+		});
+	})
+}
