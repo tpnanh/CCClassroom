@@ -214,6 +214,8 @@ i{
 	font-family:verdana;
 	font-weight: bold;
 	margin-top: 20px;
+	color: #43437B;
+	text-align: center;
 }
 .spanListUser{
 	font-family:verdana;
@@ -277,4 +279,36 @@ td{
 .btnPermission, .btnPermission:focus, .btnPermission:hover{
 	background-color: #214996;
 	color: white;
+}
+.imgProfile{
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+.labelProfile{
+	display: block;
+	text-align: left;
+	margin-top: 20px;
+	color: #43437B;
+	font-size: 13px;
+	font-weight: bold;
+}
+.formSigninProfile {
+	width: 35%;
+	margin: 30px;
+}
+.btnSaveProfile:hover{
+	background-color: #43437B;
+	color: white;
+	margin-top: 20px;
+}
+
+.btnSaveProfile{
+	color: white;
+	/*blue*/
+	background-color: #7492c4;
+	margin-top: 20px;
+}
+.alertProfile{
+	margin-top: 15px;
+	font-size: 15px;
 }
