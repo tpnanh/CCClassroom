@@ -42,43 +42,16 @@
 			errorAlter = document.getElementById('alter-error')
 		}
 
-		//Make text input file has name
-		function makeTextInputFile(){
-			$(".custom-file-input").on("change", function() {
-			  let fileName = $(this).val().split("\\").pop();
-			  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-			});
-		}
-
 		function createClass(){
+
 			let file = avatar.files[0]
-			let fd = new FormData();
-			fd.append('avatar', file)
-			fd.append('CLASS_NAME', className.value)
-			fd.append('SUBJECT', subject.value)
-			fd.append('ROOM', room.value)
-
-			$.ajax({
-				type:"POST",
-				url:"createClassroomFunction.php",
-				cache: false,
-                contentType: false,
-                processData: false,
-				data:fd,
-				success: function (response) {
-					console.log(response)
-					if (response === 'Insert success') {
-						history.go(-1)
-					}else{
-						error(response)
-					}
-
-					
-				},
-				fail: function(xhr, textStatus, errorThrown){
-					error("Request failed")
+			createClassroom(file, className.value, subject.value, room.value).then(function(response){
+				if (response === 'Insert success') {
+					history.go(-1)
+				}else{
+					error(response)
 				}
-			});
+			})
 		}
 
 		function error(errorStr){

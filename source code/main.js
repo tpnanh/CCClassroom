@@ -366,3 +366,28 @@ function updateProfileUser(email, userName,fullname,birth,phone,imageAvatar){
 		});
 	})
 }
+
+function createClassroom(file, className, subject, room){
+	return new Promise((resolve, reject)=>{
+		let fd = new FormData();
+		fd.append('avatar', file)
+		fd.append('CLASS_NAME', className)
+		fd.append('SUBJECT', subject)
+		fd.append('ROOM', room)
+
+		$.ajax({
+			type:"POST",
+			url:"createClassroomFunction.php",
+			cache: false,
+            contentType: false,
+            processData: false,
+			data:fd,
+			success: function (response) {
+				resolve(response)
+			},
+			fail: function(xhr, textStatus, errorThrown){
+				resolve("Request failed")
+			}
+		});
+	})
+}
