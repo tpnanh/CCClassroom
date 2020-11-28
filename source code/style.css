@@ -210,3 +210,71 @@ i{
 	background-color: #2e446e;
 	color: white;
 }
+.titleListUser{
+	font-family:verdana;
+	font-weight: bold;
+	margin-top: 20px;
+}
+.spanListUser{
+	font-family:verdana;
+	font-weight: bold;
+	color: #101052;
+	font-size: 18px;
+}
+.navListuser{
+	margin: 20px;
+}
+.searchButton{
+	background-color: #214996;
+	color: white;
+}
+.searchButton:hover{
+	background-color: #2e446e;
+	color: white;
+}
+table{
+	width: 95%;
+	margin: 20px auto;
+	border-collapse: collapse;
+}
+th{
+	color: white;
+	background-color: #087043;
+	padding: 10px;
+	font-size: 15px;
+}
+td{
+	border: 1px solid lightgrey;
+	font-size: 14px;
+	padding: 10px;
+}
+.firstCol{
+	width: 5px;
+}
+.secondCol{
+	border-left-style:hidden;
+}
+.lastCol{
+	border-left-style:hidden;
+	width: 5px;
+}
+.dropdownItemUser{
+	font-size: 13px;
+	font-weight: bold;
+}
+.dropdownItemUser:focus{
+	background-color: #3e946f;
+	color: white;
+}
+.modalItem{
+	font-size: 13px;
+	font-weight: bold;			
+}
+.modalItem:focus{
+	background-color: lightgrey;
+	color: black;
+}
+.btnPermission, .btnPermission:focus, .btnPermission:hover{
+	background-color: #214996;
+	color: white;
+}

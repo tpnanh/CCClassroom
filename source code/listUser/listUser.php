@@ -24,36 +24,37 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+	<script type="text/javascript" src="../main.js"></script>  
 
 	<style>
-		h3{
+		/*.titleListUser{
 			font-family:verdana;
 			font-weight: bold;
 			margin-top: 20px;
-		}
-		span{
+		}*/
+		/*.spanListUser{
 			font-family:verdana;
 			font-weight: bold;
 			color: #101052;
 			font-size: 18px;
-		}
-		i{
+		}*/
+		/*i{
 			color: #43437B;
 			font-size: 19px;
-		}
-		.navbar{
+		}*/
+		/*.navListuser{
 			margin: 20px;
-
-		}
-		.searchButton{
+		}*/
+		/*.searchButton{
 			background-color: #214996;
 			color: white;
 		}
 		.searchButton:hover{
 			background-color: #2e446e;
 			color: white;
-		}
-		table{
+		}*/
+		/*table{
 			width: 95%;
 			margin: 20px auto;
 			border-collapse: collapse;
@@ -68,8 +69,8 @@
 			border: 1px solid lightgrey;
 			font-size: 14px;
 			padding: 10px;
-		}
-		.firstCol{
+		}*/
+		/*.firstCol{
 			width: 5px;
 		}
 		.secondCol{
@@ -78,27 +79,27 @@
 		.lastCol{
 			border-left-style:hidden;
 			width: 5px;
-		}
-		.dropdown-item{
+		}*/
+		/*.dropdownItemUser{
 			font-size: 13px;
 			font-weight: bold;
 		}
-		.dropdown-item:focus{
+		.dropdownItemUser:focus{
 			background-color: #3e946f;
 			color: white;
-		}
-		.modalItem{
+		}*/
+		/*.modalItem{
 			font-size: 13px;
 			font-weight: bold;			
 		}
 		.modalItem:focus{
 			background-color: lightgrey;
 			color: black;
-		}
-		.btnPermission, .btnPermission:focus, .btnPermission:hover{
+		}*/
+		/*.btnPermission, .btnPermission:focus, .btnPermission:hover{
 			background-color: #214996;
 			color: white;
-		}
+		}*/
 	</style>
 
 	<script>
@@ -224,7 +225,7 @@
 			div2.aria_labelledby = 'editUser'
 
 			let a = document.createElement('a')
-			a.classList.add('dropdown-item')
+			a.classList.add('dropdown-item','dropdownItemUser')
 			a.onclick = function(){ deleteUser(data.email,tr) }
 			a.innerHTML = 'Delete'
 
@@ -232,7 +233,7 @@
 			div3.classList.add('dropdown-divider')
 
 			let a2 = document.createElement('a')
-			a2.classList.add('dropdown-item')
+			a2.classList.add('dropdown-item','dropdownItemUser')
 			a2.setAttribute("data-toggle", "modal")
 			a2.href = "#modalPermission"
 			a2.onclick = function(){ saveEmailTemp(data.email,td5) }
@@ -318,9 +319,9 @@
 	</script>
 </head>
 <body>
-	<h3 style="text-align: center;">List of Users</h3>
+	<h3 class="titleListUser" style="text-align: center;">List of Users</h3>
 
-	<nav class="navbar">
+	<nav class="navbar navListuser">
 		
 		<form class="form-inline" style="margin-left: auto;" onsubmit="findUser();return false;">
 			<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="inputTextFindView">
@@ -347,7 +348,7 @@
   						<div class="modal-header">
 	        					<h5 class="modal-title">Permission</h5>
 	        					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	         						<span aria-hidden="true">&times;</span>
+	         						<span class="spanListUser" aria-hidden="true">&times;</span>
 	        					</button>
   						</div>
 	      				<div class="modal-body">
@@ -355,9 +356,9 @@
 	        				<div class="btn-group">
 								<button class="btn btn-sm dropdown-toggle btnPermission" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="btnPermission">Permission</button>
 								<div class="dropdown-menu">
-									<a class="dropdown-item modalItem" onclick="changeViewPermission('Admin')">Admin</a>
-									<a class="dropdown-item modalItem" onclick="changeViewPermission('Student')">Student</a>
-									<a class="dropdown-item modalItem" onclick="changeViewPermission('Teacher')">Teacher</a>
+									<a class="dropdown-item dropdownItemUser modalItem" onclick="changeViewPermission('Admin')">Admin</a>
+									<a class="dropdown-item dropdownItemUser modalItem" onclick="changeViewPermission('Student')">Student</a>
+									<a class="dropdown-item dropdownItemUser modalItem" onclick="changeViewPermission('Teacher')">Teacher</a>
 								</div>
 							</div>
 	      				</div>
