@@ -57,140 +57,72 @@
 		}
 
 		function getInfoClass(){
-			$.ajax({
-				type:"GET",
-				url:"../stream/getInfoClass.php?",
-				data: { 
-        			id: idClass
-    			},
-				success: function (response) {
-					let result = JSON.parse(response)
-					emailClassOfUser = result.email
-				},
-				fail: function(xhr, textStatus, errorThrown){
-				}
+			getDataClassroomById(idClass).then(function(response){
+				let result = JSON.parse(response)
+				emailClassOfUser = result.email
 			})
 		}
 
-		function getParameterByName(name, url) {
-            if (!url) url = window.location.href;
-            name = name.replace(/[\[\]]/g, '\\$&');
-            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-                results = regex.exec(url);
-            if (!results) return null;
-            if (!results[2]) return '';
-            return decodeURIComponent(results[2].replace(/\+/g, ' '));
-        }
-
         function getInfoPost(){
-        	$.ajax({
-				type:"GET",
-				url:"getInfoPost.php?",
-				data: { 
-        			ID_POST: idPost
-    			},
-				success: function (response) {
-					if (response==="Post/Assignment not found") {
-						window.location.href="../home/home.php"
+        	getInfoPostDetail(idPost).then(function(response){
+				if (response==="Post/Assignment not found") {
+					window.location.href="../home/home.php"
+				}else{
+					let result = JSON.parse(response)
+					title.innerHTML = result.title
+					userCreate.innerHTML = result.email
+					timeCreate.innerHTML = formateDate(result.date_create)
+					description.innerHTML = result.des
+					if (result.type==="ASSIGN") {
+						timeDue.innerHTML = "Due "+formateDate2(result.due)
+						linkAssign.href = result.url_form
 					}else{
-						let result = JSON.parse(response)
-						title.innerHTML = result.title
-						userCreate.innerHTML = result.email
-						timeCreate.innerHTML = formateDate(result.date_create)
-						description.innerHTML = result.des
-						if (result.type==="ASSIGN") {
-							timeDue.innerHTML = "Due "+formateDate2(result.due)
-							linkAssign.href = result.url_form
-						}else{
-							linkAssign.style.display = "none"
-							labelAssign.style.display = "none"
-							timeCreate.style.float = ""
-							timeDue.innerHTML = ""
-						}
-						if (result.nameFile!="") {
-						 	nameFile.innerHTML = result.nameFile
-						 	linkFile.href = "../Uploads/files/"+idClass+"/"+result.nameFile
-						}else{
-						 	nameFile.style.display = "none"
-         					linkFile.style.display = "none"
-						}
-						checkTimeAssign()
+						linkAssign.style.display = "none"
+						labelAssign.style.display = "none"
+						timeCreate.style.float = ""
+						timeDue.innerHTML = ""
 					}
-				},
-				fail: function(xhr, textStatus, errorThrown){
+					if (result.nameFile!="") {
+					 	nameFile.innerHTML = result.nameFile
+					 	linkFile.href = "../Uploads/files/"+idClass+"/"+result.nameFile
+					}else{
+					 	nameFile.style.display = "none"
+     					linkFile.style.display = "none"
+					}
+					checkTimeAssign()
 				}
-			});
+			})
         }
 
        	function checkTimeAssign(){
        		if (linkAssign.style.display==="") {
-				let timeNow = new Date()
-				let timeDeadline = new Date(timeDue.innerHTML)
-				if (timeNow > timeDeadline) {
-					console.log("Tre deadline")
-					timeDue.style.color = "red"
+       			if(!checkTime(timeDue.innerHTML)){
+       				console.log("Tre deadline")
+       				timeDue.style.color = "red"
 					linkAssign.style.display = "none"
-				}else{
-					console.log("Chua Tre deadline")
-				}
+       			}else{
+       				console.log("Chua Tre deadline")
+       			}
         	}
        	}
 
-        function formateDate(value){
-        	let date = new Date(value).toDateString()
-			let [, month, day, year] = date.split(' ')
-			let MmDD = `${month} ${day}`
-			return MmDD
-        }
-
-        function formateDate2(value){
-        	let date = new Date(value).toDateString()
-        	let hour = new Date(value).getHours()
-        	let minute = new Date(value).getMinutes()
-			let [, month, day, year] = date.split(' ')
-			let MmDdYyHhMm = `${month} ${day}, ${year} ${hour}:${minute}`
-			return MmDdYyHhMm
-        }
-
         function addComment(){
-        	let fd = new FormData();
-			fd.append('CONTENT', comment.value)
-			fd.append('MATERIAL', idPost)
-			$.ajax({
-				type:"POST",
-				url:"addComment.php",
-				cache: false,
-                contentType: false,
-                processData: false,
-				data:fd,
-				success: function (response) {
-					console.log(response)
+        	if (comment.value.trim().length !=0) {
+        		addCommentToPost(comment.value, idPost).then(function(response){
 					comment.value = ""
 					getListComment()
-				},
-				fail: function(xhr, textStatus, errorThrown){
-				}
-			});
+				})
+        	}
         }
 
         function getListComment(){
-			
-			$.ajax({
-				type:"GET",
-				url:"getListComment.php?",
-				data: { 
-        			ID_MATERIAL: idPost
-    			},
-				success: function (response) {
-					removeAllChildNodes(listComment)
-					let result = JSON.parse(response)
-					for (i = 0; i < result.length; i++) {
-					 	addViewComment(result[i])
-					}
-				},
-				fail: function(xhr, textStatus, errorThrown){
+			getListCommentPost(idPost).then(function(response){
+				removeAllChildNode(listComment)
+				let result = JSON.parse(response)
+				for (i = 0; i < result.length; i++) {
+				 	addViewComment(result[i])
 				}
-			});
+			})
         }
 
         function addViewComment(data){
@@ -251,48 +183,19 @@
         }
 
         function deleteComment(view,idComment){
-        	let fd = new FormData();
-			fd.append('ID_COMMENT', idComment)
-			$.ajax({
-				type:"POST",
-				url:"deleteComment.php",
-				cache: false,
-                contentType: false,
-                processData: false,
-				data:fd,
-				success: function (response) {
-					console.log(response)
-					if (response==="Delete comment success") {
-						view.parentNode.parentNode.remove()
-					}
-				},
-				fail: function(xhr, textStatus, errorThrown){
+        	deleteCommentPost(idComment).then(function(response){
+				if (response==="Delete comment success") {
+					view.parentNode.parentNode.remove()
 				}
-			});
+			})
         }
-
-        function removeAllChildNodes(parent) {
-    		while (parent.firstChild) {
-        		parent.removeChild(parent.firstChild);
-    		}
-		}
-
 		
 		function logOut(){
-			$.ajax({
-				type:"POST",
-				url:"../logOut/logOut.php",
-				cache: false,
-                contentType: false,
-                processData: false,
-				success: function (response) {
-					if (response=="LogOut Success") {
-						window.location.href = '../index.php'
-					}
-				},
-				fail: function(xhr, textStatus, errorThrown){
+			userLogOut().then(function(response){
+				if (response=="LogOut Success") {
+					window.location.href = '../index.php'
 				}
-			});
+			})
 		}
 	</script>
 

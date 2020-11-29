@@ -678,6 +678,97 @@ function updateInfoMaterialPost(idClass, idMaterial, title, description, time, f
 	})
 }
 
+function getInfoPostDetail(idPost){
+	return new Promise((resolve, reject)=>{
+		$.ajax({
+			type:"GET",
+			url:"getInfoPost.php?",
+			data: { 
+    			ID_POST: idPost
+			},
+			success: function (response) {
+				resolve(response)
+			},
+			fail: function(xhr, textStatus, errorThrown){
+			}
+		});
+	})
+}
+
+function addCommentToPost(comment, idPost){
+	return new Promise((resolve, reject)=>{
+		let fd = new FormData();
+		fd.append('CONTENT', comment)
+		fd.append('MATERIAL', idPost)
+		$.ajax({
+			type:"POST",
+			url:"addComment.php",
+			cache: false,
+            contentType: false,
+            processData: false,
+			data:fd,
+			success: function (response) {
+				resolve(response)
+			},
+			fail: function(xhr, textStatus, errorThrown){
+			}
+		});
+	})
+}
+
+function getListCommentPost(idPost){
+	return new Promise((resolve, reject)=>{
+		$.ajax({
+			type:"GET",
+			url:"getListComment.php?",
+			data: { 
+    			ID_MATERIAL: idPost
+			},
+			success: function (response) {
+				resolve(response)
+			},
+			fail: function(xhr, textStatus, errorThrown){
+			}
+		});
+	})
+}
+
+function deleteCommentPost(idComment){
+	return new Promise((resolve, reject)=>{
+		let fd = new FormData();
+		fd.append('ID_COMMENT', idComment)
+		$.ajax({
+			type:"POST",
+			url:"deleteComment.php",
+			cache: false,
+            contentType: false,
+            processData: false,
+			data:fd,
+			success: function (response) {
+				resolve(response)
+			},
+			fail: function(xhr, textStatus, errorThrown){
+			}
+		});
+	})
+}
+
+ function formateDate(value){
+	let date = new Date(value).toDateString()
+	let [, month, day, year] = date.split(' ')
+	let MmDD = `${month} ${day}`
+	return MmDD
+}
+
+function formateDate2(value){
+	let date = new Date(value).toDateString()
+	let hour = new Date(value).getHours()
+	let minute = new Date(value).getMinutes()
+	let [, month, day, year] = date.split(' ')
+	let MmDdYyHhMm = `${month} ${day}, ${year} ${hour}:${minute}`
+	return MmDdYyHhMm
+}
+
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, '\\$&');
