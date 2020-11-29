@@ -127,12 +127,11 @@
 
         function addViewComment(data){
         	let div = document.createElement('div')
+        	div.style.marginBottom = "15px"
 
         	let img = document.createElement('img')
-        	img.classList.add('rounded-circle')
+        	img.classList.add('rounded-circle','iconAvatar')
         	img.alt = "avatar"
-        	img.width = "50"
-        	img.style.float = "left"
         	img.src = data.avatar
         	div.appendChild(img)
 
@@ -177,6 +176,7 @@
 				div.appendChild(div2)
 			}
 			let p = document.createElement('p')
+			p.classList.add('comment')
 			p.innerHTML = data.content
 			div.appendChild(p)
 			listComment.appendChild(div)
@@ -264,7 +264,7 @@
 		  	<hr class="third-line">
 		  	<div>		
 		  		<form onsubmit="addComment();return false;">
-					<img src="../img/person_icon.png" id="iconCurrentUser" class="rounded-circle" alt="avatar" width="50" height="50" style="float: left;margin-top: 5px"> 
+					<img src="../img/person_icon.png" id="iconCurrentUser" class="rounded-circle iconAvatar" alt="avatar" > 
 			      	<input type="text" name="comment" id="comment" class="commentPostDetail" placeholder="Add class comment">    
 			      	<a href="#"><img src="../img/send.png" width="23px" style="position: right;margin-left: 7px;margin-bottom: 3px" onclick="addComment()"></a>
 		      	</form>	

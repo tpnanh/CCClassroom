@@ -83,8 +83,8 @@
 
 		<button class="btn btnSaveProfile btn-md btn-block" type="submit" name="submit">Create</button>
 
-		<div class="alert alertProfile alert-success" style="display: none;" id="alter-success">Class has been created</div>
-		<div class="alert alertProfile alert-danger" style="display: none;" id="alter-error"></div>
+		<div class="alert alertProfile alert-success" id="alter-success">Class has been created</div>
+		<div class="alert alertProfile alert-danger" id="alter-error"></div>
 	</form>
 	
 </body>

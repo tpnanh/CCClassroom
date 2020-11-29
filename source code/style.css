@@ -13,6 +13,14 @@
 	margin-bottom: 10px;
 }
 
+.dropdownClassroom{
+	font-weight: bold;
+}
+
+.modal{
+	margin-top: 20px;
+}
+
 .formLogin {
 	width: 100%;
 	max-width: 330px;
@@ -141,41 +149,52 @@
 .navRightHome li{
 	margin-left: 20px;
 }
+
 i{
 	font-size: 19px;
 }
+
 .dropdown-item{
 	font-size: 13px;
 	font-weight: bold;
 }
+
 .dropdown-item:focus, .joinClass, .joinClass:hover{
 	background-color: #43437B;
 	color: white;
 }
+
 .logout:hover{
 	color: red;
 }
+
 .logout:focus{
 	background-color: lightgray;
 }
+
 .deleteClass{
 	background-color: #43437B;
 	color: white;
 }
+
 .deleteClass:hover, .deleteClass:focus{
 	background-color: red;
 	color: white;
 }
+
 .deleteClass:not(:disabled):not(.disabled):focus {
 	border-color: red;
     box-shadow: 0 1px 1px rgba(255, 255, 255, 0.075);
 }
+
 .linkHome{
 	color:white;
 }
+
 .linkHome:hover{
 	color:white;
 }
+
 .cardHome{
 	width: 100%;
 	margin-top: 5px;
@@ -184,32 +203,39 @@ i{
 	background-clip: padding-box;
 	border: 10px solid transparent;
 }
+
 .cardHeaderHome{
 	color: white;
 	/*green*/
 	background-color: #087043;
 }
+
 .cardTitleHome{
 	padding-bottom: 4px;
 }
+
 .cardBodyHome{
 	background-color: lightgrey;
 	height: 60px;
 }
+
 .joinClassHome{
 	width: 90%;
 	white-space: nowrap; 
     overflow: hidden;
     text-overflow: ellipsis; 
 }
+
 .findClass{
 	background-color: #214996;
 	color: white;
 }
+
 .findClass:hover{
 	background-color: #2e446e;
 	color: white;
 }
+
 .titleListUser{
 	font-family:verdana;
 	font-weight: bold;
@@ -217,73 +243,90 @@ i{
 	color: #43437B;
 	text-align: center;
 }
+
 .spanListUser{
 	font-family:verdana;
 	font-weight: bold;
 	color: #101052;
 	font-size: 18px;
 }
+
 .navListuser{
 	margin: 20px;
 }
+
 .searchButton, .addButton {
 	background-color: #214996;
 	color: white;
 }
+
 .searchButton:hover, .addButton:hover{
 	background-color: #2e446e;
 	color: white;
 }
+
 table{
 	width: 95%;
 	margin: 20px auto;
 	border-collapse: collapse;
 }
+
 th{
 	color: white;
 	background-color: #087043;
 	padding: 10px;
 	font-size: 15px;
 }
+
 td{
 	border: 1px solid lightgrey;
 	font-size: 14px;
 	padding: 10px;
 }
+
 .firstCol{
 	width: 5px;
 }
+
 .secondCol{
 	border-left-style:hidden;
 }
+
 .lastCol{
 	border-left-style:hidden;
 	width: 5px;
 }
+
 .dropdownItemUser{
 	font-size: 13px;
 	font-weight: bold;
 }
+
 .dropdownItemUser:focus{
 	background-color: #3e946f;
 	color: white;
 }
+
 .modalItem{
 	font-size: 13px;
 	font-weight: bold;			
 }
+
 .modalItem:focus{
 	background-color: lightgrey;
 	color: black;
 }
+
 .btnPermission, .btnPermission:focus, .btnPermission:hover{
 	background-color: #214996;
 	color: white;
 }
+
 .imgProfile{
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
+
 .labelProfile{
 	display: block;
 	text-align: left;
@@ -292,10 +335,12 @@ td{
 	font-size: 13px;
 	font-weight: bold;
 }
+
 .formSigninProfile {
 	width: 35%;
 	margin: 30px;
 }
+
 .btnSaveProfile:hover{
 	background-color: #43437B;
 	color: white;
@@ -308,38 +353,51 @@ td{
 	background-color: #7492c4;
 	margin-top: 20px;
 }
+
 .alertProfile{
 	margin-top: 15px;
 	font-size: 15px;
+	display: none;
 }
+
 .navClassroom{
 	padding: 20px;
 	background-color: white; 
 }
+
 .navTab{
 	z-index: 2;
     float: left;
     width: 100%;
     text-align: center;
 }
+
 .stream{
 	margin-left: auto;
 	font-weight: bold;
 }
+
 .people{
 	margin-right: auto;
 	font-weight: bold;
 }
+
 .modelTitle{
 	width: 90%;
 	white-space: nowrap; 
     overflow: hidden;
     text-overflow: ellipsis; 
 }
+
 .labelClassroom{
 	font-weight: bold;
 	color: #43437B;
 }
+
+.inputClassroom{
+
+}
+
 .containerStream{
 	margin-top: 70px;	
 }
@@ -348,52 +406,63 @@ td{
 	padding: 0px;
 	margin-top: 20px;
 }
+
 .cardHeaderStream{
 	color: white;
 }
+
 .cardField:hover{
 	text-decoration: none;
 }
+
 .cardField:active{
 	text-decoration: none;
 }
+
 .subTitleStream{
 	color: black;
 	padding: 2px;
 	display: block;
 }
+
 .studentName{
 	font-weight: 600;
 	margin-left: 80px;
 	padding-top: 15px;
 	font-size: 16px;
 }
+
 .divideLine{
 	color: gray;
 	background-color: lightgray;
 	height: 1px;
 	border-width:0;
 }
+
 .imgPeople{
 	margin-left: 20px;
 }
+
 #deleteUser{
 	float: right;
 	margin-right: 10px;
 	margin-top: 15px;
 }
+
 .first-line{
 	color: #087043;
 	background-color: #087043;
 	height: 1px;
 	border-width:0
 }
+
 .second-line{
 	color: lightgray;
 	background-color: lightgray;
 	height: 2px;
 	border-width:0;
 }
+
 .third-line{
 	color: lightgray;
 	background-color: lightgray;
@@ -401,6 +470,7 @@ td{
 	border-width:0;
 	margin-top: 0px;
 }
+
 .containerPostDetail {
   	display: flex;
   	justify-content: center;
@@ -410,35 +480,43 @@ td{
   	width: 100%;
   	padding: 0px;
 }
+
 .centerPostDetail {
  	width: 80%;
 }
+
 .iconPostDetail{
 	font-size: 16px;
 	margin-top: 8px;
 }
+
 .titlePostDetail{
 	color: #087043;			
 }
+
 .centerPostDetail p{
 	color: gray;
 	font-weight: 400;
 }
+
 #description{
 	color: black;
 	font-size: 14px;
 	line-height: 1.6;
 	margin-bottom: 2px;
 }
+
 .userPostDetail{
 	font-weight: bold;
 	font-size: 15px;
 }
+
 .date{
 	font-size: 13px;
 	color: gray;
 	font-weight: 400;
 }
+
 .comment{
 	margin-left: 60px;
 	margin-top: 5px;
@@ -446,6 +524,7 @@ td{
 	margin-bottom: 0px;
 	width: 90%;
 }
+
 .commentPostDetail{
 	border-radius: 80px; 
 	padding: 9px;
@@ -460,7 +539,15 @@ td{
 	width: 87%;
 
 }
+
 .commentPostDetail:focus{
 	outline: none;
 	border-width: 3px;
+}
+
+.iconAvatar{
+	width:50px;
+	height:50px;
+	float: left;
+	margin-top: 5px
 }

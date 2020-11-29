@@ -149,11 +149,11 @@
 <body>
 
 	<div>
-		<nav class="navbar navbar-expand-lg fixed-top navClassroom" style="padding: 20px;"> 
+		<nav class="navbar navbar-expand-lg fixed-top navClassroom"> 
 	  		<ul class="navbar-nav nav nav-tabs navTab">
 				<li class="nav-item">
 		      		<a href="../home/home.php">
-		      			<img src="../img/brand.png" style="width: auto; height: 36px">
+		      			<img class="imgBrand" src="../img/brand.png" style="width: auto; height: 36px">
 		      		</a>
 			    </li>
 			    <li class="nav-item stream">
@@ -170,9 +170,9 @@
 				       		<i class="fas fa-plus"></i>
 				       	</button>				       	
 				        <div class="dropdown-menu dropdown-menu-lg-right dropdown-add" aria-expanded="true" id = "assignment" aria-labelledby="btnAssignment">
-						    <a class="dropdown-item" data-toggle="modal" href="#modalAssignment" style="font-weight: bold;">Assignment</a>
+						    <a class="dropdown-item dropdownClassroom" data-toggle="modal" href="#modalAssignment">Assignment</a>
 						    <div class="dropdown-divider"></div>
-						    <a class="dropdown-item" data-toggle="modal" href="#modalPost" style="font-weight: bold;">Post
+						    <a class="dropdown-item dropdownClassroom" data-toggle="modal" href="#modalPost">Post
 						    </a>
 						</div>
 					</div>
@@ -183,7 +183,7 @@
 				       		<i class="fas fa-info-circle"></i>
 				       	</button>				       	
 				        <div class="dropdown-menu dropdown-menu-lg-right  dropdown-profile" aria-expanded="true" aria-labelledby="profile">
-						    <a class="dropdown-item logout" data-toggle="modal" href="#" style="font-weight: bold;" onclick="logOut()">Logout</a>
+						    <a class="dropdown-item logout dropdownClassroom" data-toggle="modal" href="#" onclick="logOut()">Logout</a>
 						</div>
 					</div>
 			    </li>
@@ -201,7 +201,7 @@
       	</div>
     </main>
 
-	<div class="modal" style="margin-top: 20px" id="modalAssignment" tabindex="-1" role="dialog">
+	<div class="modal" id="modalAssignment" tabindex="-1" role="dialog">
 		<div class="modal-dialog " role="document">
 	    	<div class="modal-content w-75">
 	      		<div class="modal-header">
