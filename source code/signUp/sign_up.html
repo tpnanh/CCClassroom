@@ -23,6 +23,7 @@
 		let avatar;
 		let alertError;
 		let alertSuccess;
+		let errorBirth;
 		window.onload = function(){
 			makeTextInputFile()
 			mail = document.getElementById('email');
@@ -33,13 +34,17 @@
 			birth = document.getElementById('date-of-birth');
 			sdt = document.getElementById('phone-number');
 			avatar = document.getElementById('custom-file');
+			errorBirth = document.getElementById('errorBirth')
 			alertError = document.getElementById('alter-error');
 			alertSuccess = document.getElementById('alter-success');
 		}
 
 		function checkInformation(){
-			signUp(confirmPass.value, pass.value, avatar.files[0], mail.value, username.value, hoTen.value, birth.value, sdt.value)
-			.then(function(result){
+			if(checkTime(birth.value)){
+				errorBirth.style.display = ""
+			}else{
+				errorBirth.style.display = "none"
+				signUp(confirmPass.value, pass.value, avatar.files[0], mail.value, username.value, hoTen.value, birth.value, sdt.value).then(function(result){
 				if(result==="File so big"){
 					alertError.style.display = ""
 					alertError.innerHTML = "File avatar so big"
@@ -63,6 +68,8 @@
 					alertSuccess.style.display = "none"
 				}
 			})
+			}
+			
 		}
 		
 	</script>
@@ -92,6 +99,8 @@
 
 		<label class="labelSignUp" for="date-of-birth" >Date of birth</label>     
 		<input type="date" name="date-of-birth" id="date-of-birth" class="form-control formControlLogin inputPassLogin" placeholder="Date of birth" required> 	
+		<p style="color: red; margin-top: 5px; margin-bottom: 0px; justify-content: flex-start; font-size: 14px; text-align: left; display: none" id="errorBirth">Your date of birth must not be greater than today.</p>
+
 
 		<label class="labelSignUp" for="phone-number" >Phone number</label>     
 		<input type="tel" name="phone-number" id="phone-number" class="form-control formControlLogin inputPassLogin" placeholder="Phone number" 
