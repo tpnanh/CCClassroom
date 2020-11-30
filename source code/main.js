@@ -797,3 +797,7 @@ function checkRegex(value){
 	}
 	return false
 }
+
+function checkStrJustNumber(value){
+	return value.match(/^[0-9]+$/);
+}

@@ -23,7 +23,7 @@
 	<link rel="stylesheet" type="text/css" href="../style.css">
 
 	<script>
-		let title, userCreate,timeCreate, timeDue, description, linkFile, nameFile,iconCurrentUser,comment, listComment, labelAssign, linkAssign
+		let title, userCreate,timeCreate, timeDue, description, linkFile, nameFile,iconCurrentUser,comment, listComment, labelAssign, linkAssign, errorAssign
 		let idPost = ""
 		let idClass = ""
 		let roleCurrentUser = ""
@@ -42,6 +42,7 @@
 			listComment = document.getElementById('listComment')
 			labelAssign = document.getElementById('labelAssign')
 			linkAssign = document.getElementById('linkAssign')
+			errorAssign = document.getElementById('errorAssign')
 			roleCurrentUser = '<?= $user['role'] ?>';
 			emailCurrentUser = '<?= $user['email'] ?>';
 			getUrl()
@@ -64,6 +65,7 @@
 		}
 
         function getInfoPost(){
+        	errorAssign.style.display = "none"
         	getInfoPostDetail(idPost).then(function(response){
 				if (response==="Post/Assignment not found") {
 					window.location.href="../home/home.php"
@@ -100,7 +102,9 @@
        				console.log("Tre deadline")
        				timeDue.style.color = "red"
 					linkAssign.style.display = "none"
+					errorAssign.style.display = ""
        			}else{
+       				errorAssign.style.display = "none"
        				console.log("Chua Tre deadline")
        			}
         	}
@@ -192,14 +196,8 @@
 		
 		function logOut(){
 			userLogOut().then(function(response){
-				if (response==="Classroom not found") {
-					window.location.href="../home/home.php"
-				}else{
-					let result = JSON.parse(response)
-					cardNameClass.innerHTML = result.name_class
-					cardSubjectClass.innerHTML = result.subject
-					cardRoomClass.innerHTML = result.room
-					emailClassOfUser = result.email
+				if (response=="LogOut Success") {
+					window.location.href = '../index.php'
 				}
 			})
 		}
@@ -233,22 +231,19 @@
 	</div>
 	<div class="container containerPostDetail" >
 		<div class="center centerPostDetail">
-			<h3 id="title" class="titlePostDetail">Đề tài đồ án cuối kì</h3>
-			<p id="userCreate" style="margin: 0px;">Mai Văn Mạnh</p>
-			<p id="timeCreate" style="float: left">Nov 3</p>
-			<p id="timeDue" style="text-align: right;font-size: 14px; margin-right: 20px;">Due Nov 3</p>
+			<h3 id="title" class="titlePostDetail"></h3>
+			<p id="userCreate" style="margin: 0px;"></p>
+			<p id="timeCreate" style="float: left"></p>
+			<p id="timeDue" style="text-align: right;font-size: 14px; margin-right: 20px;"></p>
 			<hr class="first-line">
-			<p style="font-weight: bold;color: black;margin-bottom: 0px" id="labelAssign">Assignment</p>     
-			<a href="https://forms.gle/QCaVodHtHs5xkVWq8" target="_blank" id="linkAssign">https://forms.gle/QCaVodHtHs5xkVWq8</a>
+			<p style="font-weight: bold;color: black;margin-bottom: 0px" id="labelAssign"></p>
+			<p style="color: red" id="errorAssign">Assignment has been hidden</p>  
+			<a href="#" target="_blank" id="linkAssign"></a>
 			<p></p>
-			<p id="description"> Các em xem mô tả đề tài cuối kỳ trong tập tin đính kèm.
-			<br>- Tất cả các nhóm đều làm cùng đề bài này.
-			<br>- Deadline nộp bài là 30/11/2020.
-			<br>- Nếu có các vấn đề thắc mắc các em trao đổi trực tiếp với thầy.
-			<br>- Các nhóm có thể bắt đầu thực hiện từ hôm nay
+			<p id="description"> 
 			</p>
-			<a href="../file/plan.pdf" download id="linkFile">
-				<p id="nameFile">plan.pdf</p>
+			<a href="#" download id="linkFile">
+				<p id="nameFile"></p>
 			</a>
 			<hr class="second-line">
 			<div id="listComment">

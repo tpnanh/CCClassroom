@@ -139,6 +139,7 @@
 		function addPeople(){
 			addPeopleToClass(idClass, inputAddUser.value).then(function(response){
 				if (response==="Add success") {
+					inputAddUser.value = ""
 					getPeople()
 				}else{
 					alert(response)

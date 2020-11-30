@@ -155,15 +155,16 @@
 					let result = JSON.parse(response)
 					if (roleCurrentUser!=="Admin") {
 						if (result.email!==emailCurrentUser) {
-							console.log("Tat assignment")
-						}else{
-							console.log("Mo assignment")
+							$("#assignmentDropDown" ).css("display","none")
+							$("#divAssignmentDropDown" ).css("display","none")
 						}
-					}else{
-						console.log("Mo assignment")
 					}
 				}  
 			})
+		}
+
+		function goBack(){
+			window.history.go(-1)
 		}
     </script>
 
@@ -174,9 +175,7 @@
 		<nav class="navbar navbar-expand-lg fixed-top navClassroom"> 
 	  		<ul class="navbar-nav nav nav-tabs navTab">
 				<li class="nav-item">
-		      		<a href="../home/home.php">
-		      			<img class="imgBrand" src="../img/brand.png" style="width: auto; height: 36px">
-		      		</a>
+	      			<img class="imgBrand" src="../img/brand.png" onclick="goBack()" style="width: auto; height: 36px">
 			    </li>
 			    <li class="nav-item stream">
 					<a class="nav-link active" data-toggle="tab" href="#streamTab">Stream</a>
@@ -192,8 +191,8 @@
 				       		<i class="fas fa-plus"></i>
 				       	</button>				       	
 				        <div class="dropdown-menu dropdown-menu-lg-right dropdown-add" aria-expanded="true" id = "assignment" aria-labelledby="btnAssignment">
-						    <a class="dropdown-item dropdownClassroom" data-toggle="modal" href="#modalAssignment">Assignment</a>
-						    <div class="dropdown-divider"></div>
+						    <a class="dropdown-item dropdownClassroom" data-toggle="modal" href="#modalAssignment" id="assignmentDropDown">Assignment</a>
+						    <div class="dropdown-divider" id="divAssignmentDropDown"></div>
 						    <a class="dropdown-item dropdownClassroom" data-toggle="modal" href="#modalPost">Post
 						    </a>
 						</div>

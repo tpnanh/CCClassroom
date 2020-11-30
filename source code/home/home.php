@@ -176,15 +176,21 @@
 		}
 
 		function userJoinClass(){
-			joinClassById(inputClasscode.value).then(function(response){
-				if (response==="Join success") {	
-					window.location.href="../classroom/classroom.php?idClass="+inputClasscode.value
-					$("#modalJoin").modal('hide');
-				}else{
-					errorJoinClass.style.display = ''
-					errorJoinClass.innerHTML = response
-				}
-			})
+			if(checkStrJustNumber(inputClasscode.value)){
+				joinClassById(inputClasscode.value).then(function(response){
+					if (response==="Join success") {	
+						window.location.href="../classroom/classroom.php?idClass="+inputClasscode.value
+						$("#modalJoin").modal('hide');
+					}else{
+						errorJoinClass.style.display = ''
+						errorJoinClass.innerHTML = response
+					}
+				})
+			}else{
+				errorJoinClass.style.display = ''
+				errorJoinClass.innerHTML = "ID is invalid"
+			}
+			
 		}
 
 		function logOut(){
@@ -289,7 +295,7 @@
 	        		</button>
 	      		</div>
 		      	<div class="modal-body">
-		        	<form>
+		        	<form onsubmit="userJoinClass();return false;">
 		        		<label for="inputClasscode">Classcode</label>
 						<input type="text" class="form-control" id="inputClasscode" placeholder="Enter classcode" >
 						<p style="font-size: 13px;color: red;margin-top: 10px; margin-bottom: 0px;display: none" id="errorJoinClass">ID Class is not available</p>
