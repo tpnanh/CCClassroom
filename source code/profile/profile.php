@@ -119,8 +119,8 @@
 
 		<button class="btn btnSaveProfile btn-md btn-block" type="submit" name="submit">Save</button>
 
-		<div class="alert alertProfile alert-success" style="display: none;" id="alter-success">Information has been saved</div>
-		<div class="alert alertProfile alert-danger" style="display: none;" id="alter-error"></div>
+		<div class="alert alertProfile alert-success" id="alter-success">Information has been saved</div>
+		<div class="alert alertProfile alert-danger" id="alter-error"></div>
 	</form>
 	
 </body>
