@@ -1,8 +1,8 @@
 <?php
 	session_start();
 	$user = $_SESSION['user'];
-	$title = $_POST['TITLE'];
-	$des = $_POST['DES'];
+	$title = nl2br($_POST['TITLE']);
+	$des = nl2br($_POST['DES']);
 	$type = $_POST['TYPE'];
 	$due = $_POST['DUE'];
 	$urlForm = $_POST['URL_FORM'];

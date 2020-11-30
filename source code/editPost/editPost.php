@@ -69,7 +69,7 @@
 				}else{
 					let result = JSON.parse(response)
 					title.value = result.title
-					description.value = result.des
+					description.value = result.des.replace(new RegExp('<br />', 'g'),"")
 					if (result.type==="ASSIGN") {
 						time.style.display = ""
 						time.value = result.due
@@ -94,9 +94,9 @@
         }
 
         function updatePost(){
-        	if (checkTime(time.value)) {
+        	if (checkTime(time.value) || time.style.display === "none") {
         		dueAlert.style.display = "none"
-        		if (checkRegex(linkAssign.value)){
+        		if (checkRegex(linkAssign.value) || linkAssign.style.display === "none"){
 					assignAlert.style.display = "none"
 					let file = customFile.files[0]
 					updateInfoMaterialPost(idClass, idMaterial, title.value, description.value, time.value, file, nameFileOld, linkAssign.value ).then(function(response){
@@ -126,12 +126,12 @@
 		<img class="imgProfile" src="../img/icon.png" alt="icon" width="auto" height="60">
 		<h3 class="createClass"><b>Edit Material</b></h3>
 		<label class="labelSignUp" for="title">Title</label>
-		<input type="text" class="form-control formControlLogin inputPassLogin" id="title" placeholder="Title" required >
+		<input type="text" class="form-control formControlLogin inputPassLogin" id="title" placeholder="Title" required maxlength="100">
 		<label class="labelSignUp" for="assignLink" style="margin-top: 10px" id="labelAssignment">Assignment</label>
 		<input type="url" class="form-control formControlLogin inputPassLogin" id="assignLink" placeholder="Link Google Form">
 		<p id="assignAlert" style="color: red; margin-top: 5px; margin-bottom: 0px; justify-content: flex-start; font-size: 14px; text-align: left; display: none">Your Google Form link is invalid!</p>
 		<label class="labelSignUp" for="description" style="margin-top: 10px">Description</label>
-		<textarea class="form-control formControlLogin" id="description" placeholder="Description (optional)"></textarea>
+		<textarea class="form-control formControlLogin" id="description" placeholder="Description (optional)" wrap="hard" rows="3" maxlength="1000"></textarea>
 		<label class="labelSignUp" for="custom-file" style="margin-top: 10px; display: block;">Add your file</label>
 		<p id="nameFileOld"></p>
 		<a id="deleteFile" style="float: right;margin-right: 8px;" onclick="deleteViewFile(this)">

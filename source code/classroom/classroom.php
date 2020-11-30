@@ -234,13 +234,13 @@
 		      	<div class="modal-body">
 		        	<form method="post" class="form-signin" onsubmit='postNewAssign();return false'>
 		        		<label class="labelClassroom" for="assignmentTitle">Title</label>
-						<input type="text" class="form-control" id="assignmentTitle" placeholder="Title" required>
+						<input type="text" class="form-control" id="assignmentTitle" placeholder="Title" required maxlength="100">
 						<label class="labelClassroom" for="assignmentLink" style="margin-top: 10px">Assignment</label>
 						<input type="url" class="form-control" id="assignmentLink" placeholder="Link Google Form" 
 						 required>
 						<p id="assignAlert" style="color: red; margin-top: 5px; margin-bottom: 0px; display: none; font-size: 14px;">Your Google Form link is invalid!</p>
 						<label class="labelClassroom" for="assignmentDescription" style="margin-top: 10px">Description</label>
-						<textarea class="form-control" id="assignmentDescription" placeholder="Description (optional)" rows="3"></textarea>
+						<textarea class="form-control" id="assignmentDescription" placeholder="Description (optional)" rows="3"wrap="hard" maxlength="1000"></textarea>
 						<label class="labelClassroom" for="custom-file" style="margin-top: 10px; display: block;">Add your file</label>
 						<div class="custom-file" width="100%" style="display: block;">
 							<label class="custom-file-label labelClassroom" for="custom-file-assignment">Choose file</label>
@@ -277,9 +277,9 @@
 		      	<div class="modal-body">
 		        	<form method="post" class="form-signin" onsubmit='postNewPost();return false'>
 		        		<label for="postTitle">Title</label>
-						<input type="text" class="form-control" id="postTitle" placeholder="Title" required>
+						<input type="text" class="form-control" id="postTitle" placeholder="Title" required maxlength="100">
 						<label for="postDescription" style="margin-top: 10px">Description</label>
-						<textarea class="form-control" id="postDescription" placeholder="Description (optional)" rows="3"></textarea>
+						<textarea class="form-control" id="postDescription" placeholder="Description (optional)" rows="3" wrap="hard" maxlength="1000"></textarea>
 						<label for="custom-file" style="margin-top: 10px; display: block;">Add your file</label>
 						<div class="custom-file" width="100%" style=" display: block;">
 							<label class="custom-file-label"for="custom-file-post">Choose file</label>

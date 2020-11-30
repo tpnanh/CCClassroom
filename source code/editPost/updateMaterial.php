@@ -1,8 +1,8 @@
 <?php
 	$idMaterial = $_POST['ID_MATERIAL'];
 	$idClass = $_POST['ID_CLASS'];
-	$title = $_POST['TITLE'];
-	$des = $_POST['DES'];
+	$title = nl2br($_POST['TITLE']);
+	$des = nl2br($_POST['DES']);
 	$due = $_POST['DUE'];
 	$oldFile = $_POST['OLD_FILE'];
 	$urlForm = $_POST['URL_FORM'];
