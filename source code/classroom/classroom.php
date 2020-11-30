@@ -242,7 +242,7 @@
 						<label class="labelClassroom" for="assignmentDescription" style="margin-top: 10px">Description</label>
 						<textarea class="form-control" id="assignmentDescription" placeholder="Description (optional)" rows="3"wrap="hard" maxlength="1000"></textarea>
 						<label class="labelClassroom" for="custom-file" style="margin-top: 10px; display: block;">Add your file</label>
-						<div class="custom-file" style=" display: block;">
+						<div class="custom-file" width="100%" style="display: block;">
 							<label class="custom-file-label labelClassroom" for="custom-file-assignment">Choose file</label>
 							<input type='file' name="custom-file" class="custom-file-input" id="custom-file-assignment" multiple="multiple" >		
 						</div>	
@@ -281,8 +281,8 @@
 						<label for="postDescription" style="margin-top: 10px">Description</label>
 						<textarea class="form-control" id="postDescription" placeholder="Description (optional)" rows="3" wrap="hard" maxlength="1000"></textarea>
 						<label for="custom-file" style="margin-top: 10px; display: block;">Add your file</label>
-						<div class="custom-file" style=" display: block;">
-							<label class="custom-file-label" for="custom-file-post">Choose file</label>
+						<div class="custom-file" width="100%" style=" display: block;">
+							<label class="custom-file-label"for="custom-file-post">Choose file</label>
 							<input type='file' name="custom-file" class="custom-file-input" id="custom-file-post" multiple="multiple">		
 						</div>
 						<button type="submit" style="display: none;" id="btnSumitPost"></button>
