@@ -126,7 +126,7 @@
 		<img class="imgProfile" src="../img/icon.png" alt="icon" width="auto" height="60">
 		<h3 class="createClass"><b>Edit Material</b></h3>
 		<label class="labelSignUp" for="title">Title</label>
-		<input type="text" class="form-control formControlLogin inputPassLogin" id="title" placeholder="Title" required >
+		<input type="text" class="form-control formControlLogin inputPassLogin" id="title" placeholder="Title" required maxlength="100">
 		<label class="labelSignUp" for="assignLink" style="margin-top: 10px" id="labelAssignment">Assignment</label>
 		<input type="url" class="form-control formControlLogin inputPassLogin" id="assignLink" placeholder="Link Google Form">
 		<p id="assignAlert" style="color: red; margin-top: 5px; margin-bottom: 0px; justify-content: flex-start; font-size: 14px; text-align: left; display: none">Your Google Form link is invalid!</p>

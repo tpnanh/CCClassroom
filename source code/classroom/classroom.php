@@ -234,7 +234,7 @@
 		      	<div class="modal-body">
 		        	<form method="post" class="form-signin" onsubmit='postNewAssign();return false'>
 		        		<label class="labelClassroom" for="assignmentTitle">Title</label>
-						<input type="text" class="form-control" id="assignmentTitle" placeholder="Title" required>
+						<input type="text" class="form-control" id="assignmentTitle" placeholder="Title" required maxlength="100">
 						<label class="labelClassroom" for="assignmentLink" style="margin-top: 10px">Assignment</label>
 						<input type="url" class="form-control" id="assignmentLink" placeholder="Link Google Form" 
 						 required>
@@ -277,7 +277,7 @@
 		      	<div class="modal-body">
 		        	<form method="post" class="form-signin" onsubmit='postNewPost();return false'>
 		        		<label for="postTitle">Title</label>
-						<input type="text" class="form-control" id="postTitle" placeholder="Title" required>
+						<input type="text" class="form-control" id="postTitle" placeholder="Title" required maxlength="100">
 						<label for="postDescription" style="margin-top: 10px">Description</label>
 						<textarea class="form-control" id="postDescription" placeholder="Description (optional)" rows="3" wrap="hard" maxlength="1000"></textarea>
 						<label for="custom-file" style="margin-top: 10px; display: block;">Add your file</label>
