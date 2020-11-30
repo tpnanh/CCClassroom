@@ -140,9 +140,9 @@
 		<a href="../file/plan.pdf" style="text-align: left;" id="downFile" download>
 			<p id="link">plan.pdf</p>
 		</a>
-		<div class="custom-file" style=" display: block;">
-			<label class="custom-file-label labelSignUp" style="margin:0px;" for="custom-file">Choose file</label>
-			<input type='file' name="custom-file" class="custom-file-input inputPassLogin" id="custom_file" multiple="multiple">		
+		<div class="custom-file" style="text-overflow: ellipsis;" style=" display: block;">
+			<label class="custom-file-label labelSignUp" width="100%" style="margin:0px;" for="custom-file">Choose file</label>
+			<input type='file' name="custom-file" style="text-overflow: ellipsis;" class="custom-file-input inputPassLogin" id="custom_file" multiple="multiple">		
 		</div>
 		<label class="labelSignUp" for="due" style="margin-top: 25px; margin-right: 10px; float: left" id="labelDue">Due</label>
 		<input class="inputPassLogin" type="datetime-local" style="margin-top: 20px;width: 88%" name="due" id="time">
