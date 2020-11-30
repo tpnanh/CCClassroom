@@ -67,6 +67,8 @@
 			$('#modalAssignment').on('hidden.bs.modal', function () {
  				deletTeTextInputAssignment()
 			})
+
+			getInfoClass()
     	}
 
 
@@ -141,7 +143,27 @@
     		fileAssign.value = ''
     		dueAssign.value = ''
     		$(".custom-file-input").siblings(".custom-file-label").addClass("selected").html('Choose file')
+		}
 
+		function getInfoClass(){
+			let emailCurrentUser = '<?= $user['email'] ?>';
+		 	let roleCurrentUser = '<?= $user['role'] ?>';
+			getDataClassroomById(idClass).then(function(response){
+				if (response==="Classroom not found") {
+					window.location.href="../home/home.php"
+				}else{
+					let result = JSON.parse(response)
+					if (roleCurrentUser!=="Admin") {
+						if (result.email!==emailCurrentUser) {
+							console.log("Tat assignment")
+						}else{
+							console.log("Mo assignment")
+						}
+					}else{
+						console.log("Mo assignment")
+					}
+				}  
+			})
 		}
     </script>
 

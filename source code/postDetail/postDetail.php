@@ -192,8 +192,14 @@
 		
 		function logOut(){
 			userLogOut().then(function(response){
-				if (response=="LogOut Success") {
-					window.location.href = '../index.php'
+				if (response==="Classroom not found") {
+					window.location.href="../home/home.php"
+				}else{
+					let result = JSON.parse(response)
+					cardNameClass.innerHTML = result.name_class
+					cardSubjectClass.innerHTML = result.subject
+					cardRoomClass.innerHTML = result.room
+					emailClassOfUser = result.email
 				}
 			})
 		}
@@ -205,9 +211,10 @@
 		<nav class="navbar navbar-expand-sm fixed-top navHome" style="background-color: white"> 
 	  		<ul class="navbar-nav nav nav-tabs navTab">
 				<li class="nav-item">
-		      		<a href="../classroom/classroom.php">
+					<img src="../img/brand.png" style="width: auto; height: 36px">
+		      		<!-- <a href="../classroom/classroom.php">
 		      			<img src="../img/brand.png" style="width: auto; height: 36px">
-		      		</a>
+		      		</a> -->
 			    </li>
 		  	</ul>
 		  	<ul class="nav-right navbar-nav ml-auto navRightHome">				
