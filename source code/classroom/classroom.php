@@ -240,7 +240,7 @@
 						 required>
 						<p id="assignAlert" style="color: red; margin-top: 5px; margin-bottom: 0px; display: none; font-size: 14px;">Your Google Form link is invalid!</p>
 						<label class="labelClassroom" for="assignmentDescription" style="margin-top: 10px">Description</label>
-						<textarea class="form-control" id="assignmentDescription" placeholder="Description (optional)" rows="3"></textarea>
+						<textarea class="form-control" id="assignmentDescription" placeholder="Description (optional)" rows="3"wrap="hard" maxlength="1000"></textarea>
 						<label class="labelClassroom" for="custom-file" style="margin-top: 10px; display: block;">Add your file</label>
 						<div class="custom-file" style=" display: block;">
 							<label class="custom-file-label labelClassroom" for="custom-file-assignment">Choose file</label>
@@ -279,7 +279,7 @@
 		        		<label for="postTitle">Title</label>
 						<input type="text" class="form-control" id="postTitle" placeholder="Title" required>
 						<label for="postDescription" style="margin-top: 10px">Description</label>
-						<textarea class="form-control" id="postDescription" placeholder="Description (optional)" rows="3"></textarea>
+						<textarea class="form-control" id="postDescription" placeholder="Description (optional)" rows="3" wrap="hard" maxlength="1000"></textarea>
 						<label for="custom-file" style="margin-top: 10px; display: block;">Add your file</label>
 						<div class="custom-file" style=" display: block;">
 							<label class="custom-file-label" for="custom-file-post">Choose file</label>
