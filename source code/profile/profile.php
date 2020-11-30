@@ -29,7 +29,7 @@
 		let fullName
 		let email
 		let birth
-		let phone
+		let phone, errorBirth
 
 		window.onload = function(){
 			avatarFile = document.getElementById('custom-file');
@@ -40,6 +40,7 @@
 			birth = document.getElementById('user-date-of-birth');
 			phone = document.getElementById('user-phone-number');
 			fullname = document.getElementById('fullname');
+			errorBirth = document.getElementById('errorBirth')
 		}
 
 		$(document).ready(function () {
@@ -68,13 +69,19 @@
 		}
 
 		function updateProfile(){
-			updateProfileUser(email.value, userName.value, fullname.value, birth.value, phone.value, imageAvatar.src).then(function(response){
-				if (response === 'Update success') {
-					history.go(-1)
-				}else{
-					error(response)
-				}
-			})
+			if(checkTime(birth.value)){
+				errorBirth.style.display = ""
+			}else{
+				errorBirth.style.display = "none"
+				updateProfileUser(email.value, userName.value, fullname.value, birth.value, phone.value, imageAvatar.src).then(function(response){
+					if (response === 'Update success') {
+						history.go(-1)
+					}else{
+						error(response)
+					}
+				})
+			}
+			
 		}
 
 		function error(errorStr){
@@ -102,7 +109,8 @@
 		<input type="email" name="user-email" id="user-email" class="form-control inputPassLogin" placeholder="Email" style="pointer-events: none;" required value="<?= $user['email'] ?>" disabled> 
 
 		<label class="labelProfile" for="user-date-of-birth" >Date of birth</label>     
-		<input type="date" name="user-date-of-birth" id="user-date-of-birth" class="form-control inputPassLogin" placeholder="Date of birth" required value="<?= $user['birthday'] ?>"> 	
+		<input type="date" name="user-date-of-birth" id="user-date-of-birth" class="form-control inputPassLogin" placeholder="Date of birth" required value="<?= $user['birthday'] ?>"> 
+		<p style="color: red; margin-top: 5px; margin-bottom: 0px; justify-content: flex-start; font-size: 14px; text-align: left; display: none" id="errorBirth">Your date of birth must not be greater than today.</p>	
 
 		<label class="labelProfile" for="user-phone-number">Phone number</label>     
 		<input type="tel" name="user-phone-number" id="user-phone-number" class="form-control inputPassLogin" placeholder="Phone number" 
