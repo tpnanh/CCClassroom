@@ -23,7 +23,7 @@
 	<link rel="stylesheet" type="text/css" href="../style.css">
 
 	<script>
-		let title, userCreate,timeCreate, timeDue, description, linkFile, nameFile,iconCurrentUser,comment, listComment, labelAssign, linkAssign, errorAssign
+		let title, userCreate,timeCreate, timeDue, description, linkFile, nameFile,iconCurrentUser,comment, listComment, labelAssign, linkAssign, errorAssign, secondLine, thirdLine
 		let idPost = ""
 		let idClass = ""
 		let roleCurrentUser = ""
@@ -40,9 +40,11 @@
 			iconCurrentUser = document.getElementById('iconCurrentUser')
 			comment = document.getElementById('comment')
 			listComment = document.getElementById('listComment')
-			labelAssign = document.getElementById('labelAssign')
+			labelAssign = document.getElementById('labelAssignment')
 			linkAssign = document.getElementById('linkAssign')
 			errorAssign = document.getElementById('errorAssign')
+			secondLine = document.getElementById('secondLine')
+			thirdLine = document.getElementById('thirdLine')
 			roleCurrentUser = '<?= $user['role'] ?>';
 			emailCurrentUser = '<?= $user['email'] ?>';
 			getUrl()
@@ -75,10 +77,15 @@
 					userCreate.innerHTML = result.email
 					timeCreate.innerHTML = formateDate(result.date_create)
 					description.innerHTML = result.des
+
 					if (result.type==="ASSIGN") {
 						timeDue.innerHTML = "Due "+formateDate2(result.due)
+						linkAssign.innerHTML = result.url_form
 						linkAssign.href = result.url_form
 					}else{
+						// if (result.des==="") {
+						// 	secondLine.style.display = "none"
+						// }
 						linkAssign.style.display = "none"
 						labelAssign.style.display = "none"
 						timeCreate.style.float = ""
@@ -123,6 +130,11 @@
 			getListCommentPost(idPost).then(function(response){
 				removeAllChildNode(listComment)
 				let result = JSON.parse(response)
+				// if (result.length==0) {
+				// 	thirdLine.style.display = "none"
+				// }else{
+				// 	thirdLine.style.display = ""
+				// }
 				for (i = 0; i < result.length; i++) {
 				 	addViewComment(result[i])
 				}
@@ -236,7 +248,7 @@
 			<p id="timeCreate" style="float: left"></p>
 			<p id="timeDue" style="text-align: right;font-size: 14px; margin-right: 20px;"></p>
 			<hr class="first-line">
-			<p style="font-weight: bold;color: black;margin-bottom: 0px" id="labelAssign"></p>
+			<p id="labelAssignment" style="font-weight: bold;color: black;margin-bottom: 0px;">Assignment</p>
 			<p style="color: red" id="errorAssign">Assignment has been hidden</p>  
 			<a href="#" target="_blank" id="linkAssign"></a>
 			<p></p>
@@ -245,7 +257,7 @@
 			<a href="#" download id="linkFile">
 				<p id="nameFile"></p>
 			</a>
-			<hr class="second-line">
+			<hr class="second-line" id="secondLine">
 			<div id="listComment">
 				<!-- <div>		
 			      	<img src="../img/person_icon.png" class="rounded-circle" alt="avatar" width="50" height="50" style="float: left;"> 
@@ -263,7 +275,7 @@
 		  		</div> -->
 			</div>
 			
-		  	<hr class="third-line">
+		  	<hr class="third-line" id="thirdLine">
 		  	<div>		
 		  		<form onsubmit="addComment();return false;">
 					<img src="../img/person_icon.png" id="iconCurrentUser" class="rounded-circle iconAvatar" alt="avatar" > 

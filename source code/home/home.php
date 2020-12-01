@@ -214,7 +214,7 @@
 </head>
 <body>
 	<div>
-		<nav class="navbar navbar-expand-sm fixed-top"> 
+		<nav class="navbar navbar-expand-sm fixed-top" style="background-color: white"> 
 	  		<ul class="navbar-nav navHome">
 	    		<li class="nav-item" >
 	       			<i class="fa fa-home navbar-brand" style="font-size: 27px; color: #D24848"></i>

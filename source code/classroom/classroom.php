@@ -40,6 +40,8 @@
     	let dueAlert;
     	let btnSumitAssign;
 
+		let emailClassOfUser = '';
+
     	window.onload = function(){
     		
     		makeTextInputFile()
@@ -148,11 +150,13 @@
 		function getInfoClass(){
 			let emailCurrentUser = '<?= $user['email'] ?>';
 		 	let roleCurrentUser = '<?= $user['role'] ?>';
+
 			getDataClassroomById(idClass).then(function(response){
 				if (response==="Classroom not found") {
 					window.location.href="../home/home.php"
 				}else{
 					let result = JSON.parse(response)
+					emailClassOfUser = result.email
 					if (roleCurrentUser!=="Admin") {
 						if (result.email!==emailCurrentUser) {
 							$("#assignmentDropDown" ).css("display","none")

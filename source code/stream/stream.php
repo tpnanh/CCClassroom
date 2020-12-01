@@ -75,6 +75,8 @@
 				}else{
 					let result = JSON.parse(response)
 					removeAllChildNode(stream)
+					console.log(result)
+					console.log(emailClassOfUser)
 					for (i = 0; i < result.length; i++) {
 						appendViewIntoTable(result[i])
 					}
