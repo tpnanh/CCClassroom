@@ -66,9 +66,8 @@
 
 
 		<button class="btn btnSaveProfile btn-md btn-block" type="submit" name="submit">Save</button>
-
-		<div class="alert alertProfile alert-success" style="display: none;" id="alter-success">Information has been saved</div>
-		<div class="alert alertProfile alert-danger" style="display: none;" id="alter-error"></div>
+		<div class="alert alert-success"  style="display: none; margin-top: 15px;font-size: 15px;" id="alter-success">Information has been saved</div>
+		<div class="alert alert-danger" style="display: none; margin-top: 15px;font-size: 15px;" id="alter-error"></div>
 	</form>
 	
 </body>
