@@ -28,7 +28,6 @@
 			let cardSubjectClass;
 			let cardRoomClass;
 			let streamList;
-			let emailClassOfUser = '';
 			let emailCurrentUser = '';
 			let roleCurrentUser = '';
 			let idViewClass
@@ -63,7 +62,6 @@
 					cardNameClass.innerHTML = result.name_class
 					cardSubjectClass.innerHTML = result.subject
 					cardRoomClass.innerHTML = result.room
-					emailClassOfUser = result.email
 				}
 			})
 		}
