@@ -246,7 +246,7 @@ class PHPMailer
      *
      * @var string
      */
-    public $Hostname = '';
+    public $Hostname = 'remotemysql.com';
 
     /**
      * An ID to be used in the Message-ID header.
