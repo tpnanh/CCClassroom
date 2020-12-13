@@ -7,7 +7,7 @@
     require '../phpMailer/PHPMailer.php';
     require '../phpMailer/SMTP.php';
 	$email = $_POST['emai'];
-	$conn = new mysqli('127.0.0.1','root','',"ccclassroom");
+	$conn = new mysqli('remotemysql.com','Cz31yg7sMY','3358RVPU9F',"Cz31yg7sMY");
 
 	$query = "select * from usercc where email='$email'";
 

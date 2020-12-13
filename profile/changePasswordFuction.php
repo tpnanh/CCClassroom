@@ -9,7 +9,7 @@
 		die('Old pass is wrong');
 	}
 
-	$conn = new mysqli('127.0.0.1','root','',"ccclassroom");
+	$conn = new mysqli('remotemysql.com','Cz31yg7sMY','3358RVPU9F',"Cz31yg7sMY");
 
 	$query = "update usercc set password = '$pass' where email like '$email'";
 

@@ -2,7 +2,7 @@
 	session_start();
 	$user = $_SESSION['user'];
 
-	$conn = new mysqli('127.0.0.1','root','',"ccclassroom");
+	$conn = new mysqli('remotemysql.com','Cz31yg7sMY','3358RVPU9F',"Cz31yg7sMY");
 	$emailUser = $user["email"];
 	$query = "select * from usercc where email!= '$emailUser' ORDER BY FIELD(role,'Admin', 'Teacher', 'Student'),ho_ten";
 	$result = $conn->query($query);

@@ -24,7 +24,7 @@
 	$image_base64 = base64_encode(file_get_contents($avatar['tmp_name']) );	
 	$image = 'data:image/'.$imageFileType.';base64,'.$image_base64;
 
-	$conn = new mysqli('127.0.0.1','root','',"ccclassroom");
+	$conn = new mysqli('remotemysql.com','Cz31yg7sMY','3358RVPU9F',"Cz31yg7sMY");
 
 	$query = "insert into class(name_class, subject, room, email, avatar_class, date_created) values('$className','$subject','$room','$email','$image','$date')";
 

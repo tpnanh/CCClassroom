@@ -3,7 +3,7 @@
 	
 	$email = $_POST["Email"];
 
-	$conn = new mysqli('127.0.0.1','root','',"ccclassroom");
+	$conn = new mysqli('remotemysql.com','Cz31yg7sMY','3358RVPU9F',"Cz31yg7sMY");
 
 	$query = "DELETE FROM usercc WHERE email like '$email'";
 	$result = $conn->query($query);

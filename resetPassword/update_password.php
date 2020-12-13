@@ -2,7 +2,7 @@
 	$new_pass = md5($_POST['pass']); 
     $token = $_POST['token'];
 
-    $conn = new mysqli('127.0.0.1','root','',"ccclassroom");
+    $conn = new mysqli('remotemysql.com','Cz31yg7sMY','3358RVPU9F',"Cz31yg7sMY");
     $query = "select email from password_reset where token='$token' LIMIT 1";
 
     $result = $conn->query($query);

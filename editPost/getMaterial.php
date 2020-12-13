@@ -2,7 +2,7 @@
 	$idMaterial = $_GET['id'];
 	$idClass = $_GET['idClass'];
 
-	$conn = new mysqli('127.0.0.1','root','',"ccclassroom");
+	$conn = new mysqli('remotemysql.com','Cz31yg7sMY','3358RVPU9F',"Cz31yg7sMY");
 
 	$query = "select * from material where id = $idMaterial and idClass = $idClass";
 

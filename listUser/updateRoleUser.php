@@ -6,7 +6,7 @@
 	$email = $_POST["Email"];
 	$role = $_POST["Role"];
 
-	$conn = new mysqli('127.0.0.1','root','',"ccclassroom");
+	$conn = new mysqli('remotemysql.com','Cz31yg7sMY','3358RVPU9F',"Cz31yg7sMY");
 	$query = "update usercc set role = '$role' where email like '$email'";
 	$result = $conn->query($query);
 

@@ -49,7 +49,7 @@
 		$postFile = $nameFile;
 	}
 
-	$conn = new mysqli('127.0.0.1','root','',"ccclassroom");
+	$conn = new mysqli('remotemysql.com','Cz31yg7sMY','3358RVPU9F',"Cz31yg7sMY");
 
 
 	$query = "UPDATE material SET title='$title',des='$des',due='$due',nameFile='$postFile',url_form = '$urlForm' WHERE idClass=$idClass and id=$idMaterial";
