@@ -39,7 +39,7 @@
     $mail->Subject = "Reset your password";
     $mail->setFrom('tai01264195883@gmail.com');
     $mail->isHTML(true);                                  // Set email format to HTML
-    $mail->Body    = "Hi there, click on this <a href=\"http://localhost:8080/resetPassword/new_password.php?token=" . $token . "\">link</a> to reset your password on our site";
+    $mail->Body    = "Hi there, click on this <a href=\"https://ccclassroom.herokuapp.com/resetPassword/new_password.php?token=" . $token . "\">link</a> to reset your password on our site";
     
  
     
